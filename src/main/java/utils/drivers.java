@@ -1,12 +1,10 @@
 package utils;
 
-import com.applitools.eyes.BrowserNames;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.CapabilityType;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.net.MalformedURLException;
@@ -48,7 +46,6 @@ public class drivers {
                 ChromeOptions options = new ChromeOptions();
                 options.addArguments("--disable-popup-blocking");
                 options.addArguments("--disable-default-apps");
-                options.addArguments("--start-maximized");
                 options.addArguments("--disable-infobars");
                 options.addArguments("–-disable-notifications");
                 options.addArguments("--dom-automation");
@@ -76,6 +73,4 @@ public class drivers {
         }
         return remoteWebDrivers.get(threadId);
     }
-
-
 }

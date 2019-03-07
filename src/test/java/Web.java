@@ -1,7 +1,9 @@
 import com.applitools.eyes.BatchInfo;
+import com.applitools.eyes.FileLogger;
 import com.applitools.eyes.MatchLevel;
 import com.applitools.eyes.RectangleSize;
 import com.applitools.eyes.selenium.StitchMode;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -23,9 +25,9 @@ public class Web {
 
     protected Eyes eyes;
 
-    private static final String BATCH_NAME = "SmileDirect Demo Web";
-    private static final String BATCH_ID = "SAMEBATCH";  //optional - setting will keep all tests in the same batch
-    private static final String APP_NAME = "SmileDirectDemo";
+    private static final String BATCH_NAME = "Perdue Global 1";
+    private static final String BATCH_ID = null;  //optional - setting will keep all tests in the same batch
+    private static final String APP_NAME = "PerdueGlobal1Demo";
 
 
     @Parameters({"platformName", "platformVersion", "browserName", "browserVersion"})
@@ -34,13 +36,13 @@ public class Web {
                          String browserName, String browserVersion) {
 
         Integer i=0;
-        String testName = "SmileDirect Demo";
+        String testName = "Perdue Global Demo 1";
         long before;
 
         //Force to check against specific baseline branch
-        //eyes.setBaselineBranchName("LLFireFox");
+        eyes.setBaselineBranchName("Perdue Global Firefox");
         //Force to check with the forced baselines corresponding environment
-        //eyes.setBaselineEnvName("firefox 63.0.3");
+        eyes.setBaselineEnvName("PerdueGlobal");
 
         //Set the environment name in the test batch results
         //eyes.setEnvName(driver.getCapabilities().getBrowserName() + " " + driver.getCapabilities().getVersion());
@@ -54,7 +56,7 @@ public class Web {
 
         String[] arr = new String[0];
         try {
-            Scanner sc = new Scanner(new File("resources/urls/SmileDirect.csv"));
+            Scanner sc = new Scanner(new File("resources/urls/PerdueGlobal.csv"));
             List<String> lines = new ArrayList<String>();
             while (sc.hasNextLine()) {
                 lines.add(sc.nextLine());
@@ -89,12 +91,13 @@ public class Web {
         long before = System.currentTimeMillis();
 
         eyes = utils.myeyes.getEyes(threadId);
+        eyes.setLogHandler(new FileLogger("log/file.log",true,true));
 
         BatchInfo batchInfo = new BatchInfo(BATCH_NAME);
         if(BATCH_ID!=null) batchInfo.setId(BATCH_ID);
         eyes.setBatch(batchInfo);
 
-        //driver = utils.drivers.getLocalChrome(threadId);
+       // driver = utils.drivers.getLocalChrome(threadId);
 
         driver = utils.drivers.getGrid(threadId, browserName);
 
