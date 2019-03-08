@@ -1,18 +1,15 @@
+import com.applitools.eyes.BatchInfo;
+import com.applitools.eyes.FileLogger;
+import com.applitools.eyes.MatchLevel;
+import com.applitools.eyes.rendering.Eyes;
+import com.applitools.eyes.rendering.Target;
+import com.applitools.eyes.visualGridClient.model.RenderingConfiguration;
+import com.applitools.eyes.visualGridClient.model.TestResultSummary;
+import com.applitools.eyes.visualGridClient.services.VisualGridManager;
 
 
-/*
 
-import com.applitools.eyes.*;
-import com.applitools.eyes.config.SeleniumConfiguration;
-import com.applitools.eyes.selenium.Eyes;
-import com.applitools.eyes.selenium.StitchMode;
-import com.applitools.eyes.selenium.fluent.Target;
-
-import com.applitools.eyes.visualgridclient.model.*;
-import com.applitools.eyes.visualgridclient.services.VisualGridRunner;
-
-import com.applitools.utils.GeneralUtils;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
@@ -21,33 +18,25 @@ import utils.params;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-
-
-*/
-
+import java.util.concurrent.TimeUnit;
 
 public class VisualGrid {
 
-    /*
+    protected RemoteWebDriver driver;
 
+    protected Target target;
 
+    private VisualGridManager VisualGrid = new VisualGridManager(10);
+    private RenderingConfiguration renderConfig = new RenderingConfiguration();
+    private Eyes eyes = new Eyes(VisualGrid);
 
-
-    protected ChromeDriver driver;
-
-
-    private VisualGridRunner renderingManager;
-    private Eyes eyes;
-    private SeleniumConfiguration seleniumConfiguration;
-    private Logger logger;
-
-    private static final String BATCH_NAME = "SmileDirect 3 Web VG Ex";
+    private static final String BATCH_NAME = "Perdue Global VG 1";
     private static final String BATCH_ID = null;  //optional - setting will keep all tests in the same batch
-    private static final String APP_NAME = "SmileDirectApp3";
-    private static final String TEST_NAME = "SmileDirectTest3";
+    private static final String APP_NAME = "PerdueGlobal1DemoVG";
 
 
     @Parameters({"platformName", "platformVersion", "browserName", "browserVersion"})
@@ -56,28 +45,22 @@ public class VisualGrid {
                          String browserName, String browserVersion) {
 
         Integer i=0;
-        long before = 0;
+        String testName = "Perdue Global Demo VG 1";
+        long before;
 
         //Force to check against specific baseline branch
         //eyes.setBaselineBranchName("LLFireFox");
-        //Force to check witht he forced baselines corresponding environment
+        //Force to check with he forced baselines corresponding environment
         //eyes.setBaselineEnvName("firefox 63.0.3");
 
-        //Set the environment name in the test batch results
-        //eyes.setEnvName(driver.getCapabilities().getBrowserName() + " " + driver.getCapabilities().getVersion());
+        eyes.setMatchLevel(MatchLevel.LAYOUT);
+        renderConfig.setTestName(testName);
 
-        eyes.setMatchLevel(MatchLevel.EXACT);
-        eyes.setStitchMode(StitchMode.CSS);
-        eyes.setSendDom(true);
-
-        seleniumConfiguration.setForceFullPageScreenshot(true);
-        seleniumConfiguration.setTestName(TEST_NAME);
-        seleniumConfiguration.setAppName(APP_NAME);
-        eyes.open(driver, seleniumConfiguration);
+        eyes.open(driver, renderConfig);
 
         String[] arr = new String[0];
         try {
-            Scanner sc = new Scanner(new File("resources/urls/SmileDirect.csv"));
+            Scanner sc = new Scanner(new File("resources/urls/PerdueGlobal.csv"));
             List<String> lines = new ArrayList<String>();
             while (sc.hasNextLine()) {
                 lines.add(sc.nextLine());
@@ -88,24 +71,20 @@ public class VisualGrid {
             e.printStackTrace();
         }
 
-        before = System.currentTimeMillis();
         for(i=0;i<arr.length;i++){
+            before = System.currentTimeMillis();
             System.out.println("Checking URL " + i + ": " + arr[i]);
             try {
                 driver.get(arr[i]);
-                utils.page.suspend(2000);
-                utils.page.scrollPage(driver);
                 eyes.check(arr[i], Target.window());
             } catch (Exception e) {
                 System.out.println("FAILED URL " + i + " in " + (System.currentTimeMillis() - before) + "ms");
                 e.printStackTrace();
             }
         }
-        System.out.println("Closing eyes");
         eyes.close();
-        System.out.println("Completed URL Check in " + (System.currentTimeMillis() - before) + "ms");
         System.out.println("Waiting for Visual Grid Rendering ...");
-        TestResultSummary allTestResults = renderingManager.getAllTestResults();
+        TestResultSummary allTestResults = VisualGrid.getAllTestResults();
         System.out.println("Results: " + allTestResults);
     }
 
@@ -113,54 +92,34 @@ public class VisualGrid {
     @Parameters({"platformName", "platformVersion", "browserName", "browserVersion"})
     @BeforeClass(alwaysRun = true)
     public void baseBeforeClass(String platformName ,String platformVersion,
-                                String browserName, String browserVersion) {
+                                String browserName, String browserVersion) throws MalformedURLException {
 
         String threadId = Long.toString(Thread.currentThread().getId());
         long before = System.currentTimeMillis();
 
-        try {
-            renderingManager = new VisualGridRunner(40);
-            renderingManager.setLogHandler(new FileLogger(true));
-            //renderingManager.setLogHandler(initLogHandler("visual_grid"));
-            logger = renderingManager.getLogger();
-            logger.log("enter");
-            //renderingManager.setServerUrl(SERVER_URL);
-
-            eyes = new Eyes(renderingManager);
-            eyes.setApiKey(params.EYES_KEY);
-            logger = eyes.getLogger();
-            BatchInfo batchInfo = new BatchInfo(BATCH_NAME);
-            if(BATCH_ID!=null) batchInfo.setId(BATCH_ID);
-            //eyes.setBatch(batchInfo);
-            eyes.setBaselineEnvName("applitools environment");
-
-            seleniumConfiguration = new SeleniumConfiguration();
-            seleniumConfiguration.setBatch(batchInfo);
-            String environment = TEST_NAME + "Env";
-            seleniumConfiguration.addBrowser(1600, 1200, SeleniumConfiguration.BrowserType.FIREFOX, environment);
-            seleniumConfiguration.addBrowser(1600, 1200, SeleniumConfiguration.BrowserType.CHROME, environment);
-            seleniumConfiguration.addBrowser(800, 600, SeleniumConfiguration.BrowserType.CHROME, environment);
-            seleniumConfiguration.addBrowser(700, 500, SeleniumConfiguration.BrowserType.CHROME, environment);
-            seleniumConfiguration.addBrowser(1200, 800, SeleniumConfiguration.BrowserType.CHROME, environment);
-            seleniumConfiguration.addBrowser(1600, 1200, SeleniumConfiguration.BrowserType.CHROME, environment);
-
-
-            EmulationDevice emulationDevice = new EmulationDevice(300, 400, 0.5f, true, ScreenOrientation.LANDSCAPE);
-            EmulationInfo emulationInfo = new EmulationInfo(EmulationInfo.DeviceName.Galaxy_Note_II, ScreenOrientation.PORTRAIT);
-
-            seleniumConfiguration.addDeviceEmulation(emulationDevice, environment);
-            seleniumConfiguration.addDeviceEmulation(emulationInfo);
-
-
-            logger.log("created configuration");
-        } catch (Throwable e) {
-            GeneralUtils.logExceptionStackTrace(logger, e);
-        }
-
         driver = utils.drivers.getLocalChrome(threadId);
 
-        // Allows for filtering dashboard view
-       // eyes.addProperty("SANDBOX", "YES");
+        eyes.setApiKey(params.EYES_KEY);
+
+        browserName = "Local Chrome";
+        browserVersion = "Local Version";
+
+        renderConfig.setAppName("APP_NAME");
+        renderConfig.addBrowser(800,  600, RenderingConfiguration.BrowserType.CHROME);
+        renderConfig.addBrowser(1200, 800, RenderingConfiguration.BrowserType.CHROME);
+        renderConfig.addBrowser(1600, 800, RenderingConfiguration.BrowserType.CHROME);
+        renderConfig.addBrowser(700,  500, RenderingConfiguration.BrowserType.FIREFOX);
+        renderConfig.addBrowser(1200,  800, RenderingConfiguration.BrowserType.FIREFOX);
+        renderConfig.addBrowser(1600,  800, RenderingConfiguration.BrowserType.FIREFOX);
+
+        eyes.setLogHandler(new FileLogger("log/file.log",true,true));
+
+        BatchInfo batchInfo = new BatchInfo(BATCH_NAME);
+        if(BATCH_ID!=null) batchInfo.setId(BATCH_ID);
+        eyes.setBatch(batchInfo);
+
+        //Allows for filtering dashboard view
+        //not yet implemented in VG SDK eyes.addProperty("SANDBOX", "YES");
 
         System.out.println("START THREAD ID - " + Thread.currentThread().getId() + " " + browserName + " " + browserVersion);
         System.out.println("baseBeforeClass took " + (System.currentTimeMillis() - before) + "ms");
@@ -178,6 +137,4 @@ public class VisualGrid {
 
 
     }
-
-    */
 }
