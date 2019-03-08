@@ -31,6 +31,10 @@ import java.util.Scanner;
 
 public class VGA {
 
+
+    //   To be used with upcoming release of "eyes-selenium-java4"
+
+
     /*
 
 
@@ -44,7 +48,7 @@ public class VGA {
     private SeleniumConfiguration seleniumConfiguration;
     private Logger logger;
 
-    private static final String BATCH_NAME = "SmileDirect 3 Web VG Ex";
+    private static final String BATCH_NAME = "SmileDirect 3 Grid VG Ex";
     private static final String BATCH_ID = null;  //optional - setting will keep all tests in the same batch
     private static final String APP_NAME = "SmileDirectApp3";
     private static final String TEST_NAME = "SmileDirectTest3";

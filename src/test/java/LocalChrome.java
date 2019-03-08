@@ -2,15 +2,13 @@ import com.applitools.eyes.BatchInfo;
 import com.applitools.eyes.FileLogger;
 import com.applitools.eyes.MatchLevel;
 import com.applitools.eyes.RectangleSize;
+import com.applitools.eyes.selenium.Eyes;
 import com.applitools.eyes.selenium.StitchMode;
-import org.openqa.selenium.WebDriver;
+import com.applitools.eyes.selenium.fluent.Target;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
-
-import com.applitools.eyes.selenium.Eyes;
-import com.applitools.eyes.selenium.fluent.Target;
 import org.testng.annotations.Test;
 
 import java.io.File;
@@ -19,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Web {
+public class LocalChrome {
 
     protected RemoteWebDriver driver;
 
@@ -40,9 +38,9 @@ public class Web {
         long before;
 
         //Force to check against specific baseline branch
-        eyes.setBaselineBranchName("Perdue Global Firefox");
+        //eyes.setBaselineBranchName("Perdue Global Firefox");
         //Force to check with the forced baselines corresponding environment
-        eyes.setBaselineEnvName("PerdueGlobal");
+        //eyes.setBaselineEnvName("PerdueGlobal");
 
         //Set the environment name in the test batch results
         //eyes.setEnvName(driver.getCapabilities().getBrowserName() + " " + driver.getCapabilities().getVersion());
@@ -54,30 +52,8 @@ public class Web {
 
         eyes.open(driver,APP_NAME, testName, new RectangleSize(1200, 900));
 
-        String[] arr = new String[0];
-        try {
-            Scanner sc = new Scanner(new File("resources/urls/PerdueGlobal.csv"));
-            List<String> lines = new ArrayList<String>();
-            while (sc.hasNextLine()) {
-                lines.add(sc.nextLine());
-            }
-            arr = lines.toArray(new String[0]);
-            System.out.println("URL's to check: " + arr.length);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+        tests.urlscan.scanlist(driver, eyes, "resources/urls/PerdueGlobal.csv");
 
-        for(i=0;i<arr.length;i++){
-            before = System.currentTimeMillis();
-            System.out.println("Checking URL " + i + ": " + arr[i]);
-            try {
-                driver.get(arr[i]);
-                eyes.check(arr[i], Target.window().fully());
-            } catch (Exception e) {
-                System.out.println("FAILED URL " + i + " in " + (System.currentTimeMillis() - before) + "ms");
-                e.printStackTrace();
-            }
-        }
         eyes.close();
     }
 
@@ -97,9 +73,7 @@ public class Web {
         if(BATCH_ID!=null) batchInfo.setId(BATCH_ID);
         eyes.setBatch(batchInfo);
 
-       // driver = utils.drivers.getLocalChrome(threadId);
-
-        driver = utils.drivers.getGrid(threadId, browserName);
+        driver = utils.drivers.getLocalChrome(threadId);
 
         //Allows for filtering dashboard view
         eyes.addProperty("SANDBOX", "YES");

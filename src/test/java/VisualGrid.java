@@ -48,11 +48,6 @@ public class VisualGrid {
         String testName = "Perdue Global Demo VG 1";
         long before;
 
-        //Force to check against specific baseline branch
-        //eyes.setBaselineBranchName("LLFireFox");
-        //Force to check with he forced baselines corresponding environment
-        //eyes.setBaselineEnvName("firefox 63.0.3");
-
         eyes.setMatchLevel(MatchLevel.LAYOUT);
         renderConfig.setTestName(testName);
 
