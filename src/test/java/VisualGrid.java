@@ -34,9 +34,9 @@ public class VisualGrid {
     private RenderingConfiguration renderConfig = new RenderingConfiguration();
     private Eyes eyes = new Eyes(VisualGrid);
 
-    private static final String BATCH_NAME = "Perdue Global VG 1";
+    private static final String BATCH_NAME = "Vanguard VG 5";
     private static final String BATCH_ID = null;  //optional - setting will keep all tests in the same batch
-    private static final String APP_NAME = "PerdueGlobal1DemoVG";
+    private static final String APP_NAME = "VanguardVG3";
 
 
     @Parameters({"platformName", "platformVersion", "browserName", "browserVersion"})
@@ -45,7 +45,7 @@ public class VisualGrid {
                          String browserName, String browserVersion) {
 
         Integer i=0;
-        String testName = "Perdue Global Demo VG 1";
+        String testName = "Vanguard 5";
         long before;
 
         eyes.setMatchLevel(MatchLevel.LAYOUT);
@@ -55,7 +55,7 @@ public class VisualGrid {
 
         String[] arr = new String[0];
         try {
-            Scanner sc = new Scanner(new File("resources/urls/PerdueGlobal.csv"));
+            Scanner sc = new Scanner(new File("resources/urls/Vanguard.csv"));
             List<String> lines = new ArrayList<String>();
             while (sc.hasNextLine()) {
                 lines.add(sc.nextLine());
