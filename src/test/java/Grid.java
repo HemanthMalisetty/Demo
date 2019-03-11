@@ -12,6 +12,7 @@ import org.testng.annotations.Parameters;
 import com.applitools.eyes.selenium.Eyes;
 import com.applitools.eyes.selenium.fluent.Target;
 import org.testng.annotations.Test;
+import utils.params;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -25,10 +26,9 @@ public class Grid {
 
     protected Eyes eyes;
 
-    private static final String BATCH_NAME = "Perdue Global 1";
-    private static final String BATCH_ID = null;  //optional - setting will keep all tests in the same batch
-    private static final String APP_NAME = "PerdueGlobal1Demo";
-
+    private static final String BATCH_NAME = params.BATCH_NAME;
+    private static final String BATCH_ID = params.BATCH_ID;
+    private static final String APP_NAME = params.APP_NAME;
 
     @Parameters({"platformName", "platformVersion", "browserName", "browserVersion"})
     @Test(priority = 1, alwaysRun = true, enabled = true)
@@ -36,7 +36,7 @@ public class Grid {
                          String browserName, String browserVersion) {
 
         Integer i=0;
-        String testName = "Perdue Global Demo 1";
+        String testName = params.TEST_NAME;
         long before;
 
         before = System.currentTimeMillis();
@@ -56,7 +56,7 @@ public class Grid {
 
         eyes.open(driver,APP_NAME, testName, new RectangleSize(1200, 900));
 
-        tests.urlscan.scanlist(driver, eyes, "resources/urls/PerdueGlobal.csv");
+        tests.urlscan.scanlist(driver, eyes, params.URL_FILE);
 
         eyes.close();
     }

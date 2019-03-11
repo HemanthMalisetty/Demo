@@ -10,8 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class urlscan {
 
+public class urlscan {
 
     public static void scanlist(RemoteWebDriver driver, Eyes eyes, String urlList){
 
@@ -19,11 +19,12 @@ public class urlscan {
         long before;
 
         before = System.currentTimeMillis();
+        urlscan wantFile = new urlscan();
 
         System.out.println("Scanning URL's in " + urlList);
         String[] arr = new String[0];
         try {
-            Scanner sc = new Scanner(new File(urlList));
+            Scanner sc = new Scanner(wantFile.getFile(urlList));
             List<String> lines = new ArrayList<String>();
             while (sc.hasNextLine()) {
                 lines.add(sc.nextLine());
@@ -46,6 +47,18 @@ public class urlscan {
             }
         }
         System.out.println("Scanned URL's in " + (System.currentTimeMillis() - before) + "ms");
+    }
 
+    public File getFile(String fileName){
+
+        ClassLoader classLoader = getClass().getClassLoader();
+        File file = null;
+        try {
+            file = new File(classLoader.getResource(fileName).getFile());
+        } catch (Exception e) {
+            System.out.println("Fiel Not Found: " + fileName);
+            e.printStackTrace();
+        }
+        return file;
     }
 }

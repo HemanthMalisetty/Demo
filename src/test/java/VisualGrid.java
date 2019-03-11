@@ -19,6 +19,7 @@ import utils.params;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.net.MalformedURLException;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -34,10 +35,9 @@ public class VisualGrid {
     private RenderingConfiguration renderConfig = new RenderingConfiguration();
     private Eyes eyes = new Eyes(VisualGrid);
 
-    private static final String BATCH_NAME = "Vanguard VG 5";
-    private static final String BATCH_ID = null;  //optional - setting will keep all tests in the same batch
-    private static final String APP_NAME = "VanguardVG3";
-
+    private static final String BATCH_NAME = params.BATCH_NAME;
+    private static final String BATCH_ID = params.BATCH_ID;
+    private static final String APP_NAME = params.APP_NAME;
 
     @Parameters({"platformName", "platformVersion", "browserName", "browserVersion"})
     @Test(priority = 1, alwaysRun = true, enabled = true)
@@ -45,17 +45,17 @@ public class VisualGrid {
                          String browserName, String browserVersion) {
 
         Integer i=0;
-        String testName = "Vanguard 5";
+        String testName = params.TEST_NAME;
         long before;
 
-        eyes.setMatchLevel(MatchLevel.LAYOUT);
+        eyes.setMatchLevel(params.MATCH_MODE);
         renderConfig.setTestName(testName);
 
         eyes.open(driver, renderConfig);
 
         String[] arr = new String[0];
         try {
-            Scanner sc = new Scanner(new File("resources/urls/Vanguard.csv"));
+            Scanner sc = new Scanner(new File("src/main/resources/" + params.URL_FILE));
             List<String> lines = new ArrayList<String>();
             while (sc.hasNextLine()) {
                 lines.add(sc.nextLine());
@@ -71,6 +71,7 @@ public class VisualGrid {
             System.out.println("Checking URL " + i + ": " + arr[i]);
             try {
                 driver.get(arr[i]);
+                utils.page.suspend(10000);
                 eyes.check(arr[i], Target.window());
             } catch (Exception e) {
                 System.out.println("FAILED URL " + i + " in " + (System.currentTimeMillis() - before) + "ms");
@@ -92,14 +93,20 @@ public class VisualGrid {
         String threadId = Long.toString(Thread.currentThread().getId());
         long before = System.currentTimeMillis();
 
-        driver = utils.drivers.getLocalChrome(threadId);
+        //driver = utils.drivers.getLocalChrome(threadId);
+
+        driver = utils.drivers.getGrid(threadId, browserName);
+        driver.manage().timeouts().setScriptTimeout(60, TimeUnit.SECONDS);
+        driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
 
         eyes.setApiKey(params.EYES_KEY);
+
+        eyes.setIsDisabled(params.DISABLE_EYES);
 
         browserName = "Local Chrome";
         browserVersion = "Local Version";
 
-        renderConfig.setAppName("APP_NAME");
+        renderConfig.setAppName(APP_NAME);
         renderConfig.addBrowser(800,  600, RenderingConfiguration.BrowserType.CHROME);
         renderConfig.addBrowser(1200, 800, RenderingConfiguration.BrowserType.CHROME);
         renderConfig.addBrowser(1600, 800, RenderingConfiguration.BrowserType.CHROME);
