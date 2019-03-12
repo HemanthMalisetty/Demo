@@ -16,7 +16,7 @@
                 <version>3.0.0-M3</version>
                 <configuration>
                     <suiteXmlFiles>
-                        <suiteXmlFile>testng_LocalChrome.xml</suiteXmlFile>
+                        <suiteXmlFile>testng_VisualGrid.xml</suiteXmlFile>
                     </suiteXmlFiles>
                 </configuration>
             </plugin>

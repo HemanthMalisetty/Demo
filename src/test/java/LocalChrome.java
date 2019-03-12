@@ -17,6 +17,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 public class LocalChrome {
 
@@ -75,6 +76,9 @@ public class LocalChrome {
         eyes.setBatch(batchInfo);
 
         driver = utils.drivers.getLocalChrome(threadId);
+        driver.manage().timeouts().setScriptTimeout(90, TimeUnit.SECONDS);
+        driver.manage().timeouts().pageLoadTimeout(90, TimeUnit.SECONDS);
+
 
         //Allows for filtering dashboard view
         eyes.addProperty("SANDBOX", "YES");

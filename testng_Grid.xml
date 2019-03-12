@@ -12,7 +12,7 @@
             <class name="Grid" />
         </classes>
     </test>
-
+<!--
     <test name="FireFox">
         <parameter name="platformName" value="Windows" />
         <parameter name="platformVersion" value="10" />
@@ -22,5 +22,5 @@
             <class name="Grid" />
         </classes>
     </test>
-
+-->
 </suite>

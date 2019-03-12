@@ -96,8 +96,8 @@ public class VisualGrid {
         //driver = utils.drivers.getLocalChrome(threadId);
 
         driver = utils.drivers.getGrid(threadId, browserName);
-        driver.manage().timeouts().setScriptTimeout(60, TimeUnit.SECONDS);
-        driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
+        driver.manage().timeouts().setScriptTimeout(90, TimeUnit.SECONDS);
+        driver.manage().timeouts().pageLoadTimeout(90, TimeUnit.SECONDS);
 
         eyes.setApiKey(params.EYES_KEY);
 

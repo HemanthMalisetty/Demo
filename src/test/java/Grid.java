@@ -19,6 +19,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 public class Grid {
 
@@ -42,9 +43,9 @@ public class Grid {
         before = System.currentTimeMillis();
 
         //Force to check against specific baseline branch
-        eyes.setBaselineBranchName("Perdue Global Firefox");
+        eyes.setBaselineBranchName("FirstDataFirefox");
         //Force to check with the forced baselines corresponding environment
-        eyes.setBaselineEnvName("PerdueGlobal");
+        eyes.setBaselineEnvName("FF1200x900");
 
         //Set the environment name in the test batch results
         //eyes.setEnvName(driver.getCapabilities().getBrowserName() + " " + driver.getCapabilities().getVersion());
@@ -78,6 +79,9 @@ public class Grid {
         eyes.setBatch(batchInfo);
 
         driver = utils.drivers.getGrid(threadId, browserName);
+        driver.manage().timeouts().setScriptTimeout(90, TimeUnit.SECONDS);
+        driver.manage().timeouts().pageLoadTimeout(90, TimeUnit.SECONDS);
+
 
         //Allows for filtering dashboard view
         eyes.addProperty("SANDBOX", "YES");
