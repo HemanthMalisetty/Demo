@@ -1,6 +1,5 @@
 import com.applitools.eyes.BatchInfo;
 import com.applitools.eyes.FileLogger;
-import com.applitools.eyes.MatchLevel;
 import com.applitools.eyes.rendering.Eyes;
 import com.applitools.eyes.rendering.Target;
 import com.applitools.eyes.visualGridClient.model.RenderingConfiguration;
@@ -19,7 +18,6 @@ import utils.params;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.net.MalformedURLException;
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -72,7 +70,7 @@ public class VisualGrid {
             try {
                 driver.get(arr[i]);
                 utils.page.suspend(10000);
-                eyes.check(arr[i], Target.window());
+                eyes.check(arr[i], Target.window());   // Check the entire page
             } catch (Exception e) {
                 System.out.println("FAILED URL " + i + " in " + (System.currentTimeMillis() - before) + "ms");
                 e.printStackTrace();

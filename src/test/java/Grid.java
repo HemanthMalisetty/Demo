@@ -43,14 +43,14 @@ public class Grid {
         before = System.currentTimeMillis();
 
         //Force to check against specific baseline branch
-        eyes.setBaselineBranchName("FirstDataFirefox");
+        eyes.setBaselineBranchName("ErieInsurance01");
         //Force to check with the forced baselines corresponding environment
         eyes.setBaselineEnvName("FF1200x900");
 
         //Set the environment name in the test batch results
         //eyes.setEnvName(driver.getCapabilities().getBrowserName() + " " + driver.getCapabilities().getVersion());
 
-        eyes.setMatchLevel(MatchLevel.STRICT);
+        eyes.setMatchLevel(params.MATCH_MODE);
         eyes.setStitchMode(StitchMode.CSS);
         eyes.setForceFullPageScreenshot(true);
         eyes.setSendDom(true);
