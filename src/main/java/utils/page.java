@@ -7,6 +7,8 @@ import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
+import java.io.Console;
+
 public class page {
 
     public static void click(WebDriver driver, String cssSelector) {
@@ -16,7 +18,7 @@ public class page {
 
         }
     }
-    public static void scrollPage(RemoteWebDriver driver){
+    public static void pageDown(RemoteWebDriver driver){
 
         Long height = (Long) driver.executeScript("return document.body.scrollHeight;");
 
@@ -32,6 +34,31 @@ public class page {
         seriesOfActions = builder
                 .sendKeys(Keys.HOME)
                 .build();
+        seriesOfActions.perform();
+    }
+
+    public static void arrowDown(RemoteWebDriver driver){
+
+        Long height = (Long) driver.executeScript("return document.body.scrollHeight;");
+
+        Actions builder = new Actions(driver);
+        Action seriesOfActions = builder
+                .sendKeys(Keys.ARROW_DOWN)
+                .build();
+
+        Integer i=0;
+        for(i=0;i<height/4;i++) {
+            seriesOfActions.perform();
+        }
+    }
+
+
+    public static void home(RemoteWebDriver driver){
+
+        Actions builder = new Actions(driver);
+        Action seriesOfActions = builder
+            .sendKeys(Keys.HOME)
+            .build();
         seriesOfActions.perform();
     }
 

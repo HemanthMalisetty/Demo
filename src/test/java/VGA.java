@@ -98,7 +98,7 @@ public class VGA {
             try {
                 driver.get(arr[i]);
                 utils.page.suspend(2000);
-                utils.page.scrollPage(driver);
+                utils.page.pageDown(driver);
                 eyes.check(arr[i], Target.window());
             } catch (Exception e) {
                 System.out.println("FAILED URL " + i + " in " + (System.currentTimeMillis() - before) + "ms");

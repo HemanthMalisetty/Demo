@@ -69,7 +69,9 @@ public class VisualGrid {
             System.out.println("Checking URL " + i + ": " + arr[i]);
             try {
                 driver.get(arr[i]);
-                utils.page.suspend(10000);
+                utils.page.arrowDown(driver);
+                utils.page.home(driver);
+                utils.page.suspend(5000);
                 eyes.check(arr[i], Target.window());   // Check the entire page
             } catch (Exception e) {
                 System.out.println("FAILED URL " + i + " in " + (System.currentTimeMillis() - before) + "ms");
@@ -91,9 +93,10 @@ public class VisualGrid {
         String threadId = Long.toString(Thread.currentThread().getId());
         long before = System.currentTimeMillis();
 
-        //driver = utils.drivers.getLocalChrome(threadId);
+        driver = utils.drivers.getLocalChrome(threadId);
 
-        driver = utils.drivers.getGrid(threadId, browserName);
+        //driver = utils.drivers.getGrid(threadId, browserName);
+
         driver.manage().timeouts().setScriptTimeout(90, TimeUnit.SECONDS);
         driver.manage().timeouts().pageLoadTimeout(90, TimeUnit.SECONDS);
 
@@ -106,11 +109,11 @@ public class VisualGrid {
 
         renderConfig.setAppName(APP_NAME);
         renderConfig.addBrowser(800,  600, RenderingConfiguration.BrowserType.CHROME);
-        renderConfig.addBrowser(1200, 800, RenderingConfiguration.BrowserType.CHROME);
-        renderConfig.addBrowser(1600, 800, RenderingConfiguration.BrowserType.CHROME);
-        renderConfig.addBrowser(700,  500, RenderingConfiguration.BrowserType.FIREFOX);
-        renderConfig.addBrowser(1200,  800, RenderingConfiguration.BrowserType.FIREFOX);
-        renderConfig.addBrowser(1600,  800, RenderingConfiguration.BrowserType.FIREFOX);
+       // renderConfig.addBrowser(1200, 800, RenderingConfiguration.BrowserType.CHROME);
+        renderConfig.addBrowser(1600, 900, RenderingConfiguration.BrowserType.CHROME);
+        renderConfig.addBrowser(800,  600, RenderingConfiguration.BrowserType.FIREFOX);
+        // renderConfig.addBrowser(1200,  800, RenderingConfiguration.BrowserType.FIREFOX);
+        renderConfig.addBrowser(1600,  900, RenderingConfiguration.BrowserType.FIREFOX);
 
         eyes.setLogHandler(new FileLogger("log/file.log",true,true));
 

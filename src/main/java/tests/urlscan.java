@@ -40,6 +40,7 @@ public class urlscan {
             System.out.println("Checking URL " + +i + ": " + arr[i]);
             try {
                 driver.get(arr[i]);
+                utils.page.arrowDown(driver);
                 eyes.check(arr[i], Target.window());
             } catch (Exception e) {
                 System.out.println("FAILED URL " + +i + " in " + (System.currentTimeMillis() - before) + "ms");
