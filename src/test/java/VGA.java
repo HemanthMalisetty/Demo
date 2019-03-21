@@ -25,20 +25,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-
 */
+
 
 
 public class VGA {
 
-
-    //   To be used with upcoming release of "eyes-selenium-java4"
-
-
-    /*
-
-
-
+/*
 
     protected ChromeDriver driver;
 
