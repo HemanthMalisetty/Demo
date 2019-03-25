@@ -7,13 +7,12 @@
         <parameter name="platformName" value="Windows" />
         <parameter name="platformVersion" value="10" />
         <parameter name="browserName" value="chrome" />
-        <parameter name="browserVersion" value="72.0.3626.109" />
+        <parameter name="browserVersion" value="NA" />
         <classes>
             <class name="Grid" />
         </classes>
     </test>
 
-<!--0
     <test name="FireFox">
         <parameter name="platformName" value="Windows" />
         <parameter name="platformVersion" value="10" />
@@ -23,6 +22,6 @@
             <class name="Grid" />
         </classes>
     </test>
-    -->
+
 
 </suite>
