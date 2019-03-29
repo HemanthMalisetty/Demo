@@ -70,6 +70,7 @@ public class VisualGrid {
             try {
                 driver.get(arr[i]);
                 utils.page.arrowDown(driver);
+                utils.page.changePage(driver);
                 eyes.check(arr[i], Target.window());   // Check the entire page
             } catch (Exception e) {
                 System.out.println("FAILED URL " + i + " in " + (System.currentTimeMillis() - before) + "ms");
