@@ -7,7 +7,6 @@ import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
-import java.io.Console;
 
 public class page {
 
@@ -67,6 +66,22 @@ public class page {
             Thread.sleep(millis);
         } catch (Exception e) {
 
+        }
+    }
+
+    public static void changePage(RemoteWebDriver driver){
+
+        String script = "" +
+                "                                    var elements = window.document.querySelectorAll(\"body, body *\");\n" +
+                "                                    var child;\n" +
+                "                                    for(var i = 0; i < elements.length; i++) {\n" +
+                "                                        child = elements[i].childNodes[0];\n" +
+                "                                        if(elements[i].hasChildNodes() && child.nodeType == 3) {\n" +
+                "                                           child.nodeValue = child.nodeValue.replace('o','0');" +
+                "                                        }\n" +
+                "                                    }\n";
+        if(params.changePage) {
+            driver.executeScript(script);
         }
     }
 }

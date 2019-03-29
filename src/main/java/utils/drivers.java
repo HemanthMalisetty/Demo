@@ -49,7 +49,7 @@ public class drivers {
                 options.addArguments("--disable-default-apps");
                 options.addArguments("--disable-infobars");
                 options.addArguments("–-disable-notifications");
-                options.addArguments("--dom-automation");
+                //options.addArguments("--dom-automation");
                 options.setCapability(CapabilityType.BROWSER_NAME, "chrome");
                 options.setCapability(CapabilityType.PLATFORM_NAME, Platform.ANY);
                 try {

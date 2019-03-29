@@ -109,11 +109,11 @@ public class VisualGrid {
         browserVersion = "Local Version";
 
         renderConfig.setAppName(APP_NAME);
-        renderConfig.addBrowser(1800,  1600, RenderingConfiguration.BrowserType.CHROME);
-        renderConfig.addBrowser(1900, 1800, RenderingConfiguration.BrowserType.CHROME);
-        renderConfig.addBrowser(1600, 1900, RenderingConfiguration.BrowserType.CHROME);
-        renderConfig.addBrowser(1800,  1600, RenderingConfiguration.BrowserType.FIREFOX);
-        renderConfig.addBrowser(1900,  1800, RenderingConfiguration.BrowserType.FIREFOX);
+        renderConfig.addBrowser(800,  600, RenderingConfiguration.BrowserType.CHROME);
+        renderConfig.addBrowser(1024, 768, RenderingConfiguration.BrowserType.CHROME);
+        renderConfig.addBrowser(1600, 900, RenderingConfiguration.BrowserType.CHROME);
+        renderConfig.addBrowser(800,  600, RenderingConfiguration.BrowserType.FIREFOX);
+        renderConfig.addBrowser(1024,  768, RenderingConfiguration.BrowserType.FIREFOX);
         renderConfig.addBrowser(1600,  1900, RenderingConfiguration.BrowserType.FIREFOX);
 
         eyes.setLogHandler(new FileLogger("log/file.log",true,true));

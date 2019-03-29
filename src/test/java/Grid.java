@@ -43,9 +43,9 @@ public class Grid {
         before = System.currentTimeMillis();
 
         //Force to check against specific baseline branch
-        eyes.setBaselineBranchName("ErieInsurance01");
+        //eyes.setBaselineBranchName("ErieInsurance01");
         //Force to check with the forced baselines corresponding environment
-        eyes.setBaselineEnvName("FF1200x900");
+        //eyes.setBaselineEnvName("FF1200x900");
 
         //Set the environment name in the test batch results
         //eyes.setEnvName(driver.getCapabilities().getBrowserName() + " " + driver.getCapabilities().getVersion());
