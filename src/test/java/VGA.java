@@ -32,7 +32,6 @@ import java.util.Scanner;
 public class VGA {
 
 /*
-
     protected ChromeDriver driver;
 
 
@@ -175,6 +174,6 @@ public class VGA {
 
 
     }
+*/
 
-    */
 }
