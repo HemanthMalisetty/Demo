@@ -1,6 +1,6 @@
 
 
-/*
+
 
 import com.applitools.eyes.*;
 import com.applitools.eyes.config.SeleniumConfiguration;
@@ -25,13 +25,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-*/
 
 
 
 public class VGA {
 
-/*
+    // This is to be used with 3.149.1-beta
+
     protected ChromeDriver driver;
 
 
@@ -40,10 +40,8 @@ public class VGA {
     private SeleniumConfiguration seleniumConfiguration;
     private Logger logger;
 
-    private static final String BATCH_NAME = "SmileDirect 3 Grid VG Ex";
-    private static final String BATCH_ID = null;  //optional - setting will keep all tests in the same batch
-    private static final String APP_NAME = "SmileDirectApp3";
-    private static final String TEST_NAME = "SmileDirectTest3";
+
+    private static final String APP_NAME = params.APP_NAME;
 
 
     @Parameters({"platformName", "platformVersion", "browserName", "browserVersion"})
@@ -62,18 +60,19 @@ public class VGA {
         //Set the environment name in the test batch results
         //eyes.setEnvName(driver.getCapabilities().getBrowserName() + " " + driver.getCapabilities().getVersion());
 
-        eyes.setMatchLevel(MatchLevel.EXACT);
+        eyes.setMatchLevel(params.MATCH_MODE);
         eyes.setStitchMode(StitchMode.CSS);
         eyes.setSendDom(true);
 
         seleniumConfiguration.setForceFullPageScreenshot(true);
-        seleniumConfiguration.setTestName(TEST_NAME);
-        seleniumConfiguration.setAppName(APP_NAME);
-        eyes.open(driver, seleniumConfiguration);
+        seleniumConfiguration.setTestName(params.TEST_NAME);
+        seleniumConfiguration.setAppName(params.APP_NAME);
+        eyes.setConfiguration(seleniumConfiguration);
+        eyes.open(driver);
 
         String[] arr = new String[0];
         try {
-            Scanner sc = new Scanner(new File("resources/urls/SmileDirect.csv"));
+            Scanner sc = new Scanner(new File("src/main/resources/" + params.URL_FILE));
             List<String> lines = new ArrayList<String>();
             while (sc.hasNextLine()) {
                 lines.add(sc.nextLine());
@@ -91,15 +90,16 @@ public class VGA {
                 driver.get(arr[i]);
                 utils.page.suspend(2000);
                 utils.page.pageDown(driver);
+                utils.page.changePage(driver);
                 eyes.check(arr[i], Target.window());
             } catch (Exception e) {
                 System.out.println("FAILED URL " + i + " in " + (System.currentTimeMillis() - before) + "ms");
                 e.printStackTrace();
             }
         }
-        System.out.println("Closing eyes");
-        eyes.close();
-        System.out.println("Completed URL Check in " + (System.currentTimeMillis() - before) + "ms");
+        //System.out.println("Closing eyes");
+        //eyes.close();
+        System.out.println("Completed URL Check in " + ((System.currentTimeMillis() - before))/1000 + "s");
         System.out.println("Waiting for Visual Grid Rendering ...");
         TestResultSummary allTestResults = renderingManager.getAllTestResults();
         System.out.println("Results: " + allTestResults);
@@ -125,14 +125,13 @@ public class VGA {
             eyes = new Eyes(renderingManager);
             eyes.setApiKey(params.EYES_KEY);
             logger = eyes.getLogger();
-            BatchInfo batchInfo = new BatchInfo(BATCH_NAME);
-            if(BATCH_ID!=null) batchInfo.setId(BATCH_ID);
-            //eyes.setBatch(batchInfo);
+            BatchInfo batchInfo = new BatchInfo(utils.params.BATCH_NAME);
+            if(utils.params.BATCH_ID!=null) batchInfo.setId(utils.params.BATCH_ID);
             eyes.setBaselineEnvName("applitools environment");
 
             seleniumConfiguration = new SeleniumConfiguration();
             seleniumConfiguration.setBatch(batchInfo);
-            String environment = TEST_NAME + "Env";
+            String environment = utils.params.TEST_NAME + "Env";
             seleniumConfiguration.addBrowser(1600, 1200, SeleniumConfiguration.BrowserType.FIREFOX, environment);
             seleniumConfiguration.addBrowser(1600, 1200, SeleniumConfiguration.BrowserType.CHROME, environment);
             seleniumConfiguration.addBrowser(800, 600, SeleniumConfiguration.BrowserType.CHROME, environment);
@@ -172,8 +171,6 @@ public class VGA {
             System.out.println("Driver quit took " + (System.currentTimeMillis() - before) + "ms");
         }
 
-
     }
-*/
 
 }

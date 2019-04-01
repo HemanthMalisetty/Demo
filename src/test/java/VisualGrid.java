@@ -1,3 +1,5 @@
+
+/*
 import com.applitools.eyes.BatchInfo;
 import com.applitools.eyes.FileLogger;
 import com.applitools.eyes.rendering.Eyes;
@@ -5,8 +7,6 @@ import com.applitools.eyes.rendering.Target;
 import com.applitools.eyes.visualGridClient.model.RenderingConfiguration;
 import com.applitools.eyes.visualGridClient.model.TestResultSummary;
 import com.applitools.eyes.visualGridClient.services.VisualGridManager;
-
-
 
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.annotations.AfterClass;
@@ -23,13 +23,20 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
+USE THIS WITH 3.50.1 ++++ version
+
+
+ */
+
+
 public class VisualGrid {
 
+    /*
     protected RemoteWebDriver driver;
 
     protected Target target;
 
-    private VisualGridManager VisualGrid = new VisualGridManager(10);
+    private VisualGridManager VisualGrid = new VisualGridManager(100);
     private RenderingConfiguration renderConfig = new RenderingConfiguration();
     private Eyes eyes = new Eyes(VisualGrid);
 
@@ -72,6 +79,7 @@ public class VisualGrid {
                 utils.page.arrowDown(driver);
                 utils.page.home(driver);
                 utils.page.suspend(5000);
+                utils.page.changePage(driver);
                 eyes.check(arr[i],
                         Target.window().fully());   // Check the entire page
             } catch (Exception e) {
@@ -141,4 +149,6 @@ public class VisualGrid {
 
 
     }
+*/
 }
+

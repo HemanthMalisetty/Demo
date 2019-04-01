@@ -40,16 +40,17 @@ public class LocalChrome {
         long before;
 
         //Force to check against specific baseline branch
-        //eyes.setBaselineBranchName("Perdue Global Firefox");
+        //eyes.setBaselineBranchName("EvicoreFirefox");
         //Force to check with the forced baselines corresponding environment
-        //eyes.setBaselineEnvName("sandbox");
+        //eyes.setBaselineEnvName("FF1200x900");
 
         //Set the environment name in the test batch results
         //eyes.setEnvName(driver.getCapabilities().getBrowserName() + " " + driver.getCapabilities().getVersion());
 
         eyes.setMatchLevel(params.MATCH_MODE);
         eyes.setStitchMode(StitchMode.CSS);
-        eyes.setForceFullPageScreenshot(true);
+        eyes.setForceFullPageScreenshot(false);
+        if(params.FULL_SCREEN) eyes.setForceFullPageScreenshot(true);
         eyes.setSendDom(true);
 
         eyes.open(driver,APP_NAME, testName, new RectangleSize(1200, 900));
