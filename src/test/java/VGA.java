@@ -1,7 +1,5 @@
 
 
-
-
 import com.applitools.eyes.*;
 import com.applitools.eyes.config.SeleniumConfiguration;
 import com.applitools.eyes.selenium.Eyes;
@@ -32,6 +30,10 @@ public class VGA {
 
     // This is to be used with 3.149.1-beta
 
+
+
+
+
     protected ChromeDriver driver;
 
 
@@ -51,14 +53,6 @@ public class VGA {
 
         Integer i=0;
         long before = 0;
-
-        //Force to check against specific baseline branch
-        //eyes.setBaselineBranchName("LLFireFox");
-        //Force to check witht he forced baselines corresponding environment
-        //eyes.setBaselineEnvName("firefox 63.0.3");
-
-        //Set the environment name in the test batch results
-        //eyes.setEnvName(driver.getCapabilities().getBrowserName() + " " + driver.getCapabilities().getVersion());
 
         eyes.setMatchLevel(params.MATCH_MODE);
         eyes.setStitchMode(StitchMode.CSS);
@@ -88,8 +82,7 @@ public class VGA {
             System.out.println("Checking URL " + i + ": " + arr[i]);
             try {
                 driver.get(arr[i]);
-                utils.page.suspend(2000);
-                utils.page.pageDown(driver);
+                utils.page.arrowDown(driver);
                 utils.page.changePage(driver);
                 eyes.check(arr[i], Target.window());
             } catch (Exception e) {
@@ -101,7 +94,9 @@ public class VGA {
         //eyes.close();
         System.out.println("Completed URL Check in " + ((System.currentTimeMillis() - before))/1000 + "s");
         System.out.println("Waiting for Visual Grid Rendering ...");
+        before = System.currentTimeMillis();
         TestResultSummary allTestResults = renderingManager.getAllTestResults();
+        System.out.println("Completed Rendering in " + ((System.currentTimeMillis() - before))/1000 + "s");
         System.out.println("Results: " + allTestResults);
     }
 
@@ -115,12 +110,10 @@ public class VGA {
         long before = System.currentTimeMillis();
 
         try {
-            renderingManager = new VisualGridRunner(40);
+            renderingManager = new VisualGridRunner(100);
             renderingManager.setLogHandler(new FileLogger(true));
-            //renderingManager.setLogHandler(initLogHandler("visual_grid"));
             logger = renderingManager.getLogger();
             logger.log("enter");
-            //renderingManager.setServerUrl(SERVER_URL);
 
             eyes = new Eyes(renderingManager);
             eyes.setApiKey(params.EYES_KEY);
@@ -129,22 +122,22 @@ public class VGA {
             if(utils.params.BATCH_ID!=null) batchInfo.setId(utils.params.BATCH_ID);
             eyes.setBaselineEnvName("applitools environment");
 
+
             seleniumConfiguration = new SeleniumConfiguration();
             seleniumConfiguration.setBatch(batchInfo);
             String environment = utils.params.TEST_NAME + "Env";
-            seleniumConfiguration.addBrowser(1600, 1200, SeleniumConfiguration.BrowserType.FIREFOX, environment);
+            seleniumConfiguration.addBrowser(1024, 768, SeleniumConfiguration.BrowserType.CHROME, environment);
             seleniumConfiguration.addBrowser(1600, 1200, SeleniumConfiguration.BrowserType.CHROME, environment);
             seleniumConfiguration.addBrowser(800, 600, SeleniumConfiguration.BrowserType.CHROME, environment);
             seleniumConfiguration.addBrowser(700, 500, SeleniumConfiguration.BrowserType.CHROME, environment);
             seleniumConfiguration.addBrowser(1200, 800, SeleniumConfiguration.BrowserType.CHROME, environment);
-            seleniumConfiguration.addBrowser(1600, 1200, SeleniumConfiguration.BrowserType.CHROME, environment);
 
+            seleniumConfiguration.addBrowser(1024, 768, SeleniumConfiguration.BrowserType.FIREFOX, environment);
+            seleniumConfiguration.addBrowser(1600, 1200, SeleniumConfiguration.BrowserType.FIREFOX, environment);
+            seleniumConfiguration.addBrowser(800, 600, SeleniumConfiguration.BrowserType.FIREFOX, environment);
+            seleniumConfiguration.addBrowser(700, 500, SeleniumConfiguration.BrowserType.FIREFOX, environment);
+            seleniumConfiguration.addBrowser(1200, 800, SeleniumConfiguration.BrowserType.FIREFOX, environment);
 
-            EmulationDevice emulationDevice = new EmulationDevice(300, 400, 0.5f, true, ScreenOrientation.LANDSCAPE);
-            EmulationInfo emulationInfo = new EmulationInfo(EmulationInfo.DeviceName.Galaxy_Note_II, ScreenOrientation.PORTRAIT);
-
-            seleniumConfiguration.addDeviceEmulation(emulationDevice, environment);
-            seleniumConfiguration.addDeviceEmulation(emulationInfo);
 
 
             logger.log("created configuration");
@@ -173,4 +166,17 @@ public class VGA {
 
     }
 
+
+
+
 }
+
+
+/*
+            EmulationDevice emulationDevice = new EmulationDevice(300, 400, 0.5f, true, ScreenOrientation.LANDSCAPE);
+            EmulationInfo emulationInfo = new EmulationInfo(EmulationInfo.DeviceName.iPhone_X, ScreenOrientation.PORTRAIT);
+
+            seleniumConfiguration.addDeviceEmulation(emulationDevice, environment);
+            seleniumConfiguration.addDeviceEmulation(emulationInfo);
+
+ */

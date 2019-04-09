@@ -43,7 +43,7 @@ public class Grid {
         before = System.currentTimeMillis();
 
         //Force to check against specific baseline branch
-        eyes.setBaselineBranchName("EvicoreFirefox");
+        eyes.setBaselineBranchName("GoldmanSachs");
         //Force to check with the forced baselines corresponding environment
         eyes.setBaselineEnvName("FF1200x900");
 

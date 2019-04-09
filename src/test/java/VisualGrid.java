@@ -23,15 +23,12 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
-USE THIS WITH 3.50.1 ++++ version
-
-
- */
+*/
 
 
 public class VisualGrid {
 
-    /*
+/*
     protected RemoteWebDriver driver;
 
     protected Target target;
@@ -71,8 +68,8 @@ public class VisualGrid {
             e.printStackTrace();
         }
 
+        before = System.currentTimeMillis();
         for(i=0;i<arr.length;i++){
-            before = System.currentTimeMillis();
             System.out.println("Checking URL " + i + ": " + arr[i]);
             try {
                 driver.get(arr[i]);
@@ -87,10 +84,14 @@ public class VisualGrid {
                 e.printStackTrace();
             }
         }
-        eyes.close();
+      //  eyes.close();
+        System.out.println("Completed URL Check in " + ((System.currentTimeMillis() - before))/1000 + "s");
         System.out.println("Waiting for Visual Grid Rendering ...");
-        TestResultSummary allTestResults = VisualGrid.getAllTestResults(true);
+        before = System.currentTimeMillis();
+        TestResultSummary allTestResults = VisualGrid.getAllTestResults();
+        System.out.println("Completed Rendering in " + ((System.currentTimeMillis() - before))/1000 + "s");
         System.out.println("Results: " + allTestResults);
+
     }
 
 
@@ -116,13 +117,17 @@ public class VisualGrid {
         browserName = "Local Chrome";
         browserVersion = "Local Version";
 
+
         renderConfig.setAppName(APP_NAME);
+
         renderConfig.addBrowser(800,  600, RenderingConfiguration.BrowserType.CHROME);
         renderConfig.addBrowser(1024, 768, RenderingConfiguration.BrowserType.CHROME);
-        renderConfig.addBrowser(1600, 900, RenderingConfiguration.BrowserType.CHROME);
+        renderConfig.addBrowser(1600, 500, RenderingConfiguration.BrowserType.CHROME);
+
         renderConfig.addBrowser(800,  600, RenderingConfiguration.BrowserType.FIREFOX);
         renderConfig.addBrowser(1024,  768, RenderingConfiguration.BrowserType.FIREFOX);
-        renderConfig.addBrowser(1600,  1900, RenderingConfiguration.BrowserType.FIREFOX);
+        renderConfig.addBrowser(1600,  500, RenderingConfiguration.BrowserType.FIREFOX);
+
 
         eyes.setLogHandler(new FileLogger("log/file.log",true,true));
 
