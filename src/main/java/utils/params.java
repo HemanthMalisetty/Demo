@@ -7,10 +7,11 @@ public class params {
     public static String EYES_KEY = System.getProperty("eyesAPIKey", "DEFAULT_TOKEN");
     public static String GRID_URL = "http://localhost:4444/wd/hub";
 
-    private static String name = "Instructure";
-    public static Boolean changePage = false;  // to change the content for demo purposes
+    private static String name = "SD";
+    public static Boolean changePage = true;  // to change the content for demo purposes
 
-    public static String BATCH_NAME = name + " CP 01";
+    //public static String BATCH_NAME = name + " CP 01";
+    public static String BATCH_NAME = "SD Java CP 1";
     public static String APP_NAME = name + " 01";
     public static String TEST_NAME = name + " 01";
     public static String URL_FILE = name + ".csv";

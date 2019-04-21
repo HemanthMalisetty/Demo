@@ -7,16 +7,11 @@ import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
+import java.rmi.Remote;
+
 
 public class page {
 
-    public static void click(WebDriver driver, String cssSelector) {
-        try {
-            driver.findElement(By.cssSelector(cssSelector)).click();
-        } catch (Exception e) {
-
-        }
-    }
     public static void pageDown(RemoteWebDriver driver){
 
         Long height = (Long) driver.executeScript("return document.body.scrollHeight;");
@@ -84,4 +79,25 @@ public class page {
             driver.executeScript(script);
         }
     }
+
+    public static void clickLinkText(RemoteWebDriver driver, String identifier){
+        Integer i;
+        for(i=0;i<=5;i++){
+            try {
+                driver.findElementByLinkText(identifier).click();
+                i=999;
+            } catch (Exception e) {}
+        }
+    }
+
+    public static void clickName(RemoteWebDriver driver, String identifier){
+        Integer i;
+        for(i=0;i<=5;i++){
+            try {
+                driver.findElementByName(identifier).click();
+                i=999;
+            } catch (Exception e) {}
+        }
+    }
+
 }

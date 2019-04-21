@@ -1,5 +1,5 @@
 
-
+/*
 import com.applitools.eyes.*;
 import com.applitools.eyes.config.SeleniumConfiguration;
 import com.applitools.eyes.selenium.Eyes;
@@ -22,16 +22,16 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+*/
 
 
 
-
-public class VGA {
+public class vg1beta {
 
     // This is to be used with 3.149.1-beta
 
 
-
+/*
 
 
     protected ChromeDriver driver;
@@ -167,7 +167,7 @@ public class VGA {
     }
 
 
-
+*/
 
 }
 

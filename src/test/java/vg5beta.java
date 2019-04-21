@@ -26,16 +26,17 @@ import java.util.concurrent.TimeUnit;
 */
 
 
-public class VisualGrid {
+public class vg5beta {
 
-/*
+    /*
+
     protected RemoteWebDriver driver;
 
     protected Target target;
 
-    private VisualGridManager VisualGrid = new VisualGridManager(100);
+    private VisualGridManager vg = new VisualGridManager(100);
     private RenderingConfiguration renderConfig = new RenderingConfiguration();
-    private Eyes eyes = new Eyes(VisualGrid);
+    private Eyes eyes = new Eyes(vg);
 
     private static final String BATCH_NAME = params.BATCH_NAME;
     private static final String BATCH_ID = params.BATCH_ID;
@@ -88,7 +89,7 @@ public class VisualGrid {
         System.out.println("Completed URL Check in " + ((System.currentTimeMillis() - before))/1000 + "s");
         System.out.println("Waiting for Visual Grid Rendering ...");
         before = System.currentTimeMillis();
-        TestResultSummary allTestResults = VisualGrid.getAllTestResults();
+        TestResultSummary allTestResults = vg31510.getAllTestResults();
         System.out.println("Completed Rendering in " + ((System.currentTimeMillis() - before))/1000 + "s");
         System.out.println("Results: " + allTestResults);
 
