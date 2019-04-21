@@ -40,8 +40,8 @@ public class urlscan {
             System.out.println("Checking URL " + +i + ": " + arr[i]);
             try {
                 driver.get(arr[i]);
-                //utils.page.arrowDown(driver);
-                //utils.page.suspend(1000);
+                utils.page.arrowDown(driver);
+                utils.page.suspend(1000);
                 utils.page.changePage(driver);
                 eyes.check(arr[i], Target.window());
             } catch (Exception e) {
