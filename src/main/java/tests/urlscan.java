@@ -41,7 +41,7 @@ public class urlscan {
             try {
                 driver.get(arr[i]);
                 utils.page.arrowDown(driver);
-                utils.page.suspend(1000);
+                utils.page.suspend(2000);
                 utils.page.changePage(driver);
                 eyes.check(arr[i], Target.window());
             } catch (Exception e) {

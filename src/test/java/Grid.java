@@ -52,7 +52,6 @@ public class Grid {
 
         eyes.setMatchLevel(params.MATCH_MODE);
         eyes.setStitchMode(StitchMode.CSS);
-        eyes.setForceFullPageScreenshot(false);
         if(params.FULL_SCREEN) eyes.setForceFullPageScreenshot(true);
         eyes.setSendDom(true);
 
