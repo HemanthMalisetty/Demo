@@ -1,6 +1,3 @@
-
-
-
 import com.applitools.eyes.BatchInfo;
 import com.applitools.eyes.FileLogger;
 
@@ -31,9 +28,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
-
-
-
 
 public class vg31510 {
 
@@ -133,21 +127,30 @@ public class vg31510 {
         visualGridRunner.setServerUrl("https://eyes.applitools.com/");
 
         renderConfig.setAppName(APP_NAME);
-        renderConfig.addBrowser(800,  600, BrowserType.CHROME);
+        renderConfig.addBrowser(600,  600, BrowserType.CHROME);
+        renderConfig.addBrowser(700, 600, BrowserType.CHROME);
+        renderConfig.addBrowser(800, 600, BrowserType.CHROME);
+        renderConfig.addBrowser(900,  600, BrowserType.CHROME);
+        renderConfig.addBrowser(1000, 600, BrowserType.CHROME);
         renderConfig.addBrowser(1200, 600, BrowserType.CHROME);
-        renderConfig.addBrowser(1600, 500, BrowserType.CHROME);
-        renderConfig.addBrowser(800,  600, BrowserType.FIREFOX);
+        renderConfig.addBrowser(1600, 600, BrowserType.CHROME);
+
+        renderConfig.addBrowser(600,  600, BrowserType.FIREFOX);
+        renderConfig.addBrowser(700, 600, BrowserType.FIREFOX);
+        renderConfig.addBrowser(800, 600, BrowserType.FIREFOX);
+        renderConfig.addBrowser(900,  600, BrowserType.FIREFOX);
+        renderConfig.addBrowser(1000, 600, BrowserType.FIREFOX);
         renderConfig.addBrowser(1200, 600, BrowserType.FIREFOX);
-        renderConfig.addBrowser(1600,  500, BrowserType.FIREFOX);
+        renderConfig.addBrowser(1600, 600, BrowserType.FIREFOX);
+
         renderConfig.addBrowser(800,  600, BrowserType.EDGE);
         renderConfig.addBrowser(1200, 600, BrowserType.EDGE);
         renderConfig.addBrowser(1600, 500, BrowserType.EDGE);
+
         renderConfig.addBrowser(800,  600, BrowserType.IE_11);
         renderConfig.addBrowser(1200,  600, BrowserType.IE_11);
         renderConfig.addBrowser(1600,  500, BrowserType.IE_11);
-        renderConfig.addBrowser(800,  600, BrowserType.IE_10);
-        renderConfig.addBrowser(1200,  600, BrowserType.IE_10);
-        renderConfig.addBrowser(1600,  500, BrowserType.IE_10);
+
 
         renderConfig.addDeviceEmulation(DeviceName.iPad_Pro, ScreenOrientation.PORTRAIT);
         renderConfig.addDeviceEmulation(DeviceName.Nexus_10, ScreenOrientation.PORTRAIT);

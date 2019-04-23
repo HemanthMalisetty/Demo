@@ -40,7 +40,9 @@ public class urlscan {
             System.out.println("Checking URL " + +i + ": " + arr[i]);
             try {
                 driver.get(arr[i]);
+                utils.page.suspend(2000);
                 utils.page.arrowDown(driver);
+                utils.page.home(driver);
                 utils.page.suspend(2000);
                 utils.page.changePage(driver);
                 eyes.check(arr[i], Target.window());
@@ -49,7 +51,7 @@ public class urlscan {
                 e.printStackTrace();
             }
         }
-        System.out.println("Scanned URL's in " + (System.currentTimeMillis() - before) + "ms");
+        System.out.println("Completed URL scan in " + ((System.currentTimeMillis() - before))/1000 + " seconds");
     }
 
     public File getFile(String fileName){
