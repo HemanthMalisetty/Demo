@@ -1,7 +1,4 @@
-import com.applitools.eyes.BatchInfo;
-import com.applitools.eyes.FileLogger;
-import com.applitools.eyes.MatchLevel;
-import com.applitools.eyes.RectangleSize;
+import com.applitools.eyes.*;
 import com.applitools.eyes.selenium.StitchMode;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -59,7 +56,9 @@ public class Grid {
 
         tests.urlscan.scanlist(driver, eyes, params.URL_FILE);
 
-        eyes.close();
+        TestResults testResult = eyes.close();
+        System.out.println("Applitools Test Results");
+        System.out.println(testResult.toString());
     }
 
 

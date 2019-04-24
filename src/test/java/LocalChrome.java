@@ -1,7 +1,4 @@
-import com.applitools.eyes.BatchInfo;
-import com.applitools.eyes.FileLogger;
-import com.applitools.eyes.MatchLevel;
-import com.applitools.eyes.RectangleSize;
+import com.applitools.eyes.*;
 import com.applitools.eyes.selenium.Eyes;
 import com.applitools.eyes.selenium.StitchMode;
 import com.applitools.eyes.selenium.fluent.Target;
@@ -40,7 +37,7 @@ public class LocalChrome {
         long before;
 
         //Force to check against specific baseline branch
-        //eyes.setBaselineBranchName("EvicoreFirefox");
+        //eyes.setBaselineBranchName("Firefox");
         //Force; to check with the forced baselines corresponding environment
         //eyes.setBaselineEnvName("FF1200x900");
 
@@ -52,12 +49,13 @@ public class LocalChrome {
         eyes.setForceFullPageScreenshot(false);
         if(params.FULL_SCREEN) eyes.setForceFullPageScreenshot(true);
         eyes.setSendDom(true);
-
         eyes.open(driver,APP_NAME, testName, new RectangleSize(1200, 800));
 
         tests.urlscan.scanlist(driver, eyes, params.URL_FILE);
 
-        eyes.close();
+        TestResults testResult = eyes.close();
+        System.out.println("Applitools Test Results");
+        System.out.println(testResult.toString());
     }
 
 

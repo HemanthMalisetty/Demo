@@ -125,8 +125,11 @@ public class vg31510 {
         visualGridRunner.setLogHandler(logHandler);
         visualGridRunner.getLogger().log("enter");
         visualGridRunner.setServerUrl("https://eyes.applitools.com/");
-
         renderConfig.setAppName(APP_NAME);
+
+        renderConfig.addBrowser(1200, 600, BrowserType.CHROME);
+
+        /*
         renderConfig.addBrowser(600,  600, BrowserType.CHROME);
         renderConfig.addBrowser(700, 600, BrowserType.CHROME);
         renderConfig.addBrowser(800, 600, BrowserType.CHROME);
@@ -154,6 +157,8 @@ public class vg31510 {
 
         renderConfig.addDeviceEmulation(DeviceName.iPad_Pro, ScreenOrientation.PORTRAIT);
         renderConfig.addDeviceEmulation(DeviceName.Nexus_10, ScreenOrientation.PORTRAIT);
+
+        */
 
         eyes = new Eyes(visualGridRunner);
         eyes.setApiKey(params.EYES_KEY);
