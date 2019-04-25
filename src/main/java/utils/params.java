@@ -4,11 +4,10 @@ import com.applitools.eyes.MatchLevel;
 
 public class params {
 
-    public static String EYES_KEY = System.getProperty("eyesAPIKey", "DEFAULT_TOKEN");
-    public static String GRID_URL = "zdmoZglAeFpz109AF1maELY9IdnyazVFMrGq1jduomN2U110";
-            // CME "http://localhost:4444/wd/hub";
+    public static String EYES_KEY = "zdmoZglAeFpz109AF1maELY9IdnyazVFMrGq1jduomN2U110";  // System.getProperty("eyesAPIKey", "DEFAULT_TOKEN");
+    public static String GRID_URL = "http://localhost:4444/wd/hub";
 
-    private static String name = "Carnival";
+    private static String name = "url";
     public static Boolean changePage = false;  // to change the content for demo purposes
 
     public static String BATCH_NAME = name + " VG 02";
