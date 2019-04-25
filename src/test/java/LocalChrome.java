@@ -53,7 +53,7 @@ public class LocalChrome {
 
         tests.urlscan.scanlist(driver, eyes, params.URL_FILE);
 
-        TestResults testResult = eyes.close();
+        TestResults testResult = eyes.close(false);
         System.out.println("Applitools Test Results");
         System.out.println(testResult.toString());
     }
