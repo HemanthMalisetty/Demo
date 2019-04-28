@@ -84,11 +84,13 @@ public class vg31510 {
                   driver.findElement(By.cssSelector("#agree")).click();
                 } catch (Exception e){};
 
+                driver.executeScript("document.write('<script type=\"text/undefined\">')");
 
                 utils.page.arrowDown(driver);
                 utils.page.home(driver);
                 //utils.page.suspend(5000);
                 utils.page.changePage(driver);
+                driver.executeScript("document.write('<script type=\"text/undefined\">')");
                 eyes.check(arr[i],
                         Target.window().fully());   // Check the entire page
             } catch (Exception e) {
@@ -103,7 +105,7 @@ public class vg31510 {
 
         eyes.close(true);
         TestResultSummary allTestResults = visualGridRunner.getAllTestResults();
-
+        System.out.println(allTestResults.toString());
         System.out.println("Completed Rendering in " + ((System.currentTimeMillis() - before)) / 1000 + " seconds");
 
     }
@@ -121,24 +123,31 @@ public class vg31510 {
 
         FileLogger logHandler = new FileLogger("log/eyes_vg.log", false, true);
 
+        BatchInfo batchInfo = new BatchInfo(BATCH_NAME);
+        if(BATCH_ID!=null) batchInfo.setId(BATCH_ID);
+
         visualGridRunner = new VisualGridRunner(100);
         visualGridRunner.setLogHandler(logHandler);
         visualGridRunner.getLogger().log("enter");
         visualGridRunner.setServerUrl("https://eyes.applitools.com/");
         renderConfig.setAppName(APP_NAME);
+        renderConfig.setBatch(batchInfo);
 
-        renderConfig.addBrowser(1200, 600, BrowserType.CHROME);
+        renderConfig.addBrowser(600, 100, BrowserType.CHROME);
+        renderConfig.addBrowser(700, 100, BrowserType.CHROME);
+        renderConfig.addBrowser(800, 100, BrowserType.CHROME);
+        renderConfig.addBrowser(900,  100, BrowserType.CHROME);
+        renderConfig.addBrowser(1000,  100, BrowserType.CHROME);
+        renderConfig.addBrowser(1100, 100, BrowserType.CHROME);
+        renderConfig.addBrowser(1200, 100, BrowserType.CHROME);
+        renderConfig.addBrowser(1300, 100, BrowserType.CHROME);
+        renderConfig.addBrowser(1400, 100, BrowserType.CHROME);
+        renderConfig.addBrowser(1500, 100, BrowserType.CHROME);
+        renderConfig.addBrowser(1600, 100, BrowserType.CHROME);
 
-        /*
-        renderConfig.addBrowser(600,  600, BrowserType.CHROME);
-        renderConfig.addBrowser(700, 600, BrowserType.CHROME);
-        renderConfig.addBrowser(800, 600, BrowserType.CHROME);
-        renderConfig.addBrowser(900,  600, BrowserType.CHROME);
-        renderConfig.addBrowser(1000, 600, BrowserType.CHROME);
-        renderConfig.addBrowser(1200, 600, BrowserType.CHROME);
-        renderConfig.addBrowser(1600, 600, BrowserType.CHROME);
 
-        renderConfig.addBrowser(600,  600, BrowserType.FIREFOX);
+/*
+        renderConfig.addBrowser(600,  500, BrowserType.FIREFOX);
         renderConfig.addBrowser(700, 600, BrowserType.FIREFOX);
         renderConfig.addBrowser(800, 600, BrowserType.FIREFOX);
         renderConfig.addBrowser(900,  600, BrowserType.FIREFOX);
@@ -154,10 +163,8 @@ public class vg31510 {
         renderConfig.addBrowser(1200,  600, BrowserType.IE_11);
         renderConfig.addBrowser(1600,  500, BrowserType.IE_11);
 
-
         renderConfig.addDeviceEmulation(DeviceName.iPad_Pro, ScreenOrientation.PORTRAIT);
         renderConfig.addDeviceEmulation(DeviceName.Nexus_10, ScreenOrientation.PORTRAIT);
-
         */
 
         eyes = new Eyes(visualGridRunner);
@@ -165,9 +172,7 @@ public class vg31510 {
         eyes.setIsDisabled(params.DISABLE_EYES);
         eyes.setLogHandler(new FileLogger("log/eyes.log",true,true));
 
-        BatchInfo batchInfo = new BatchInfo(BATCH_NAME);
-        if(BATCH_ID!=null) batchInfo.setId(BATCH_ID);
-        eyes.setBatch(batchInfo);
+
 
         //Allows for filtering dashboard view
         //not yet implemented in VG SDK eyes.addProperty("SANDBOX", "YES");
