@@ -14,36 +14,40 @@ public class page {
 
     public static void pageDown(RemoteWebDriver driver){
 
-        Long height = (Long) driver.executeScript("return document.body.scrollHeight;");
+        try {
+            Long height = (Long) driver.executeScript("return document.body.scrollHeight;");
 
-        Actions builder = new Actions(driver);
-        Action seriesOfActions = builder
-                .sendKeys(Keys.PAGE_DOWN)
-                .build();
+            Actions builder = new Actions(driver);
+            Action seriesOfActions = builder
+                    .sendKeys(Keys.PAGE_DOWN)
+                    .build();
 
-        Integer i=0;
-        for(i=0;i<height/800;i++) {
+            Integer i = 0;
+            for (i = 0; i < height / 800; i++) {
+                seriesOfActions.perform();
+            }
+            seriesOfActions = builder
+                    .sendKeys(Keys.HOME)
+                    .build();
             seriesOfActions.perform();
-        }
-        seriesOfActions = builder
-                .sendKeys(Keys.HOME)
-                .build();
-        seriesOfActions.perform();
+        } catch (Exception e) {}
     }
 
     public static void arrowDown(RemoteWebDriver driver){
 
-        Long height = (Long) driver.executeScript("return document.body.scrollHeight;");
+        try {
+            Long height = (Long) driver.executeScript("return document.body.scrollHeight;");
 
-        Actions builder = new Actions(driver);
-        Action seriesOfActions = builder
-                .sendKeys(Keys.ARROW_DOWN)
-                .build();
+            Actions builder = new Actions(driver);
+            Action seriesOfActions = builder
+                    .sendKeys(Keys.ARROW_DOWN)
+                    .build();
 
-        Integer i=0;
-        for(i=0;i<height/4;i++) {
-            seriesOfActions.perform();
-        }
+            Integer i = 0;
+            for (i = 0; i < height / 4; i++) {
+                seriesOfActions.perform();
+            }
+        } catch (Exception e) {}
     }
 
 

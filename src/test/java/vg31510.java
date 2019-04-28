@@ -133,17 +133,17 @@ public class vg31510 {
         renderConfig.setAppName(APP_NAME);
         renderConfig.setBatch(batchInfo);
 
-        renderConfig.addBrowser(600, 100, BrowserType.CHROME);
-        renderConfig.addBrowser(700, 100, BrowserType.CHROME);
-        renderConfig.addBrowser(800, 100, BrowserType.CHROME);
-        renderConfig.addBrowser(900,  100, BrowserType.CHROME);
-        renderConfig.addBrowser(1000,  100, BrowserType.CHROME);
-        renderConfig.addBrowser(1100, 100, BrowserType.CHROME);
-        renderConfig.addBrowser(1200, 100, BrowserType.CHROME);
-        renderConfig.addBrowser(1300, 100, BrowserType.CHROME);
-        renderConfig.addBrowser(1400, 100, BrowserType.CHROME);
-        renderConfig.addBrowser(1500, 100, BrowserType.CHROME);
-        renderConfig.addBrowser(1600, 100, BrowserType.CHROME);
+        renderConfig.addBrowser(600, 600, BrowserType.CHROME);
+        renderConfig.addBrowser(700, 600, BrowserType.CHROME);
+        renderConfig.addBrowser(800, 600, BrowserType.CHROME);
+        renderConfig.addBrowser(900, 600, BrowserType.CHROME);
+        renderConfig.addBrowser(1000, 600, BrowserType.CHROME);
+        renderConfig.addBrowser(1100, 600, BrowserType.CHROME);
+        renderConfig.addBrowser(1200, 600, BrowserType.CHROME);
+        renderConfig.addBrowser(1300, 600, BrowserType.CHROME);
+        renderConfig.addBrowser(1400, 600, BrowserType.CHROME);
+        renderConfig.addBrowser(1500, 600, BrowserType.CHROME);
+        renderConfig.addBrowser(1600, 600, BrowserType.CHROME);
 
 
 /*
