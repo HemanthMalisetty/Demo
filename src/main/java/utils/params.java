@@ -4,7 +4,7 @@ import com.applitools.eyes.MatchLevel;
 
 public class params {
 
-    public static String EYES_KEY = "8pVdTA8n6joSM18VHrggfo9OHmhaFjepyAbkdrZ1NcU110"; //System.getProperty("eyesAPIKey", "DEFAULT_TOKEN");
+    public static String EYES_KEY = System.getProperty("eyesAPIKey", "DEFAULT_TOKEN");
     public static String GRID_URL = "http://localhost:4444/wd/hub";
 
     private static String name = "url";
