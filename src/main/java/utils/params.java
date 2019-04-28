@@ -11,7 +11,7 @@ public class params {
     public static Boolean changePage = false;  // to change the content for demo purposes
 
     //public static String BATCH_NAME = name + " Jenkins 01";
-    public static String BATCH_NAME = System.getenv("APPLITOOLS_BATCH_NAME")
+    public static String BATCH_NAME = System.getenv("APPLITOOLS_BATCH_NAME");
 
     public static String APP_NAME = name + " 01";
     public static String TEST_NAME = name + " VG 03";
