@@ -40,9 +40,9 @@ public class urlscan {
             System.out.println("Checking URL " + +i + ": " + arr[i]);
             try {
                 driver.get(arr[i]);
-                utils.page.suspend(2000);
-                utils.page.arrowDown(driver);
-                utils.page.home(driver);
+                //utils.page.suspend(2000);
+                //utils.page.arrowDown(driver);
+                //utils.page.home(driver);
                 utils.page.suspend(2000);
                 utils.page.changePage(driver);
                 eyes.check(arr[i], Target.window());
@@ -54,6 +54,45 @@ public class urlscan {
         System.out.println("Completed URL scan in " + ((System.currentTimeMillis() - before))/1000 + " seconds");
     }
 
+    public static void scanlist(RemoteWebDriver driver, Eyes eyes, String urlList, int urlPos){
+
+        int i = urlPos;
+        long before;
+
+        before = System.currentTimeMillis();
+        urlscan wantFile = new urlscan();
+
+        System.out.println("Scanning URL's in " + urlList);
+        String[] arr = new String[0];
+        try {
+            Scanner sc = new Scanner(wantFile.getFile(urlList));
+            List<String> lines = new ArrayList<String>();
+            while (sc.hasNextLine()) {
+                lines.add(sc.nextLine());
+            }
+            arr = lines.toArray(new String[0]);
+            System.out.println("URL's to check: " + arr.length);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("Checking URL " + +i + ": " + arr[i]);
+        try {
+            driver.get(arr[i]);
+            utils.page.suspend(2000);
+            utils.page.arrowDown(driver);
+            utils.page.home(driver);
+            utils.page.suspend(2000);
+            utils.page.changePage(driver);
+            eyes.check(arr[i], Target.window());
+        } catch (Exception e) {
+            System.out.println("FAILED URL " + +i + " in " + (System.currentTimeMillis() - before) + "ms");
+            e.printStackTrace();
+        }
+
+        System.out.println("Completed URL scan in " + ((System.currentTimeMillis() - before))/1000 + " seconds");
+    }
+
     public File getFile(String fileName){
 
         ClassLoader classLoader = getClass().getClassLoader();
@@ -61,7 +100,7 @@ public class urlscan {
         try {
             file = new File(classLoader.getResource(fileName).getFile());
         } catch (Exception e) {
-            System.out.println("Fiel Not Found: " + fileName);
+            System.out.println("File Not Found: " + fileName);
             e.printStackTrace();
         }
         return file;

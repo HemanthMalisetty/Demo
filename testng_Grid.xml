@@ -3,17 +3,50 @@
 <suite thread-count="10" name="DemoTestSuite" verbose="1" parallel="tests">
 
 
-    <test name="Chrome">
+    <test name="Chrome1">
         <parameter name="platformName" value="Windows" />
         <parameter name="platformVersion" value="10" />
         <parameter name="browserName" value="chrome" />
         <parameter name="browserVersion" value="NA" />
+        <parameter name="urlPos" value="0" />
         <classes>
             <class name="Grid" />
         </classes>
     </test>
 
     <!--
+    <test name="Chrome2">
+        <parameter name="platformName" value="Windows" />
+        <parameter name="platformVersion" value="10" />
+        <parameter name="browserName" value="chrome" />
+        <parameter name="browserVersion" value="NA" />
+        <parameter name="urlPos" value="1" />
+        <classes>
+            <class name="Grid" />
+        </classes>
+    </test>
+
+    <test name="Chrome3">
+        <parameter name="platformName" value="Windows" />
+        <parameter name="platformVersion" value="10" />
+        <parameter name="browserName" value="chrome" />
+        <parameter name="browserVersion" value="NA" />
+        <parameter name="urlPos" value="2" />
+        <classes>
+            <class name="Grid" />
+        </classes>
+    </test>
+
+    <test name="Chrome4">
+        <parameter name="platformName" value="Windows" />
+        <parameter name="platformVersion" value="10" />
+        <parameter name="browserName" value="chrome" />
+        <parameter name="browserVersion" value="NA" />
+        <parameter name="urlPos" value="3" />
+        <classes>
+            <class name="Grid" />
+        </classes>
+    </test>
 
     <test name="FireFox">
         <parameter name="platformName" value="Windows" />

@@ -49,7 +49,7 @@ public class LocalChrome {
         eyes.setForceFullPageScreenshot(false);
         if(params.FULL_SCREEN) eyes.setForceFullPageScreenshot(true);
         eyes.setSendDom(true);
-        eyes.open(driver,APP_NAME, testName, new RectangleSize(1200, 800));
+        eyes.open(driver,APP_NAME, testName, new RectangleSize(1400, 900));
 
         tests.urlscan.scanlist(driver, eyes, params.URL_FILE);
 

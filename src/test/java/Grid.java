@@ -28,10 +28,10 @@ public class Grid {
     private static final String BATCH_ID = params.BATCH_ID;
     private static final String APP_NAME = params.APP_NAME;
 
-    @Parameters({"platformName", "platformVersion", "browserName", "browserVersion"})
+    @Parameters({"platformName", "platformVersion", "browserName", "browserVersion","urlPos"})
     @Test(priority = 1, alwaysRun = true, enabled = true)
     public void CheckURL(String platformName ,String platformVersion,
-                         String browserName, String browserVersion) {
+                         String browserName, String browserVersion, String urlPos) {
 
         Integer i=0;
         String testName = params.TEST_NAME;
@@ -52,8 +52,9 @@ public class Grid {
         if(params.FULL_SCREEN) eyes.setForceFullPageScreenshot(true);
         eyes.setSendDom(true);
 
-        eyes.open(driver,APP_NAME, testName, new RectangleSize(1200, 900));
+        eyes.open(driver,APP_NAME, testName, new RectangleSize(1400, 900));
 
+       // tests.urlscan.scanlist(driver, eyes, params.URL_FILE, Integer.parseInt(urlPos));
         tests.urlscan.scanlist(driver, eyes, params.URL_FILE);
 
         TestResults testResult = eyes.close();
@@ -62,10 +63,10 @@ public class Grid {
     }
 
 
-    @Parameters({"platformName", "platformVersion", "browserName", "browserVersion"})
+    @Parameters({"platformName", "platformVersion", "browserName", "browserVersion","urlPos"})
     @BeforeClass(alwaysRun = true)
     public void baseBeforeClass(String platformName ,String platformVersion,
-                                String browserName, String browserVersion) {
+                                String browserName, String browserVersion, String urlPos) {
 
         String threadId = Long.toString(Thread.currentThread().getId());
         long before = System.currentTimeMillis();
