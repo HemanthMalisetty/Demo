@@ -14,7 +14,7 @@ public class params {
     public static String TEST_NAME = name + suffix;
     public static String URL_FILE = name + ".csv";
     public static MatchLevel MATCH_MODE = MatchLevel.LAYOUT;
-    public static Boolean FULL_SCREEN = true;
+    public static Boolean FULL_SCREEN = false;
     public static Boolean DISABLE_EYES = false;
 
     public static String BATCH_NAME = getBatchName();
