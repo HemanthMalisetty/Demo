@@ -36,7 +36,7 @@ public class urlscan {
         }
 
         for(i=0;i<arr.length;i++){
-            before = System.currentTimeMillis();
+
             System.out.println("Checking URL " + +i + ": " + arr[i]);
             try {
                 driver.get(arr[i]);
