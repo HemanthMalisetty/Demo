@@ -8,13 +8,13 @@ public class params {
     public static String GRID_URL = "http://localhost:4444/wd/hub";
 
     private static String name = "url";
-    private static String suffix = " DG02";
+    private static String suffix = " Ryder DG02";
     public static Boolean changePage = false;  // to change the content for demo purposes
     public static String APP_NAME = name + suffix;
     public static String TEST_NAME = name + suffix;
     public static String URL_FILE = name + ".csv";
     public static MatchLevel MATCH_MODE = MatchLevel.LAYOUT;
-    public static Boolean FULL_SCREEN = false;
+    public static Boolean FULL_SCREEN = true;
     public static Boolean DISABLE_EYES = false;
 
     public static String BATCH_NAME = getBatchName();

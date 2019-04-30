@@ -77,6 +77,8 @@ public class page {
                 "                                        child = elements[i].childNodes[0];\n" +
                 "                                        if(elements[i].hasChildNodes() && child.nodeType == 3) {\n" +
                 "                                           child.nodeValue = child.nodeValue.replace('o','0');" +
+                "                                           child.nodeValue = child.nodeValue.replace('?','!');" +
+                "                                           child.nodeValue = child.nodeValue.replace('.','.<br>');" +
                 "                                        }\n" +
                 "                                    }\n";
         if(params.changePage) {
