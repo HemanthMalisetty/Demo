@@ -8,7 +8,7 @@ public class params {
     public static String GRID_URL = "http://localhost:4444/wd/hub";
 
     private static String name = "url";
-    private static String suffix = " Ryder DG02";
+    private static String suffix = " Float DG02";
     public static Boolean changePage = false;  // to change the content for demo purposes
     public static String APP_NAME = name + suffix;
     public static String TEST_NAME = name + suffix;
