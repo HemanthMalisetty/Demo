@@ -82,7 +82,7 @@ public class vg31510 {
             try {
                 driver.get(arr[i]);
 
-                /*
+
                 //clear cookie warning or floating toolbar or whatever needs cleanup
                 try{
                     System.out.println("Clearing floater");
@@ -97,7 +97,7 @@ public class vg31510 {
                 } catch (Exception e){
                     System.out.println("Clear failed");
                 };
-                */
+
 
                 //utils.page.arrowDown(driver);
                 //utils.page.home(driver);
