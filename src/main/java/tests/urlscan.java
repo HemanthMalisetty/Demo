@@ -44,17 +44,17 @@ public class urlscan {
 
                 //clear cookie warning
                 try{
-                    System.out.println("Clearing floater");
+                  //  System.out.println("Clearing floater");
 
                     String jscript = "var x = document.getElementsByClassName('container container--trending'); " +
                             "x[0].style.display = 'none';";
                     driver.executeScript(jscript);
 
                     // driver.findElement(By.cssSelector("body > div.container.container--trending > label")).click();
-                    System.out.println("Clear succeeded");
-                    utils.page.suspend(2000);
+                //    System.out.println("Clear succeeded");
+                    utils.page.suspend(1000);
                 } catch (Exception e){
-                    System.out.println("Clear failed");
+                  //  System.out.println("Clear failed");
                 };
 
 

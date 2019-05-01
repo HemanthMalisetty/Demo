@@ -8,7 +8,7 @@ public class params {
     public static String GRID_URL = "http://localhost:4444/wd/hub";
 
     private static String name = "url";
-    private static String suffix = " Float DG02";
+    private static String suffix = " DG Sample 01";
     public static Boolean changePage = false;  // to change the content for demo purposes
     public static String APP_NAME = name + suffix;
     public static String TEST_NAME = name + suffix;
@@ -16,6 +16,8 @@ public class params {
     public static MatchLevel MATCH_MODE = MatchLevel.LAYOUT;
     public static Boolean FULL_SCREEN = true;
     public static Boolean DISABLE_EYES = false;
+    public static int MATCH_TIMEOUT = 1000;
+
 
     public static String BATCH_NAME = getBatchName();
     public static String BATCH_ID = getBatchId();

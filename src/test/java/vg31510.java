@@ -85,17 +85,17 @@ public class vg31510 {
 
                 //clear cookie warning or floating toolbar or whatever needs cleanup
                 try{
-                    System.out.println("Clearing floater");
+                   // System.out.println("Clearing floater");
 
                     String jscript = "var x = document.getElementsByClassName('container container--trending'); " +
                         "x[0].style.display = 'none';";
                     driver.executeScript(jscript);
 
                     driver.findElement(By.cssSelector("body > div.container.container--trending > label")).click();
-                    System.out.println("Clear succeeded");
+                   // System.out.println("Clear succeeded");
                     utils.page.suspend(2000);
                 } catch (Exception e){
-                    System.out.println("Clear failed");
+                   // System.out.println("Clear failed");
                 };
 
 
