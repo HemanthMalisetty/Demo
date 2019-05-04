@@ -1,5 +1,6 @@
 import com.applitools.eyes.*;
 import com.applitools.eyes.selenium.StitchMode;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.annotations.AfterClass;
@@ -28,10 +29,10 @@ public class Grid {
     private static final String BATCH_ID = params.BATCH_ID;
     private static final String APP_NAME = params.APP_NAME;
 
-    @Parameters({"platformName", "platformVersion", "browserName", "browserVersion","urlPos"})
+    @Parameters({"platformName", "platformVersion", "browserName", "browserVersion"})
     @Test(priority = 1, alwaysRun = true, enabled = true)
     public void CheckURL(String platformName ,String platformVersion,
-                         String browserName, String browserVersion, String urlPos) {
+                         String browserName, String browserVersion) {
 
         Integer i=0;
         String testName = params.TEST_NAME;
@@ -49,6 +50,7 @@ public class Grid {
 
         eyes.setMatchLevel(params.MATCH_MODE);
         eyes.setStitchMode(StitchMode.CSS);
+        eyes.setMatchTimeout(params.MATCH_TIMEOUT);
         if(params.FULL_SCREEN) eyes.setForceFullPageScreenshot(true);
         eyes.setSendDom(true);
 
@@ -57,16 +59,17 @@ public class Grid {
        // tests.urlscan.scanlist(driver, eyes, params.URL_FILE, Integer.parseInt(urlPos));
         tests.urlscan.scanlist(driver, eyes, params.URL_FILE);
 
+
         TestResults testResult = eyes.close();
         System.out.println("Applitools Test Results");
         System.out.println(testResult.toString());
     }
 
 
-    @Parameters({"platformName", "platformVersion", "browserName", "browserVersion","urlPos"})
+    @Parameters({"platformName", "platformVersion", "browserName", "browserVersion"})
     @BeforeClass(alwaysRun = true)
     public void baseBeforeClass(String platformName ,String platformVersion,
-                                String browserName, String browserVersion, String urlPos) {
+                                String browserName, String browserVersion) {
 
         String threadId = Long.toString(Thread.currentThread().getId());
         long before = System.currentTimeMillis();

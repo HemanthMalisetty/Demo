@@ -53,6 +53,21 @@ public class LocalChrome {
 
         tests.urlscan.scanlist(driver, eyes, params.URL_FILE);
 
+        //NYT Specific
+        /*
+        driver.get("https://www.nytimes.com/crosswords");
+        utils.page.suspend(2000);
+        utils.page.arrowDown(driver);
+        eyes.check("Crosswords", Target.window().fully());
+        driver.findElement(By.cssSelector("#root > div > div > div.app-mainContainer--3CJGG > div > div > div > div.Section-section--2YfV5.white > div > section > div.flexbox-expandToRow--3Qm-J.flexbox-flexContainer--1aFi7 > div:nth-child(3) > a > div")).click();
+        utils.page.suspend(2000);
+        utils.page.arrowDown(driver);
+        eyes.check("Previous Crossword OK", Target.window().fully());
+        driver.findElement(By.xpath("//span[text()=\"OK\"]"));
+        eyes.check("Previous Crossword", Target.window().fully());
+*/
+
+
         TestResults testResult = eyes.close(false);
         System.out.println("Applitools Test Results");
         System.out.println(testResult.toString());
@@ -69,6 +84,7 @@ public class LocalChrome {
 
         eyes = utils.myeyes.getEyes(threadId);
         eyes.setLogHandler(new FileLogger("log/file.log",true,true));
+        eyes.setServerUrl(params.EYES_URL);
 
         BatchInfo batchInfo = new BatchInfo(BATCH_NAME);
         if(BATCH_ID!=null) batchInfo.setId(BATCH_ID);

@@ -2,6 +2,8 @@ import com.applitools.eyes.BatchInfo;
 import com.applitools.eyes.FileLogger;
 
 
+import com.applitools.eyes.ImageMatchSettings;
+import com.applitools.eyes.RectangleSize;
 import com.applitools.eyes.selenium.BrowserType;
 import com.applitools.eyes.selenium.Configuration;
 import com.applitools.eyes.selenium.Eyes;
@@ -58,7 +60,8 @@ public class vg31510 {
         renderConfig.setTestName(testName);
 
         eyes.setConfiguration(renderConfig);
-        eyes.open(driver);
+        //eyes.open(driver);
+        eyes.open(driver,APP_NAME, testName, new RectangleSize(1400, 900));
 
         String[] arr = new String[0];
         try {
@@ -79,18 +82,27 @@ public class vg31510 {
             try {
                 driver.get(arr[i]);
 
-                //clear cookie warning
+
+                //clear cookie warning or floating toolbar or whatever needs cleanup
                 try{
-                  driver.findElement(By.cssSelector("#agree")).click();
-                } catch (Exception e){};
+                   // System.out.println("Clearing floater");
 
-                driver.executeScript("document.write('<script type=\"text/undefined\">')");
+                    String jscript = "var x = document.getElementsByClassName('container container--trending'); " +
+                        "x[0].style.display = 'none';";
+                    driver.executeScript(jscript);
 
-                utils.page.arrowDown(driver);
-                utils.page.home(driver);
-                //utils.page.suspend(5000);
+                    driver.findElement(By.cssSelector("body > div.container.container--trending > label")).click();
+                   // System.out.println("Clear succeeded");
+                    utils.page.suspend(2000);
+                } catch (Exception e){
+                   // System.out.println("Clear failed");
+                };
+
+
+                //utils.page.arrowDown(driver);
+                //utils.page.home(driver);
+                utils.page.suspend(2000);
                 utils.page.changePage(driver);
-                driver.executeScript("document.write('<script type=\"text/undefined\">')");
                 eyes.check(arr[i],
                         Target.window().fully());   // Check the entire page
             } catch (Exception e) {
@@ -98,12 +110,12 @@ public class vg31510 {
                 e.printStackTrace();
             }
         }
-        System.out.println("Completed URL Check in " + ((System.currentTimeMillis() - before))/1000 + " seconds");
+        System.out.println("Completed URL Check in " + ((System.currentTimeMillis() - before)) / 1000 + " seconds");
         System.out.println("Waiting for Visual Grid Rendering ...");
 
         before = System.currentTimeMillis();
 
-        eyes.close(true);
+        //eyes.close(true);
         TestResultSummary allTestResults = visualGridRunner.getAllTestResults();
         System.out.println(allTestResults.toString());
         System.out.println("Completed Rendering in " + ((System.currentTimeMillis() - before)) / 1000 + " seconds");
@@ -117,6 +129,11 @@ public class vg31510 {
 
         String threadId = Long.toString(Thread.currentThread().getId());
 
+        ImageMatchSettings ims = new ImageMatchSettings();
+        ims.setMatchLevel(params.MATCH_MODE);
+        //ims.setEnablePatterns(true);
+        //ims.setUseDom(true);
+
         driver = utils.drivers.getLocalChrome(threadId);
         driver.manage().timeouts().setScriptTimeout(90, TimeUnit.SECONDS);
         driver.manage().timeouts().pageLoadTimeout(90, TimeUnit.SECONDS);
@@ -129,10 +146,14 @@ public class vg31510 {
         visualGridRunner = new VisualGridRunner(100);
         visualGridRunner.setLogHandler(logHandler);
         visualGridRunner.getLogger().log("enter");
-        visualGridRunner.setServerUrl("https://eyes.applitools.com/");
+        visualGridRunner.setServerUrl(params.EYES_URL);
         renderConfig.setAppName(APP_NAME);
         renderConfig.setBatch(batchInfo);
+        renderConfig.setDefaultMatchSettings(ims);
 
+
+        renderConfig.addBrowser(400, 600, BrowserType.CHROME);
+        renderConfig.addBrowser(500, 600, BrowserType.CHROME);
         renderConfig.addBrowser(600, 600, BrowserType.CHROME);
         renderConfig.addBrowser(700, 600, BrowserType.CHROME);
         renderConfig.addBrowser(800, 600, BrowserType.CHROME);
@@ -145,8 +166,6 @@ public class vg31510 {
         renderConfig.addBrowser(1500, 600, BrowserType.CHROME);
         renderConfig.addBrowser(1600, 600, BrowserType.CHROME);
 
-
-/*
         renderConfig.addBrowser(600,  500, BrowserType.FIREFOX);
         renderConfig.addBrowser(700, 600, BrowserType.FIREFOX);
         renderConfig.addBrowser(800, 600, BrowserType.FIREFOX);
@@ -165,17 +184,15 @@ public class vg31510 {
 
         renderConfig.addDeviceEmulation(DeviceName.iPad_Pro, ScreenOrientation.PORTRAIT);
         renderConfig.addDeviceEmulation(DeviceName.Nexus_10, ScreenOrientation.PORTRAIT);
-        */
+
+
 
         eyes = new Eyes(visualGridRunner);
         eyes.setApiKey(params.EYES_KEY);
         eyes.setIsDisabled(params.DISABLE_EYES);
         eyes.setLogHandler(new FileLogger("log/eyes.log",true,true));
+        //eyes.addProperty("SANDBOX", "YES");
 
-
-
-        //Allows for filtering dashboard view
-        //not yet implemented in VG SDK eyes.addProperty("SANDBOX", "YES");
 
     }
 

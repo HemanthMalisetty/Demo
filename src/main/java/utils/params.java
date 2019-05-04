@@ -5,6 +5,10 @@ import com.applitools.eyes.MatchLevel;
 public class params {
 
     public static String EYES_KEY = System.getProperty("eyesAPIKey", "DEFAULT_TOKEN");
+    //public static String EYES_KEY = "18IoQ102FEtR31VdC75SpLe1104gLDNp110QBdSSEDgQeoto8110";
+    //public static String EYES_URL = "https://nytimeseyes.applitools.com";
+    public static String EYES_URL = "https://eyes.applitools.com";
+
     public static String GRID_URL = "http://localhost:4444/wd/hub";
 
     private static String name = "url";
@@ -14,8 +18,10 @@ public class params {
     public static String TEST_NAME = name + suffix;
     public static String URL_FILE = name + ".csv";
     public static MatchLevel MATCH_MODE = MatchLevel.LAYOUT;
-    public static Boolean FULL_SCREEN = false;
+    public static Boolean FULL_SCREEN = true;
     public static Boolean DISABLE_EYES = false;
+    public static int MATCH_TIMEOUT = 1000;
+
 
     public static String BATCH_NAME = getBatchName();
     public static String BATCH_ID = getBatchId();
@@ -34,7 +40,7 @@ public class params {
 
         if(System.getenv("APPLITOOLS_BATCH_ID") != null)
             batchId = System.getenv("APPLITOOLS_BATCH_ID");
-
+        
         return batchId;
     }
 }
