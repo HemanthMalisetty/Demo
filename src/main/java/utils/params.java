@@ -5,10 +5,14 @@ import com.applitools.eyes.MatchLevel;
 public class params {
 
     public static String EYES_KEY = System.getProperty("eyesAPIKey", "DEFAULT_TOKEN");
+    //public static String EYES_KEY = "18IoQ102FEtR31VdC75SpLe1104gLDNp110QBdSSEDgQeoto8110";
+    //public static String EYES_URL = "https://nytimeseyes.applitools.com";
+    public static String EYES_URL = "https://eyes.applitools.com";
+
     public static String GRID_URL = "http://localhost:4444/wd/hub";
 
-    private static String name = "url";
-    private static String suffix = " DG Sample 01";
+    private static String name = "NYTimes";
+    private static String suffix = " Home VG01";
     public static Boolean changePage = false;  // to change the content for demo purposes
     public static String APP_NAME = name + suffix;
     public static String TEST_NAME = name + suffix;
@@ -36,7 +40,7 @@ public class params {
 
         if(System.getenv("APPLITOOLS_BATCH_ID") != null)
             batchId = System.getenv("APPLITOOLS_BATCH_ID");
-
+        
         return batchId;
     }
 }

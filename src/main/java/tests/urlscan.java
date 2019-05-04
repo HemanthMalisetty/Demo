@@ -2,6 +2,7 @@ package tests;
 
 import com.applitools.eyes.selenium.fluent.Target;
 import com.applitools.eyes.selenium.Eyes;
+import org.openqa.selenium.By;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.io.File;
@@ -50,7 +51,7 @@ public class urlscan {
                             "x[0].style.display = 'none';";
                     driver.executeScript(jscript);
 
-                    // driver.findElement(By.cssSelector("body > div.container.container--trending > label")).click();
+                    driver.findElement(By.cssSelector("body > div.container.container--trending > label")).click();
                 //    System.out.println("Clear succeeded");
                     utils.page.suspend(1000);
                 } catch (Exception e){
@@ -58,12 +59,12 @@ public class urlscan {
                 };
 
 
-                //utils.page.suspend(2000);
-                //utils.page.arrowDown(driver);
+                utils.page.suspend(2000);
+                utils.page.arrowDown(driver);
                 //utils.page.home(driver);
                 utils.page.suspend(2000);
                 utils.page.changePage(driver);
-                eyes.check(arr[i], Target.window());
+                eyes.check(arr[i], Target.window().fully());
             } catch (Exception e) {
                 System.out.println("FAILED URL " + +i + " in " + (System.currentTimeMillis() - before) + "ms");
                 e.printStackTrace();

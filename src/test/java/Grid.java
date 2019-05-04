@@ -1,5 +1,6 @@
 import com.applitools.eyes.*;
 import com.applitools.eyes.selenium.StitchMode;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.annotations.AfterClass;
@@ -57,6 +58,7 @@ public class Grid {
 
        // tests.urlscan.scanlist(driver, eyes, params.URL_FILE, Integer.parseInt(urlPos));
         tests.urlscan.scanlist(driver, eyes, params.URL_FILE);
+
 
         TestResults testResult = eyes.close();
         System.out.println("Applitools Test Results");
