@@ -59,12 +59,13 @@ public class urlscan {
                 };
 
 
-                utils.page.suspend(2000);
+                //utils.page.suspend(2000);
                 utils.page.arrowDown(driver);
+                utils.page.arrowUp(driver);
                 //utils.page.home(driver);
-                utils.page.suspend(2000);
-                utils.page.changePage(driver);
-                eyes.check(arr[i], Target.window().fully());
+                //utils.page.suspend(2000);
+                //utils.page.changePage(driver);
+                eyes.check(arr[i], Target.window());
             } catch (Exception e) {
                 System.out.println("FAILED URL " + +i + " in " + (System.currentTimeMillis() - before) + "ms");
                 e.printStackTrace();
@@ -98,11 +99,12 @@ public class urlscan {
         System.out.println("Checking URL " + +i + ": " + arr[i]);
         try {
             driver.get(arr[i]);
-            utils.page.suspend(2000);
-            utils.page.arrowDown(driver);
-            utils.page.home(driver);
-            utils.page.suspend(2000);
-            utils.page.changePage(driver);
+           // utils.page.suspend(2000);
+           // utils.page.arrowDown(driver);
+           // utils.page.arrowUp(driver);
+           // utils.page.home(driver);
+           // utils.page.suspend(2000);
+           // utils.page.changePage(driver);
             eyes.check(arr[i], Target.window());
         } catch (Exception e) {
             System.out.println("FAILED URL " + +i + " in " + (System.currentTimeMillis() - before) + "ms");

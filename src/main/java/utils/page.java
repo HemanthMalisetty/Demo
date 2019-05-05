@@ -50,6 +50,23 @@ public class page {
         } catch (Exception e) {}
     }
 
+    public static void arrowUp(RemoteWebDriver driver){
+
+        try {
+            Long height = (Long) driver.executeScript("return document.body.scrollHeight;");
+
+            Actions builder = new Actions(driver);
+            Action seriesOfActions = builder
+                    .sendKeys(Keys.ARROW_UP)
+                    .build();
+
+            Integer i = 0;
+            for (i = 0; i < height / 4; i++) {
+                seriesOfActions.perform();
+            }
+        } catch (Exception e) {}
+    }
+
 
     public static void home(RemoteWebDriver driver){
 
