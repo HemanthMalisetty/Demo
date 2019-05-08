@@ -12,7 +12,8 @@ public class params {
     public static String GRID_URL = "http://localhost:4444/wd/hub";
 
     private static String name = "url";
-    private static String suffix = " grouping 13";
+    private static String suffix = " vg2real 7";
+
     public static Boolean changePage = false;  // to change the content for demo purposes
     public static Boolean changePageSingle = false;
 
