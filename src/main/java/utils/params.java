@@ -12,12 +12,14 @@ public class params {
     public static String GRID_URL = "http://localhost:4444/wd/hub";
 
     private static String name = "url";
-    private static String suffix = " NYTimes 13";
+    private static String suffix = " grouping 13";
     public static Boolean changePage = false;  // to change the content for demo purposes
+    public static Boolean changePageSingle = false;
+
     public static String APP_NAME = name + suffix;
     public static String TEST_NAME = name + suffix;
     public static String URL_FILE = name + ".csv";
-    public static MatchLevel MATCH_MODE = MatchLevel.LAYOUT;
+    public static MatchLevel MATCH_MODE = MatchLevel.STRICT;
     public static Boolean FULL_SCREEN = true;
     public static Boolean DISABLE_EYES = false;
     public static int MATCH_TIMEOUT = 1000;

@@ -104,6 +104,23 @@ public class page {
         }
     }
 
+    public static void changePageSingle(RemoteWebDriver driver){
+
+        String script = "" +
+                "                                    var elements = window.document.querySelectorAll(\"body, body *\");\n" +
+                "                                    var child;\n" +
+                "                                    for(var i = 0; i < elements.length; i++) {\n" +
+                "                                        child = elements[i].childNodes[0];\n" +
+                "                                        if(elements[i].hasChildNodes() && child.nodeType == 3) {\n" +
+                "                                           child.nodeValue = child.nodeValue.replace('Welcome to','Welcom to');" +
+                "                                        }\n" +
+                "                                    }\n";
+        if(params.changePageSingle) {
+            driver.executeScript(script);
+        }
+    }
+
+
     public static void clickLinkText(RemoteWebDriver driver, String identifier){
         Integer i;
         for(i=0;i<=5;i++){

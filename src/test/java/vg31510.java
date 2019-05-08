@@ -103,6 +103,7 @@ public class vg31510 {
                 //utils.page.home(driver);
                 //utils.page.suspend(2000);
                 utils.page.changePage(driver);
+                utils.page.changePageSingle(driver);
                 eyes.check(arr[i],
                         Target.window().fully());   // Check the entire page
             } catch (Exception e) {

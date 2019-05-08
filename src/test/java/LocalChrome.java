@@ -67,6 +67,23 @@ public class LocalChrome {
         eyes.check("Previous Crossword", Target.window().fully());
 */
 
+        /*
+        Itai code to fix from trello https://trello.com/c/8vteyM2d/677-nytimes-full-page-capture-failure-viewport-only-chrome-74-ff-65-local
+
+        TestedPageUrl = "https://www.nytimes.com/";
+        testedPageSize = new Size(1200, 800);
+        GetEyes().StitchMode = StitchModes.CSS;
+        IWebElement app = GetDriver().FindElement(By.Id("app"));
+        for (int i = 0; i < app.Size.Height; i += 700)
+        {
+            ((IJavaScriptExecutor)GetDriver()).ExecuteScript($"var app = document.querySelector('#app'); app.style.transform = 'translate(0px, -{i}px)';");
+        }
+
+        ((IJavaScriptExecutor)GetDriver()).ExecuteScript("var app = document.querySelector('#app'); app.style.transform = 'translate(0px, 0px)';");
+        GetEyes().Check("NY Times", Target.Window().ScrollRootElement(By.Id("app")).Fully().SendDom(false));
+
+
+         */
 
         TestResults testResult = eyes.close(false);
         System.out.println("Applitools Test Results");
