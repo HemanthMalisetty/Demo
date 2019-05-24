@@ -9,7 +9,7 @@
         <parameter name="browserName" value="chrome" />
         <parameter name="browserVersion" value="NA" />
         <classes>
-            <class name="vg31510" />
+            <class name="vg3151x" />
         </classes>
     </test>
 

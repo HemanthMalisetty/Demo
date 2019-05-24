@@ -89,7 +89,7 @@ public class vg5beta {
         System.out.println("Completed URL Check in " + ((System.currentTimeMillis() - before))/1000 + "s");
         System.out.println("Waiting for Visual Grid Rendering ...");
         before = System.currentTimeMillis();
-        TestResultSummary allTestResults = vg31510.getAllTestResults();
+        TestResultSummary allTestResults = vg3151x.getAllTestResults();
         System.out.println("Completed Rendering in " + ((System.currentTimeMillis() - before))/1000 + "s");
         System.out.println("Results: " + allTestResults);
 
