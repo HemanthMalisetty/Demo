@@ -12,16 +12,18 @@ public class params {
     public static String GRID_URL = "http://localhost:4444/wd/hub";
 
     private static String name = "url";
-    private static String suffix = " vg2real 7";
+    private static String suffix = " CIBC";
 
     public static Boolean changePage = false;  // to change the content for demo purposes
     public static Boolean changePageSingle = false;
 
-    public static String APP_NAME = name + suffix;
-    public static String TEST_NAME = name + suffix;
+    //public static String APP_NAME = name + suffix;
+    public static String APP_NAME = "ImageTester";
+    //public static String TEST_NAME = name + suffix;
+    public static String TEST_NAME = "ImageTester";
     public static String URL_FILE = name + ".csv";
     public static MatchLevel MATCH_MODE = MatchLevel.STRICT;
-    public static Boolean FULL_SCREEN = true;
+    public static Boolean FULL_SCREEN = false;
     public static Boolean DISABLE_EYES = false;
     public static int MATCH_TIMEOUT = 1000;
 

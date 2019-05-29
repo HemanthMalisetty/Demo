@@ -37,12 +37,13 @@ public class LocalChrome {
         long before;
 
         //Force to check against specific baseline branch
-        //eyes.setBaselineBranchName("Firefox");
+        eyes.setBaselineBranchName("CIBC");
         //Force; to check with the forced baselines corresponding environment
-        //eyes.setBaselineEnvName("FF1200x900");
+        eyes.setBaselineEnvName("CIBC");
 
         //Set the environment name in the test batch results
         //eyes.setEnvName(driver.getCapabilities().getBrowserName() + " " + driver.getCapabilities().getVersion());
+        //eyes.setEnvName("CIBC");
 
         eyes.setMatchLevel(params.MATCH_MODE);
         eyes.setStitchMode(StitchMode.CSS);

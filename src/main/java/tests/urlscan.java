@@ -60,12 +60,13 @@ public class urlscan {
 
 
                 //utils.page.suspend(2000);
-                utils.page.arrowDown(driver);
-                utils.page.arrowUp(driver);
+                //utils.page.arrowDown(driver);
+                //utils.page.arrowUp(driver);
                 //utils.page.home(driver);
                 //utils.page.suspend(2000);
                 //utils.page.changePage(driver);
-                eyes.check(arr[i], Target.window());
+                //eyes.check(arr[i], Target.window());
+                eyes.check("test", Target.window());
             } catch (Exception e) {
                 System.out.println("FAILED URL " + +i + " in " + (System.currentTimeMillis() - before) + "ms");
                 e.printStackTrace();

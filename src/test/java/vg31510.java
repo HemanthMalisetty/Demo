@@ -167,7 +167,7 @@ public class vg31510 {
         renderConfig.addBrowser(1500, 600, BrowserType.CHROME);
         renderConfig.addBrowser(1600, 600, BrowserType.CHROME);
 
-        /*
+
 
         renderConfig.addBrowser(600,  500, BrowserType.FIREFOX);
         renderConfig.addBrowser(700, 600, BrowserType.FIREFOX);
@@ -188,7 +188,7 @@ public class vg31510 {
         renderConfig.addDeviceEmulation(DeviceName.iPad_Pro, ScreenOrientation.PORTRAIT);
         renderConfig.addDeviceEmulation(DeviceName.Nexus_10, ScreenOrientation.PORTRAIT);
 
-*/
+
 
         eyes = new Eyes(visualGridRunner);
         eyes.setApiKey(params.EYES_KEY);
