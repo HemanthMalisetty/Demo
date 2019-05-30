@@ -13,7 +13,7 @@ public class params {
     public static String GRID_URL = "http://localhost:4444/wd/hub";
 
     private static String name = "url";
-    private static String suffix = " FedEx VGC1 3-152-2";
+    private static String suffix = " Thanos VGC2 3-152-2";
 
     public static Boolean changePage = false;  // to change the content for demo purposes
     public static Boolean changePageSingle = false;
