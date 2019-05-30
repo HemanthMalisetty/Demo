@@ -16,12 +16,14 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 public class Grid {
 
     protected RemoteWebDriver driver;
+    private Random rand = new Random();
 
     protected Eyes eyes;
 
@@ -79,7 +81,6 @@ public class Grid {
 
         BatchInfo batchInfo = new BatchInfo(BATCH_NAME);
         if(BATCH_ID!=null) batchInfo.setId(BATCH_ID);
-        eyes.setBatch(batchInfo);
 
         driver = utils.drivers.getGrid(threadId, browserName);
         driver.manage().timeouts().setScriptTimeout(90, TimeUnit.SECONDS);

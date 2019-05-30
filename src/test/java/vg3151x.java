@@ -31,7 +31,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
-public class vg31510 {
+public class vg3151x {
 
 
     protected RemoteWebDriver driver;
@@ -84,28 +84,35 @@ public class vg31510 {
 
 
                 //clear cookie warning or floating toolbar or whatever needs cleanup
+                /*
                 try{
-                   // System.out.println("Clearing floater");
+                    System.out.println("Clearing floater");
 
                     String jscript = "var x = document.getElementsByClassName('container container--trending'); " +
                         "x[0].style.display = 'none';";
                     driver.executeScript(jscript);
 
                     driver.findElement(By.cssSelector("body > div.container.container--trending > label")).click();
-                   // System.out.println("Clear succeeded");
+                    System.out.println("Clear succeeded");
                     utils.page.suspend(2000);
                 } catch (Exception e){
-                   // System.out.println("Clear failed");
+                    System.out.println("Clear failed");
                 };
+                   */
 
-
-                utils.page.arrowDown(driver);
+                //utils.page.arrowDown(driver);
+                //utils.page.arrowUp(driver);
                 //utils.page.home(driver);
                 //utils.page.suspend(2000);
-                utils.page.changePage(driver);
-                utils.page.changePageSingle(driver);
+                //utils.page.changePage(driver);
+                //utils.page.changePageSingle(driver, "A", "B");
+
                 eyes.check(arr[i],
                         Target.window().fully());   // Check the entire page
+
+                //eyes.check(arr[i],
+                //        Target.region(By.cssSelector("#mw-content-text > div > table.infobox.hproduct > tbody > tr:nth-child(1) > td > a > img")));
+
             } catch (Exception e) {
                 System.out.println("FAILED URL " + i + " in " + (System.currentTimeMillis() - before) + "ms");
                 e.printStackTrace();
@@ -117,7 +124,7 @@ public class vg31510 {
         before = System.currentTimeMillis();
 
         //eyes.close(true);
-        TestResultSummary allTestResults = visualGridRunner.getAllTestResults();
+        TestResultSummary allTestResults = visualGridRunner.getAllTestResults(false);
         System.out.println(allTestResults.toString());
         System.out.println("Completed Rendering in " + ((System.currentTimeMillis() - before)) / 1000 + " seconds");
 
@@ -132,8 +139,8 @@ public class vg31510 {
 
         ImageMatchSettings ims = new ImageMatchSettings();
         ims.setMatchLevel(params.MATCH_MODE);
-        //ims.setEnablePatterns(true);
-        //ims.setUseDom(true);
+        ims.setEnablePatterns(true);
+        ims.setUseDom(true);
 
         driver = utils.drivers.getLocalChrome(threadId);
         driver.manage().timeouts().setScriptTimeout(90, TimeUnit.SECONDS);
@@ -146,12 +153,17 @@ public class vg31510 {
 
         visualGridRunner = new VisualGridRunner(100);
         visualGridRunner.setLogHandler(logHandler);
-        visualGridRunner.getLogger().log("enter");
+        visualGridRunner.getLogger().log("Starting Test");
         visualGridRunner.setServerUrl(params.EYES_URL);
         renderConfig.setAppName(APP_NAME);
         renderConfig.setBatch(batchInfo);
         renderConfig.setDefaultMatchSettings(ims);
 
+        renderConfig.addBrowser(1400, 600, BrowserType.IE_10);
+        renderConfig.addBrowser(1400, 600, BrowserType.IE_11);
+        renderConfig.addBrowser(1400, 600, BrowserType.EDGE);
+        renderConfig.addBrowser(1400, 600, BrowserType.FIREFOX);
+        renderConfig.addBrowser(1400, 600, BrowserType.CHROME);
 
         renderConfig.addBrowser(400, 600, BrowserType.CHROME);
         renderConfig.addBrowser(500, 600, BrowserType.CHROME);
@@ -166,8 +178,6 @@ public class vg31510 {
         renderConfig.addBrowser(1400, 600, BrowserType.CHROME);
         renderConfig.addBrowser(1500, 600, BrowserType.CHROME);
         renderConfig.addBrowser(1600, 600, BrowserType.CHROME);
-
-
 
         renderConfig.addBrowser(600,  500, BrowserType.FIREFOX);
         renderConfig.addBrowser(700, 600, BrowserType.FIREFOX);
@@ -185,10 +195,11 @@ public class vg31510 {
         renderConfig.addBrowser(1200,  600, BrowserType.IE_11);
         renderConfig.addBrowser(1600,  500, BrowserType.IE_11);
 
+
+        /*
         renderConfig.addDeviceEmulation(DeviceName.iPad_Pro, ScreenOrientation.PORTRAIT);
         renderConfig.addDeviceEmulation(DeviceName.Nexus_10, ScreenOrientation.PORTRAIT);
-
-
+    */
 
         eyes = new Eyes(visualGridRunner);
         eyes.setApiKey(params.EYES_KEY);

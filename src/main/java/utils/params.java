@@ -5,6 +5,7 @@ import com.applitools.eyes.MatchLevel;
 public class params {
 
     public static String EYES_KEY = System.getProperty("eyesAPIKey", "DEFAULT_TOKEN");
+    // "bq91GrRWoSL26p7qINN2QdgGdWI9evF1abIREFBaSEo110"; //System.getProperty("eyesAPIKey", "DEFAULT_TOKEN");
     //public static String EYES_KEY = "18IoQ102FEtR31VdC75SpLe1104gLDNp110QBdSSEDgQeoto8110";
     //public static String EYES_URL = "https://nytimeseyes.applitools.com";
     public static String EYES_URL = "https://eyes.applitools.com";
