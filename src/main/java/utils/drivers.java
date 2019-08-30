@@ -23,7 +23,8 @@ public class drivers {
         if (chromeDrivers == null || !chromeDrivers.containsKey(threadId)) {
 
             ChromeOptions cOptions = new ChromeOptions();
-           // cOptions.addArguments("--headless");
+            cOptions.addArguments("--headless");   // toggling this between tests can cause some good examples of font issues
+            cOptions.addArguments("--disable-gpu");
             cOptions.addArguments("--disable-popup-blocking");
             cOptions.addArguments("--disable-default-apps");
             cOptions.addArguments("--start-maximized");
@@ -45,10 +46,10 @@ public class drivers {
 
             if(browserName.equalsIgnoreCase("CHROME")) {
                 ChromeOptions options = new ChromeOptions();
-                options.addArguments("--disable-popup-blocking");
-                options.addArguments("--disable-default-apps");
-                options.addArguments("--disable-infobars");
-                options.addArguments("–-disable-notifications");
+                //options.addArguments("--disable-popup-blocking");
+                //options.addArguments("--disable-default-apps");
+                //options.addArguments("--disable-infobars");
+                //options.addArguments("–-disable-notifications");
                 //options.addArguments("--dom-automation");
                 options.setCapability(CapabilityType.BROWSER_NAME, "chrome");
                 options.setCapability(CapabilityType.PLATFORM_NAME, Platform.ANY);

@@ -43,9 +43,9 @@ public class Grid {
         before = System.currentTimeMillis();
 
         //Force to check against specific baseline branch
-        //eyes.setBaselineBranchName("");
+        eyes.setBaselineBranchName("MOHAWK" + browserName);
         //Force to check with the forced baselines corresponding environment
-        //eyes.setBaselineEnvName("FF1200x900");
+        //eyes.setBaselineEnvName("FF");
 
         //Set the environment name in the test batch results
         //eyes.setEnvName(driver.getCapabilities().getBrowserName() + " " + driver.getCapabilities().getVersion());
@@ -81,6 +81,7 @@ public class Grid {
 
         BatchInfo batchInfo = new BatchInfo(BATCH_NAME);
         if(BATCH_ID!=null) batchInfo.setId(BATCH_ID);
+        eyes.setBatch(batchInfo);
 
         driver = utils.drivers.getGrid(threadId, browserName);
         driver.manage().timeouts().setScriptTimeout(90, TimeUnit.SECONDS);

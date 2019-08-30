@@ -1,17 +1,16 @@
-import com.applitools.eyes.BatchInfo;
-import com.applitools.eyes.FileLogger;
+import com.applitools.eyes.*;
 
 
-import com.applitools.eyes.ImageMatchSettings;
-import com.applitools.eyes.RectangleSize;
 import com.applitools.eyes.selenium.BrowserType;
 import com.applitools.eyes.selenium.Configuration;
 import com.applitools.eyes.selenium.Eyes;
 import com.applitools.eyes.selenium.fluent.Target;
 import com.applitools.eyes.visualgrid.model.DeviceName;
 import com.applitools.eyes.visualgrid.model.ScreenOrientation;
-import com.applitools.eyes.visualgrid.model.TestResultSummary;
-import com.applitools.eyes.visualgrid.services.EyesRunner;
+
+import com.applitools.eyes.TestResultsSummary;
+
+
 import com.applitools.eyes.visualgrid.services.VisualGridRunner;
 
 
@@ -59,8 +58,9 @@ public class vg3151x {
         renderConfig.setSendDom(true);
         renderConfig.setTestName(testName);
 
+        //eyes.setBaselineEnvName("Chrome");   // change in the renderconfig
+
         eyes.setConfiguration(renderConfig);
-        //eyes.open(driver);
         eyes.open(driver,APP_NAME, testName, new RectangleSize(1400, 900));
 
         String[] arr = new String[0];
@@ -100,15 +100,18 @@ public class vg3151x {
                 };
                    */
 
-                //utils.page.arrowDown(driver);
-                //utils.page.arrowUp(driver);
+                utils.page.suspend(1000);
+               // utils.page.arrowDown(driver);
+               // utils.page.arrowUp(driver);
                 //utils.page.home(driver);
                 //utils.page.suspend(2000);
-                //utils.page.changePage(driver);
-                //utils.page.changePageSingle(driver, "A", "B");
+                utils.page.changePage(driver);
+                utils.page.changePageSingle(driver, "q", "g");
 
+                utils.page.suspend(2000);
                 eyes.check(arr[i],
                         Target.window().fully());   // Check the entire page
+
 
                 //eyes.check(arr[i],
                 //        Target.region(By.cssSelector("#mw-content-text > div > table.infobox.hproduct > tbody > tr:nth-child(1) > td > a > img")));
@@ -123,8 +126,8 @@ public class vg3151x {
 
         before = System.currentTimeMillis();
 
-        //eyes.close(true);
-        TestResultSummary allTestResults = visualGridRunner.getAllTestResults(false);
+        eyes.close(false);
+        TestResultsSummary allTestResults = visualGridRunner.getAllTestResults(false);
         System.out.println(allTestResults.toString());
         System.out.println("Completed Rendering in " + ((System.currentTimeMillis() - before)) / 1000 + " seconds");
 
@@ -151,19 +154,30 @@ public class vg3151x {
         BatchInfo batchInfo = new BatchInfo(BATCH_NAME);
         if(BATCH_ID!=null) batchInfo.setId(BATCH_ID);
 
+        String sequenceName = "Alpha";
+        batchInfo.setSequenceName(sequenceName);
+
         visualGridRunner = new VisualGridRunner(100);
         visualGridRunner.setLogHandler(logHandler);
         visualGridRunner.getLogger().log("Starting Test");
-        visualGridRunner.setServerUrl(params.EYES_URL);
+
+        renderConfig.setServerUrl(params.EYES_URL);
         renderConfig.setAppName(APP_NAME);
         renderConfig.setBatch(batchInfo);
         renderConfig.setDefaultMatchSettings(ims);
+
+        //renderConfig.setBaselineEnvName("Chrome");   // Change the baseline !!!!!
+
+        renderConfig.addBrowser(1100, 600, BrowserType.CHROME);
 
         renderConfig.addBrowser(1400, 600, BrowserType.IE_10);
         renderConfig.addBrowser(1400, 600, BrowserType.IE_11);
         renderConfig.addBrowser(1400, 600, BrowserType.EDGE);
         renderConfig.addBrowser(1400, 600, BrowserType.FIREFOX);
         renderConfig.addBrowser(1400, 600, BrowserType.CHROME);
+        renderConfig.addBrowser(1000, 600, BrowserType.CHROME);
+        renderConfig.addBrowser(1100, 600, BrowserType.CHROME);
+        renderConfig.addBrowser(1200, 600, BrowserType.CHROME);
 
         renderConfig.addBrowser(400, 600, BrowserType.CHROME);
         renderConfig.addBrowser(500, 600, BrowserType.CHROME);
@@ -195,13 +209,11 @@ public class vg3151x {
         renderConfig.addBrowser(1200,  600, BrowserType.IE_11);
         renderConfig.addBrowser(1600,  500, BrowserType.IE_11);
 
-
-        /*
         renderConfig.addDeviceEmulation(DeviceName.iPad_Pro, ScreenOrientation.PORTRAIT);
         renderConfig.addDeviceEmulation(DeviceName.Nexus_10, ScreenOrientation.PORTRAIT);
-    */
 
         eyes = new Eyes(visualGridRunner);
+
         eyes.setApiKey(params.EYES_KEY);
         eyes.setIsDisabled(params.DISABLE_EYES);
         eyes.setLogHandler(new FileLogger("log/eyes.log",true,true));
@@ -215,7 +227,8 @@ public class vg3151x {
 
         if (driver != null) {
             long before = System.currentTimeMillis();
-            eyes.abortIfNotClosed();
+            //eyes.abortIfNotClosed(); // deprecated
+            if(!eyes.getIsOpen()) eyes.close();
             driver.quit();
             System.out.println("Driver quit took " + (System.currentTimeMillis() - before) + "ms");
         }

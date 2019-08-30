@@ -4,8 +4,7 @@ import com.applitools.eyes.selenium.Configuration;
 import com.applitools.eyes.selenium.Eyes;
 import com.applitools.eyes.selenium.StitchMode;
 import com.applitools.eyes.selenium.fluent.Target;
-import com.applitools.eyes.visualgrid.model.TestResultSummary;
-import com.applitools.eyes.visualgrid.services.EyesRunner;
+import com.applitools.eyes.TestResultsSummary;
 import com.applitools.eyes.visualgrid.services.VisualGridRunner;
 import org.openqa.selenium.By;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -66,8 +65,8 @@ public class vg2real {
         visualGridRunner = new VisualGridRunner(10);
         visualGridRunner.setLogHandler(logHandler);
         visualGridRunner.getLogger().log("enter");
-        visualGridRunner.setServerUrl(params.EYES_URL);
 
+        renderConfig.setServerUrl(params.EYES_URL);
         renderConfig.setDefaultMatchSettings(ims);
         renderConfig.setAppName(APP_NAME);
         renderConfig.setBatch(batchInfo);
@@ -103,7 +102,7 @@ public class vg2real {
         System.out.println("Completed URL Check in " + ((System.currentTimeMillis() - before)) / 1000 + " seconds");
         System.out.println("Waiting for Visual Grid Rendering ...");
         before = System.currentTimeMillis();
-        TestResultSummary allTestResults = visualGridRunner.getAllTestResults(false);
+        TestResultsSummary allTestResults = visualGridRunner.getAllTestResults(false);
         System.out.println(allTestResults.toString());
         System.out.println("Completed Rendering in " + ((System.currentTimeMillis() - before)) / 1000 + " seconds");
     }

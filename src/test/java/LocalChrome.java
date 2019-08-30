@@ -40,6 +40,7 @@ public class LocalChrome {
         //eyes.setBaselineBranchName("Firefox");
         //Force; to check with the forced baselines corresponding environment
         //eyes.setBaselineEnvName("FF1200x900");
+        //eyes.setAppName();
 
         //Set the environment name in the test batch results
         //eyes.setEnvName(driver.getCapabilities().getBrowserName() + " " + driver.getCapabilities().getVersion());
@@ -49,41 +50,9 @@ public class LocalChrome {
         eyes.setForceFullPageScreenshot(false);
         if(params.FULL_SCREEN) eyes.setForceFullPageScreenshot(true);
         eyes.setSendDom(true);
-        eyes.open(driver,APP_NAME, testName, new RectangleSize(1200, 600));
+        eyes.open(driver,APP_NAME, testName, new RectangleSize(1200, 1040));
 
         tests.urlscan.scanlist(driver, eyes, params.URL_FILE);
-
-        //NYT Specific
-        /*
-        driver.get("https://www.nytimes.com/crosswords");
-        utils.page.suspend(2000);
-        utils.page.arrowDown(driver);
-        eyes.check("Crosswords", Target.window().fully());
-        driver.findElement(By.cssSelector("#root > div > div > div.app-mainContainer--3CJGG > div > div > div > div.Section-section--2YfV5.white > div > section > div.flexbox-expandToRow--3Qm-J.flexbox-flexContainer--1aFi7 > div:nth-child(3) > a > div")).click();
-        utils.page.suspend(2000);
-        utils.page.arrowDown(driver);
-        eyes.check("Previous Crossword OK", Target.window().fully());
-        driver.findElement(By.xpath("//span[text()=\"OK\"]"));
-        eyes.check("Previous Crossword", Target.window().fully());
-*/
-
-        /*
-        Itai code to fix from trello https://trello.com/c/8vteyM2d/677-nytimes-full-page-capture-failure-viewport-only-chrome-74-ff-65-local
-
-        TestedPageUrl = "https://www.nytimes.com/";
-        testedPageSize = new Size(1200, 800);
-        GetEyes().StitchMode = StitchModes.CSS;
-        IWebElement app = GetDriver().FindElement(By.Id("app"));
-        for (int i = 0; i < app.Size.Height; i += 700)
-        {
-            ((IJavaScriptExecutor)GetDriver()).ExecuteScript($"var app = document.querySelector('#app'); app.style.transform = 'translate(0px, -{i}px)';");
-        }
-
-        ((IJavaScriptExecutor)GetDriver()).ExecuteScript("var app = document.querySelector('#app'); app.style.transform = 'translate(0px, 0px)';");
-        GetEyes().Check("NY Times", Target.Window().ScrollRootElement(By.Id("app")).Fully().SendDom(false));
-
-
-         */
 
         TestResults testResult = eyes.close(false);
         System.out.println("Applitools Test Results");
@@ -124,7 +93,8 @@ public class LocalChrome {
 
         if (driver != null) {
             long before = System.currentTimeMillis();
-            eyes.abortIfNotClosed();
+            //eyes.abortIfNotClosed(); // deprecated
+            if(!eyes.getIsOpen()) eyes.abort();
             driver.quit();
             System.out.println("Driver quit took " + (System.currentTimeMillis() - before) + "ms");
         }

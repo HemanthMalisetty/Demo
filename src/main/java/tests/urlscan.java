@@ -105,7 +105,8 @@ public class urlscan {
            // utils.page.arrowUp(driver);
            // utils.page.home(driver);
            // utils.page.suspend(2000);
-           // utils.page.changePage(driver);
+            utils.page.changePage(driver);
+            utils.page.changePageSingle(driver,"1", "2");
             eyes.check(arr[i], Target.window());
         } catch (Exception e) {
             System.out.println("FAILED URL " + +i + " in " + (System.currentTimeMillis() - before) + "ms");
