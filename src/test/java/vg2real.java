@@ -44,12 +44,6 @@ public class vg2real {
     private static final String APP_NAME = params.APP_NAME;
     private static final String TEST_NAME = params.TEST_NAME;
 
-    /* How to Use
-        Must have a new test name to gather fresh VG baseline
-        Comparison will have Checkpoint environment name "Real"
-        It will be the second test in the results
-        list urls  */
-
     public void eyesVG(){
 
         Integer i=0;
@@ -99,6 +93,7 @@ public class vg2real {
                 e.printStackTrace();
             }
         }
+
         System.out.println("Completed URL Check in " + ((System.currentTimeMillis() - before)) / 1000 + " seconds");
         System.out.println("Waiting for Visual Grid Rendering ...");
         before = System.currentTimeMillis();
