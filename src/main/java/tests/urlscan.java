@@ -116,6 +116,47 @@ public class urlscan {
         System.out.println("Completed URL scan in " + ((System.currentTimeMillis() - before))/1000 + " seconds");
     }
 
+    public static void scanListMobile(RemoteWebDriver driver, Eyes eyes, String urlList){
+
+        int i;
+        long before;
+        long beforeStep;
+
+        before = System.currentTimeMillis();
+        urlscan wantFile = new urlscan();
+
+        System.out.println("Scanning URL's in " + urlList);
+        String[] arr = new String[0];
+        try {
+            Scanner sc = new Scanner(wantFile.getFile(urlList));
+            List<String> lines = new ArrayList<String>();
+            while (sc.hasNextLine()) {
+                lines.add(sc.nextLine());
+            }
+            arr = lines.toArray(new String[0]);
+            System.out.println("URL's to check: " + arr.length);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        for(i=0;i<arr.length;i++){
+
+            System.out.println("Checking URL " + +i + ": " + arr[i]);
+            try {
+                driver.get(arr[i]);
+                utils.page.suspend(5000);
+                beforeStep = System.currentTimeMillis();
+                eyes.check(arr[i], Target.window());
+                System.out.println("eyes url took " + (System.currentTimeMillis() - beforeStep) + "ms");
+            } catch (Exception e) {
+                System.out.println("FAILED URL " + +i + " in " + (System.currentTimeMillis() - before) + "ms");
+                e.printStackTrace();
+            }
+        }
+        System.out.println("Completed URL scan in " + ((System.currentTimeMillis() - before))/1000 + " seconds");
+    }
+
+
     public File getFile(String fileName){
 
         ClassLoader classLoader = getClass().getClassLoader();

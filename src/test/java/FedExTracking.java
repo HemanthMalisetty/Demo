@@ -1,7 +1,4 @@
-import com.applitools.eyes.BatchInfo;
-import com.applitools.eyes.RectangleSize;
-import com.applitools.eyes.StdoutLogHandler;
-import com.applitools.eyes.TestResults;
+import com.applitools.eyes.*;
 import com.applitools.eyes.selenium.Eyes;
 import com.applitools.eyes.selenium.StitchMode;
 import com.applitools.eyes.selenium.fluent.Target;
@@ -26,127 +23,168 @@ public class FedExTracking {
     protected RemoteWebDriver driver;
     protected Eyes eyes;
 
-    private static final String BATCH_NAME = "FedEx Brand";
+    private static final String BATCH_NAME = "FedEx";
     private static final String BATCH_ID = params.BATCH_ID;
+
+
 
     @Parameters({"platformName", "platformVersion", "browserName", "browserVersion"})
     @Test(priority = 1, alwaysRun = true, enabled = true)
-    public void BrandURL(String platformName ,String platformVersion,
+    public void Golden_1(String platformName ,String platformVersion,
                          String browserName, String browserVersion) {
 
-        Integer i=0;
-        long before;
+        try {
+            eyes.open(driver, "FedEx Golden_1", "Golden_1", new RectangleSize(1200, 800));
 
-        //Force to check against specific baseline branch
-        //eyes.setBaselineBranchName("Firefox");
-        //Force; to check with the forced baselines corresponding environment
-        //eyes.setBaselineEnvName("FF1200x900");
+            driver.get("https://www.fedex.com/en-us/home.html");
+            utils.page.suspend(4000);
+            eyes.check("Home Page", Target.window().fully());
 
-        //Set the environment name in the test batch results
-        //eyes.setEnvName(driver.getCapabilities().getBrowserName() + " " + driver.getCapabilities().getVersion());
-
-        driver.manage().timeouts().implicitlyWait(8,TimeUnit.SECONDS) ;
-
-
-        eyes.setMatchLevel(params.MATCH_MODE);
-        eyes.setStitchMode(StitchMode.CSS);
-        eyes.setForceFullPageScreenshot(false);  //if(params.FULL_SCREEN) eyes.setForceFullPageScreenshot(true);
-        eyes.setSendDom(true);
-        eyes.open(driver,"FedEx Brand", "FedEx Brand", new RectangleSize(1200, 800));
-
-        driver.get("https://brand.fedex.com/login.html");
-        eyes.check("Home Page", Target.window().fully());
-
-        driver.get("https://brand.fedex.com/login.html");
-        driver.findElement(By.id("ou")).click();
-        driver.findElement(By.id("input-username")).click();
-        driver.findElement(By.id("input-password")).sendKeys("Patanjali1-4");
-        driver.findElement(By.id("input-username")).sendKeys("cemerson123");
-        eyes.check("Login", Target.window().fully());
-
-        driver.findElement(By.id("input-submit1")).click();
-        driver.findElement(By.name("search")).click();
-        driver.findElement(By.name("search")).sendKeys("Delivery");
-        driver.findElement(By.cssSelector(".searchmagnifiericon")).click();
-        utils.page.suspend(8000);
-        utils.page.changePageSingle(driver,")", "]");
-        eyes.check("Search", Target.window().fully());
-
-        driver.findElement(By.cssSelector("#facet-materialType2 .ng-scope:nth-child(2) .border-checkbox")).click();
-        utils.page.suspend(1000);
-        driver.findElement(By.cssSelector(".resetsearch-edit")).click();
-        utils.page.suspend(1000);
-
-
-        driver.findElement(By.cssSelector(".clearfix:nth-child(7) .fx-asset-thumbnail > img")).click();
-        utils.page.changePageSingle(driver,"o", "0");
-        eyes.check("Select", Target.window().fully());
-
-        driver.findElement(By.cssSelector(".text-center > .btn-default")).click();
-
-        driver.findElement(By.cssSelector(".text-center > .btn-default")).click();
-        eyes.check("Cart", Target.window().fully());
-
-        TestResults testResult = eyes.close(false);
-        System.out.println("Applitools Test Results");
-        System.out.println(testResult.toString());
-
+            TestResults testResult = eyes.close(false);
+            System.out.println("Applitools Test Results");
+            System.out.println(testResult.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
-
-
 
 
     @Parameters({"platformName", "platformVersion", "browserName", "browserVersion"})
-    @Test(priority = 1, alwaysRun = true, enabled = false)
-    public void CheckURL(String platformName ,String platformVersion,
+    @Test(priority = 1, alwaysRun = true, enabled = true)
+    public void Golden_2(String platformName ,String platformVersion,
                          String browserName, String browserVersion) {
 
-        Integer i=0;
-        long before;
 
-        //Force to check against specific baseline branch
-        //eyes.setBaselineBranchName("Firefox");
-        //Force; to check with the forced baselines corresponding environment
-        //eyes.setBaselineEnvName("FF1200x900");
+        try {
+            eyes.open(driver, "FedEx Golden_2", "Golden_2", new RectangleSize(1200, 800));
 
-        //Set the environment name in the test batch results
-        //eyes.setEnvName(driver.getCapabilities().getBrowserName() + " " + driver.getCapabilities().getVersion());
+            driver.get("https://www.fedex.com/en-us/home.html");
+            utils.page.suspend(4000);
+            eyes.check("Home Page", Target.window().fully());
 
-        eyes.setMatchLevel(params.MATCH_MODE);
-        eyes.setStitchMode(StitchMode.CSS);
-        eyes.setForceFullPageScreenshot(false);  //if(params.FULL_SCREEN) eyes.setForceFullPageScreenshot(true);
-        eyes.setSendDom(true);
-        eyes.open(driver,"FedEx Tracking", "FedEx Tracking", new RectangleSize(1200, 800));
+            driver.findElement(By.cssSelector("div:nth-child(1) > div.fxg-cube__content > svg")).click();
+            utils.page.suspend(4000);
+            eyes.check("Rate & Ship", Target.window().fully());
 
-        driver.get("https://www.fedex.com/en-us/home.html");
-        utils.page.suspend(4000);
-        eyes.check("Home Page", Target.window().fully());
+            TestResults testResult = eyes.close(false);
+            System.out.println("Applitools Test Results");
+            System.out.println(testResult.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
-        driver.findElement(By.name("trackingnumber")).click();
-        driver.findElement(By.name("trackingnumber")).sendKeys("772803780072");
-        utils.page.suspend(2000);
-        driver.findElement(By.id("btnSingleTrack")).click();
-        utils.page.suspend(4000);
-        eyes.check("Tracking 772803780072", Target.window().fully());
+    @Parameters({"platformName", "platformVersion", "browserName", "browserVersion"})
+    @Test(priority = 1, alwaysRun = true, enabled = true)
+    public void Golden_3(String platformName ,String platformVersion,
+                         String browserName, String browserVersion) {
 
-       // driver.findElement(By.cssSelector(".fxg-app__single-tracking")).click();
-        driver.findElement(By.name("trackingnumber")).click();
-        driver.findElement(By.name("trackingnumber")).clear();
-        driver.findElement(By.name("trackingnumber")).sendKeys("787658126565");
-        utils.page.suspend(2000);
+        try {
+            eyes.open(driver,"FedEx Golden_3", "Golden_3", new RectangleSize(1200, 800));
 
-        driver.findElement(By.id("btnSingleTrack")).click();   //switch between these two to go to the wrong page
-        //driver.get("https://www.fedex.com/en-us/tracking.html");
+            driver.get("https://www.fedex.com/en-us/home.html");
+            utils.page.suspend(4000);
+            eyes.check("Home Page", Target.window().fully());
 
-        utils.page.suspend(4000);
-        eyes.check("Tracking 787658126565", Target.window().fully());
+            driver.findElement(By.name("trackingnumber")).click();
+            driver.findElement(By.name("trackingnumber")).sendKeys("772803780072");
+            utils.page.suspend(2000);
+            driver.findElement(By.id("btnSingleTrack")).click();
+            utils.page.suspend(4000);
+            eyes.check("Tracking 772803780072", Target.window().fully());
 
+            /*
+            driver.findElement(By.name("trackingnumber")).click();
+            driver.findElement(By.name("trackingnumber")).clear();
+            driver.findElement(By.name("trackingnumber")).sendKeys("787658126565");
+            utils.page.suspend(2000);
 
-        TestResults testResult = eyes.close(false);
-        System.out.println("Applitools Test Results");
-        System.out.println(testResult.toString());
+            driver.findElement(By.id("btnSingleTrack")).click();   //switch between these two to go to the wrong page
+
+            utils.page.suspend(4000);
+            eyes.check("Tracking 787658126565", Target.window().fully());
+            */
+
+            TestResults testResult = eyes.close(false);
+            System.out.println("Applitools Test Results");
+            System.out.println(testResult.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
+
+
+    @Parameters({"platformName", "platformVersion", "browserName", "browserVersion"})
+    @Test(priority = 1, alwaysRun = true, enabled = true)
+    public void Brand_1(String platformName ,String platformVersion,
+                        String browserName, String browserVersion) {
+
+        try {
+            eyes.open(driver,"FedEx Brand_1", "Brand_1", new RectangleSize(1200, 800));
+
+            driver.get("https://brand.fedex.com/login.html");
+            eyes.check("Home Page", Target.window().fully());
+
+            driver.get("https://brand.fedex.com/login.html");
+            driver.findElement(By.id("ou")).click();
+            driver.findElement(By.id("input-username")).click();
+            driver.findElement(By.id("input-password")).sendKeys("Wipro123");
+            driver.findElement(By.id("input-username")).sendKeys("PRODTESTBRAND1");
+            eyes.check("Login", Target.window().fully());
+
+            TestResults testResult = eyes.close(false);
+            System.out.println("Applitools Test Results");
+            System.out.println(testResult.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @Parameters({"platformName", "platformVersion", "browserName", "browserVersion"})
+    @Test(priority = 1, alwaysRun = true, enabled = true)
+    public void Brand_2(String platformName ,String platformVersion,
+                         String browserName, String browserVersion) {
+
+        try {
+            eyes.open(driver,"FedEx Brand_2", "Brand_2", new RectangleSize(1200, 800));
+
+            driver.get("https://brand.fedex.com/login.html");
+            eyes.check("Home Page", Target.window().fully());
+
+            driver.get("https://brand.fedex.com/login.html");
+            driver.findElement(By.id("ou")).click();
+            driver.findElement(By.id("input-username")).click();
+            driver.findElement(By.id("input-password")).sendKeys("Wipro123");
+            driver.findElement(By.id("input-username")).sendKeys("PRODTESTBRAND1");
+            eyes.check("Login", Target.window().fully());
+
+            driver.findElement(By.id("input-submit1")).click();
+            driver.findElement(By.name("search")).click();
+            driver.findElement(By.name("search")).sendKeys("Truck");
+            driver.findElement(By.cssSelector(".searchmagnifiericon")).click();
+            utils.page.suspend(10000);
+            eyes.check("Search", Target.window().fully());
+
+            driver.findElement(By.cssSelector(".clearfix:nth-child(7) .fx-asset-thumbnail > img")).click();
+            eyes.check("Select", Target.window().fully());
+
+            driver.findElement(By.cssSelector(".text-center > .btn-default")).click();
+
+            driver.findElement(By.cssSelector(".text-center > .btn-default")).click();
+            eyes.check("Cart", Target.window().fully());
+
+            TestResults testResult = eyes.close(false);
+            System.out.println("Applitools Test Results");
+            System.out.println(testResult.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
 
 
     @Parameters({"platformName", "platformVersion", "browserName", "browserVersion"})
@@ -158,8 +196,8 @@ public class FedExTracking {
         long before = System.currentTimeMillis();
 
         eyes = utils.myeyes.getEyes(threadId);
-        //eyes.setLogHandler(new FileLogger("log/file.log",true,true));
-        eyes.setLogHandler(new StdoutLogHandler(false));
+        eyes.setLogHandler(new FileLogger("log/file.log",true,true));
+        //eyes.setLogHandler(new StdoutLogHandler(false));
 
         BatchInfo batchInfo = new BatchInfo(BATCH_NAME);
         if(BATCH_ID!=null) batchInfo.setId(BATCH_ID);
@@ -169,9 +207,17 @@ public class FedExTracking {
         driver.manage().timeouts().setScriptTimeout(90, TimeUnit.SECONDS);
         driver.manage().timeouts().pageLoadTimeout(90, TimeUnit.SECONDS);
 
+        //Used to compare browsers against each other
+        //eyes.setBaselineEnvName(<tag string here>);
+
+        eyes.setMatchLevel(params.MATCH_MODE);
+        eyes.setStitchMode(StitchMode.CSS);
+        eyes.setForceFullPageScreenshot(false);
+        if(params.FULL_SCREEN) eyes.setForceFullPageScreenshot(true);
+        eyes.setSendDom(true);
 
         //Allows for filtering dashboard view
-        eyes.addProperty("SANDBOX", "YES");
+        eyes.addProperty("Sample Group", "YES");
 
         System.out.println("START THREAD ID - " + Thread.currentThread().getId() + " " + browserName + " " + browserVersion);
         System.out.println("baseBeforeClass took " + (System.currentTimeMillis() - before) + "ms");
