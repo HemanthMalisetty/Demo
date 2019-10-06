@@ -9,7 +9,7 @@
         <parameter name="browserName" value="chrome" />
         <parameter name="browserVersion" value="NA" />
         <classes>
-            <class name="FedExTracking" />
+            <class name="FedEx" />
         </classes>
     </test>
 

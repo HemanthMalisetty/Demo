@@ -30,7 +30,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
-public class vg3151x {
+public class VisualGrid {
 
 
     protected RemoteWebDriver driver;
@@ -101,18 +101,19 @@ public class vg3151x {
                    */
 
                 utils.page.suspend(1000);
-               // utils.page.arrowDown(driver);
-               // utils.page.arrowUp(driver);
+                utils.page.arrowDown(driver);
+                utils.page.arrowUp(driver);
                 //utils.page.home(driver);
                 //utils.page.suspend(2000);
                 utils.page.changePage(driver);
                 utils.page.changePageSingle(driver, "q", "g");
 
                 utils.page.suspend(2000);
+
                 eyes.check(arr[i],
-                        Target.window().fully());   // Check the entire page
+                        Target.window().fully());
 
-
+                //.region(By.cssSelector("body > div.content-wrapper > div.main > div:nth-child(10) > div > div > div > div")));   // Check the entire page
                 //eyes.check(arr[i],
                 //        Target.region(By.cssSelector("#mw-content-text > div > table.infobox.hproduct > tbody > tr:nth-child(1) > td > a > img")));
 
@@ -170,8 +171,6 @@ public class vg3151x {
 
         renderConfig.addBrowser(1100, 600, BrowserType.CHROME);
 
-        renderConfig.addBrowser(1400, 600, BrowserType.IE_10);
-        renderConfig.addBrowser(1400, 600, BrowserType.IE_11);
         renderConfig.addBrowser(1400, 600, BrowserType.EDGE);
         renderConfig.addBrowser(1400, 600, BrowserType.FIREFOX);
         renderConfig.addBrowser(1400, 600, BrowserType.CHROME);
@@ -193,6 +192,12 @@ public class vg3151x {
         renderConfig.addBrowser(1500, 600, BrowserType.CHROME);
         renderConfig.addBrowser(1600, 600, BrowserType.CHROME);
 
+        renderConfig.addBrowser(1800, 600, BrowserType.CHROME);
+        renderConfig.addBrowser(1900, 600, BrowserType.CHROME);
+        renderConfig.addBrowser(2000, 600, BrowserType.CHROME);
+        renderConfig.addBrowser(2500, 600, BrowserType.CHROME);
+        renderConfig.addBrowser(3000, 600, BrowserType.CHROME);
+
         renderConfig.addBrowser(600,  500, BrowserType.FIREFOX);
         renderConfig.addBrowser(700, 600, BrowserType.FIREFOX);
         renderConfig.addBrowser(800, 600, BrowserType.FIREFOX);
@@ -205,12 +210,20 @@ public class vg3151x {
         renderConfig.addBrowser(1200, 600, BrowserType.EDGE);
         renderConfig.addBrowser(1600, 500, BrowserType.EDGE);
 
+        /*
+        renderConfig.addBrowser(1400, 600, BrowserType.IE_10);
+        renderConfig.addBrowser(1400, 600, BrowserType.IE_11);
         renderConfig.addBrowser(800,  600, BrowserType.IE_11);
         renderConfig.addBrowser(1200,  600, BrowserType.IE_11);
         renderConfig.addBrowser(1600,  500, BrowserType.IE_11);
+        */
 
         renderConfig.addDeviceEmulation(DeviceName.iPad_Pro, ScreenOrientation.PORTRAIT);
         renderConfig.addDeviceEmulation(DeviceName.Nexus_10, ScreenOrientation.PORTRAIT);
+        renderConfig.addDeviceEmulation(DeviceName.iPhone_X, ScreenOrientation.PORTRAIT);
+        renderConfig.addDeviceEmulation(DeviceName.iPad, ScreenOrientation.PORTRAIT);
+        renderConfig.addDeviceEmulation(DeviceName.Pixel_2_XL, ScreenOrientation.PORTRAIT);
+
 
         eyes = new Eyes(visualGridRunner);
 

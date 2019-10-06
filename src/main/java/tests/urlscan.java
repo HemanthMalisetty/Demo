@@ -100,9 +100,9 @@ public class urlscan {
         System.out.println("Checking URL " + +i + ": " + arr[i]);
         try {
             driver.get(arr[i]);
-           // utils.page.suspend(2000);
-           // utils.page.arrowDown(driver);
-           // utils.page.arrowUp(driver);
+            utils.page.suspend(2000);
+            utils.page.arrowDown(driver);
+            utils.page.arrowUp(driver);
            // utils.page.home(driver);
            // utils.page.suspend(2000);
             utils.page.changePage(driver);
