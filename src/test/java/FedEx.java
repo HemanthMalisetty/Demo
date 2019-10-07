@@ -8,7 +8,6 @@ import com.applitools.eyes.selenium.fluent.Target;
 import com.applitools.eyes.visualgrid.model.DeviceName;
 import com.applitools.eyes.visualgrid.model.ScreenOrientation;
 import com.applitools.eyes.visualgrid.services.VisualGridRunner;
-import com.sun.org.apache.xpath.internal.objects.XString;
 import org.openqa.selenium.By;
 
 
