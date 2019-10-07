@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite thread-count="10" name="DemoTestSuite" verbose="1" parallel="tests">
+
+
+    <test name="Android">
+        <parameter name="platformName" value="Android" />
+        <parameter name="platformVersion" value="" />
+        <parameter name="browserName" value="Chrome" />
+        <parameter name="browserVersion" value="" />
+        <parameter name="screenResolution" value="" />
+        <parameter name="location" value="" />
+        <parameter name="deviceName" value="R38M604TNBZ" />
+        <parameter name="persona" value="Empty" />
+
+        <classes>
+            <class name="Perfecto" />
+        </classes>
+    </test>
+
+
+    <test name="iPhone">
+        <parameter name="platformName" value="iOS" />
+        <parameter name="platformVersion" value="" />
+        <parameter name="browserName" value="Safari" />
+        <parameter name="browserVersion" value="" />
+        <parameter name="screenResolution" value="" />
+        <parameter name="location" value="" />
+        <parameter name="deviceName" value="8D3E35CF16D8D827E4827ABBCD0E582E2761CADA" />
+        <parameter name="persona" value="Empty" />
+
+        <classes>
+            <class name="Perfecto" />
+        </classes>
+    </test>
+
+</suite>
+
+

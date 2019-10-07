@@ -4,12 +4,12 @@
 
 
     <test name="Chrome">
-        <parameter name="platformName" value="Windows" />
-        <parameter name="platformVersion" value="10" />
+        <parameter name="platformName" value="NA" />
+        <parameter name="platformVersion" value="NA" />
         <parameter name="browserName" value="chrome" />
         <parameter name="browserVersion" value="NA" />
         <classes>
-            <class name="VisualGrid" />
+            <class name="FedEx" />
         </classes>
     </test>
 

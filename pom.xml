@@ -2,6 +2,8 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>Demo</groupId>
@@ -20,6 +22,14 @@
                     </suiteXmlFiles>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>7</source>
+                    <target>7</target>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
@@ -28,8 +38,16 @@
         <dependency>
             <groupId>com.applitools</groupId>
             <artifactId>eyes-selenium-java3</artifactId>
-            <version>3.152.2</version>
+            <version>3.157.10</version>
         </dependency>
+
+        <!--
+        <dependency>
+            <groupId>com.applitools</groupId>
+            <artifactId>eyes-selenium-java4</artifactId>
+            <version>4.0.11</version>
+        </dependency>
+        -->
 
         <dependency>
             <groupId>org.testng</groupId>

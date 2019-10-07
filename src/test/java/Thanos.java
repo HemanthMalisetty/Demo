@@ -57,7 +57,7 @@ public class Thanos {
         eyes.check("Thanos", Target.window().fully());
 
         driver.findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Fictional supervillain'])[1]/following::canvas[1]")).click();
-        utils.page.suspend(15000);
+        utils.page.suspend(25000);
         utils.page.home(driver);
         eyes.check("50% Gone", Target.window().fully());
 

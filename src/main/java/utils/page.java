@@ -95,7 +95,7 @@ public class page {
                 "                                        if(elements[i].hasChildNodes() && child.nodeType == 3) {\n" +
                 "                                           child.nodeValue = child.nodeValue.replace('o','0');" +
                 "                                           child.nodeValue = child.nodeValue.replace('?','!                       ');" +
-                //"                                           child.nodeValue = child.nodeValue.replace(',','.');" +
+                "                                           child.nodeValue = child.nodeValue.replace(',','.');" +
                 "                                           child.nodeValue = child.nodeValue.replace('.','.</><br>');" +
                 "                                        }\n" +
                 "                                    }\n";
