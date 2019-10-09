@@ -26,7 +26,6 @@ public class LocalChrome {
     private static final String BATCH_ID = params.BATCH_ID;
     private static final String APP_NAME = params.APP_NAME;
 
-
     @Parameters({"platformName", "platformVersion", "browserName", "browserVersion"})
     @Test(priority = 1, alwaysRun = true, enabled = true)
     public void CheckURL(String platformName ,String platformVersion,

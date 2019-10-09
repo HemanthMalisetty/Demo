@@ -44,20 +44,19 @@ public class urlscan {
 
 
                 //clear cookie warning
-                /*
                 try{
-                    System.out.println("Clearing floater");
-                    String jscript = "var x = document.getElementsByClassName('container container--trending'); " +
-                            "x[0].style.display = 'none';";
-                    driver.executeScript(jscript);
+                    //System.out.println("Clearing floater");
+                    //String jscript = "var x = document.getElementsByClassName('container container--trending'); " +
+                    //        "x[0].style.display = 'none';";
+                    //driver.executeScript(jscript);
 
-                    driver.findElement(By.cssSelector("body > div.container.container--trending > label")).click();
+                    utils.page.clickLinkText(driver, "Accept Cookies");
                     System.out.println("Clear succeeded");
                     utils.page.suspend(1000);
                 } catch (Exception e){
                     System.out.println("Clear skipped");
                 };
-                */
+
 
                 utils.page.suspend(2000);
                 utils.page.arrowDown(driver);

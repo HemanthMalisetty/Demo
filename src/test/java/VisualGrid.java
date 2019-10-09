@@ -84,31 +84,23 @@ public class VisualGrid {
 
 
                 //clear cookie warning or floating toolbar or whatever needs cleanup
-                /*
+
                 try{
-                    System.out.println("Clearing floater");
-
-                    String jscript = "var x = document.getElementsByClassName('container container--trending'); " +
-                        "x[0].style.display = 'none';";
-                    driver.executeScript(jscript);
-
-                    driver.findElement(By.cssSelector("body > div.container.container--trending > label")).click();
+                    utils.page.clickLinkText(driver, "Accept Cookies");
                     System.out.println("Clear succeeded");
                     utils.page.suspend(2000);
                 } catch (Exception e){
                     System.out.println("Clear failed");
                 };
-                   */
 
-                utils.page.suspend(1000);
-                utils.page.arrowDown(driver);
-                utils.page.arrowUp(driver);
+                //utils.page.suspend(1000);
+                //utils.page.pageDown(driver);
+                //utils.page.arrowDown(driver);
+                //utils.page.arrowUp(driver);
                 //utils.page.home(driver);
                 //utils.page.suspend(2000);
                 utils.page.changePage(driver);
                 utils.page.changePageSingle(driver, "q", "g");
-
-                utils.page.suspend(2000);
 
                 eyes.check(arr[i],
                         Target.window().fully());
@@ -162,6 +154,8 @@ public class VisualGrid {
         visualGridRunner.setLogHandler(logHandler);
         visualGridRunner.getLogger().log("Starting Test");
 
+        eyes = new Eyes(visualGridRunner);
+
         renderConfig.setServerUrl(params.EYES_URL);
         renderConfig.setAppName(APP_NAME);
         renderConfig.setBatch(batchInfo);
@@ -210,13 +204,11 @@ public class VisualGrid {
         renderConfig.addBrowser(1200, 600, BrowserType.EDGE);
         renderConfig.addBrowser(1600, 500, BrowserType.EDGE);
 
-        /*
         renderConfig.addBrowser(1400, 600, BrowserType.IE_10);
         renderConfig.addBrowser(1400, 600, BrowserType.IE_11);
         renderConfig.addBrowser(800,  600, BrowserType.IE_11);
         renderConfig.addBrowser(1200,  600, BrowserType.IE_11);
         renderConfig.addBrowser(1600,  500, BrowserType.IE_11);
-        */
 
         renderConfig.addDeviceEmulation(DeviceName.iPad_Pro, ScreenOrientation.PORTRAIT);
         renderConfig.addDeviceEmulation(DeviceName.Nexus_10, ScreenOrientation.PORTRAIT);
@@ -224,12 +216,9 @@ public class VisualGrid {
         renderConfig.addDeviceEmulation(DeviceName.iPad, ScreenOrientation.PORTRAIT);
         renderConfig.addDeviceEmulation(DeviceName.Pixel_2_XL, ScreenOrientation.PORTRAIT);
 
-
-        eyes = new Eyes(visualGridRunner);
-
         eyes.setApiKey(params.EYES_KEY);
         eyes.setIsDisabled(params.DISABLE_EYES);
-        eyes.setLogHandler(new FileLogger("log/eyes.log",true,true));
+        eyes.setLogHandler(new FileLogger("log/eyes_only.log",true,true));
         //eyes.addProperty("SANDBOX", "YES");
 
 

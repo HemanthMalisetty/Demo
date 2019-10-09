@@ -120,6 +120,57 @@ public class page {
         }
     }
 
+    public static void removeNodes(RemoteWebDriver driver){
+
+        String script = "" +
+                "                                    var elements = window.document.querySelectorAll(\"body, body *\");\n" +
+                "                                    var child;\n" +
+                "                                    for(var i = 0; i < elements.length; i++) {\n" +
+                "                                       child = elements[i].childNodes[0];\n" +
+                "                                        if(elements[i].hasChildNodes() && child.nodeType == 3) {\n" +
+                "                                           elements[i].removeChild(child);" +
+                "                                        }\n" +
+                "                                    }\n";
+        if(params.removeChildNode) {
+            driver.executeScript(script);
+        }
+    }
+
+    public static void alignTextCenter(RemoteWebDriver driver){
+
+        String script = "" +
+                "                                    var elements = window.document.querySelectorAll(\"body, body *\");\n" +
+                "                                    var child;\n" +
+                "                                    for(var i = 0; i < elements.length; i++) {\n" +
+                "                                       child = elements[i].childNodes[0];\n" +
+                "                                        if(elements[i].hasChildNodes() && child.nodeType == 3) {\n" +
+                "                                           elements[i].style.textAlign = \"center\";;" +
+                "                                        }\n" +
+                "                                    }\n";
+        if(params.alignTextCenter) {
+            driver.executeScript(script);
+        }
+    }
+
+
+    public static void skewPage(RemoteWebDriver driver){
+
+        String script = "" +
+                "var cssText = 'div { transform: skewY(.009deg);}'; \n" +
+                "var css = document.createElement('style'); \n" +
+                "css.type = 'text/css'; \n" +
+                "if('textContent' in css) \n" +
+                "css.textContent = cssText; \n" +
+                "else \n" +
+                "css.innerText = cssText; \n" +
+                "document.body.appendChild(css); \n";
+
+        if(params.skewPage) {
+            driver.executeScript(script);
+        }
+    }
+
+
 
     public static void clickLinkText(RemoteWebDriver driver, String identifier){
         Integer i;

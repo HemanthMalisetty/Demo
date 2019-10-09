@@ -20,7 +20,7 @@ import utils.params;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
-public class BBVA {
+public class EBSCO {
 
     protected RemoteWebDriver driver;
     protected Eyes eyes;
@@ -28,53 +28,42 @@ public class BBVA {
     private EyesRunner visualGridRunner;
     private Configuration renderConfig = new Configuration();
 
-    private static final String BATCH_NAME = "BBVA VG";
+    private static final String BATCH_NAME = "EBSCO VG";
     private static final String BATCH_ID = params.BATCH_ID;
 
-    private static  final boolean isVG = false;
+    private static  final boolean isVG = true;
 
 
     @Parameters({"platformName", "platformVersion", "browserName", "browserVersion"})
     @Test(priority = 1, alwaysRun = true, enabled = true)
-    public void BBVA_1(String platformName ,String platformVersion,
+    public void EBSCO_1(String platformName ,String platformVersion,
                          String browserName, String browserVersion) {
 
         try {
-            openEyes(isVG, "BBVA", "BBVA", 1200, 1000);
+            openEyes(isVG, "EBSCO", "EBSCO", 1200, 1000);
 
-            driver.get("https://bbvausa.com");
+            if(!isVG) {
+                driver.get("https://www.dynamed.com");
+                utils.page.pageDown(driver);
+                utils.page.changePageSingle(driver, "O", "0");
+                utils.page.removeNodes(driver);
+                utils.page.clickLinkText(driver, "Accept Cookies");
+                eyes.check("Home Page", Target.window().fully().ignoreDisplacements());
+            }
+
+            driver.get("https://www.dynamed.com/home/request-information");
             utils.page.pageDown(driver);
-            utils.page.skewPage(driver);
             utils.page.changePageSingle(driver, "O", "0");
-
-            //eyes.check("Home Page", Target.window().fully().ignoreDisplacements());
-
-            // If I'm using the Visual Grid it's easier to code regions due to the large number of returned results
-            // So, this selects the hero image and news section to be matched with layout
-            // because of dynamic content
-            eyes.check("Home Page",
-                        Target.window()
-                            .fully()
-                            .strict()
-                            .ignoreDisplacements()
-                            .layout(By.cssSelector("body > section:nth-child(3) > section"))
-                                .layout(By.cssSelector("body > section:nth-child(4)"))
-                            .layout(By.cssSelector("body > section:nth-child(7) > section > div"))
-            );
-
-            driver.get("https://www.bbvausa.com/digital-banking-services/apply.html");
             utils.page.removeNodes(driver);
+            utils.page.alignTextCenter(driver);
+            utils.page.skewPage(driver);
+            utils.page.clickLinkText(driver,"Accept Cookies");
+            eyes.check("Free Trial Page", Target.window().fully().ignoreDisplacements());
+
+            utils.page.clickName(driver, "op");  // Send Button, fields turn red
             utils.page.skewPage(driver);
             utils.page.alignTextCenter(driver);
-            eyes.check("Apply Now", Target.window().fully().ignoreDisplacements());
-
-            driver.findElementByCssSelector("#checking > div:nth-child(4) > a.btn.btn-aqua.btn-sm").click();
-            ArrayList<String> newTab = new ArrayList<String>(driver.getWindowHandles());
-            driver.switchTo().window(newTab.get(1));
-            utils.page.removeNodes(driver);
-            utils.page.skewPage(driver);
-            utils.page.alignTextCenter(driver);
-            eyes.check("Apply Free Checking", Target.window().fully().ignoreDisplacements());
+            eyes.check("Check Validation", Target.window().fully().ignoreDisplacements());
 
             closeEyes(isVG);
 
@@ -128,8 +117,8 @@ public class BBVA {
             if (params.FULL_SCREEN) eyes.setForceFullPageScreenshot(true);
             eyes.setSendDom(true);
             //Optional, used to compare browsers against each other
-            //eyes.setBaselineEnvName(<tag string here>);
-            //eyes.setMatchLevel(params.MATCH_MODE);
+            //eyes.setBaselineEnvName("Chrome");
+            //eyes.setMatchLevel(MatchLevel.LAYOUT2);
         }
 
         if(isVG) {
@@ -140,8 +129,8 @@ public class BBVA {
                 .setSendDom(true)
                 .setApiKey(params.EYES_KEY)
                 .setViewportSize(new RectangleSize(1600, 900));
-               // .setBaselineEnvName("Chrome")
-               // .setMatchLevel(MatchLevel.LAYOUT2);
+                //.setBaselineEnvName("Chrome")
+                //.setMatchLevel(MatchLevel.LAYOUT2);
             
             renderConfig
                 .addBrowser(1100, 600, BrowserType.CHROME)
@@ -187,10 +176,12 @@ public class BBVA {
                 .addBrowser(1200, 600, BrowserType.IE_11)
                 .addBrowser(1600, 500, BrowserType.IE_11);
 
-
             visualGridRunner = new VisualGridRunner(100);
-            visualGridRunner.setLogHandler(new FileLogger("log/file.log", true, true));
+            visualGridRunner.setLogHandler(new FileLogger("log/eyes_vg.log", true, true));
             visualGridRunner.getLogger().log("Starting Test");
+
+            //Optional, used to compare browsers against each other
+            //eyes.setBaselineEnvName("IE");
 
             eyes = new Eyes(visualGridRunner);
 
@@ -198,7 +189,7 @@ public class BBVA {
         }
 
         //Allows for filtering dashboard view
-        //eyes.addProperty("Sample Group", "YES");
+        eyes.addProperty("Sample Group", "YES");
 
         driver = drivers.getLocalChrome(threadId);
         driver.manage().timeouts().setScriptTimeout(90, TimeUnit.SECONDS);
