@@ -2,7 +2,7 @@ language: java
 addons: # get google-chrome-stable
   chrome: stable
 install: # Install ChromeDriver (64bits; replace 64 with 32 for 32bits).
-  - wget -N http://chromedriver.storage.googleapis.com/78.0.3904.11/chromedriver_linux64.zip -P ~/
+  - wget -N http://chromedriver.storage.googleapis.com/77.0.3865.10/chromedriver_linux64.zip -P ~/
   - unzip ~/chromedriver_linux64.zip -d ~/
   - export CHROME_BIN=chromium-browser
   - rm ~/chromedriver_linux64.zip
