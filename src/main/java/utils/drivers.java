@@ -28,16 +28,17 @@ public class drivers {
         if (chromeDrivers == null || !chromeDrivers.containsKey(threadId)) {
 
             ChromeOptions cOptions = new ChromeOptions();
-            cOptions.setBinary("/usr/local/bin/chromedriver");
+            //cOptions.setBinary("/usr/local/bin/chromedriver");
 
             cOptions.addArguments("--headless");   // toggling this between tests can cause some good examples of font issues
+            cOptions.addArguments("--no-sandbox");
             cOptions.addArguments("--disable-infobars");
             cOptions.addArguments("--disable-gpu");
             cOptions.addArguments("--disable-popup-blocking");
             cOptions.addArguments("--disable-default-apps");
             cOptions.addArguments("–-disable-notifications");
             cOptions.addArguments("--dom-automation");
-            cOptions.addArguments("--no-sandbox");
+
 
             ChromeDriver driver = new ChromeDriver(cOptions);
             chromeDrivers.put(threadId, driver);
