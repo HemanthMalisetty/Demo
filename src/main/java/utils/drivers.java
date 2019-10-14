@@ -29,6 +29,7 @@ public class drivers {
 
             ChromeOptions cOptions = new ChromeOptions();
             cOptions.setBinary("/usr/local/bin/chromedriver");
+            /*
             cOptions.addArguments("--headless");   // toggling this between tests can cause some good examples of font issues
             cOptions.addArguments("--disable-infobars");
             cOptions.addArguments("--disable-gpu");
@@ -36,7 +37,7 @@ public class drivers {
             cOptions.addArguments("--disable-default-apps");
             cOptions.addArguments("–-disable-notifications");
             cOptions.addArguments("--dom-automation");
-
+             */
             ChromeDriver driver = new ChromeDriver(cOptions);
             chromeDrivers.put(threadId, driver);
         }
