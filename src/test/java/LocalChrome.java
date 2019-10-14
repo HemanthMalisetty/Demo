@@ -19,7 +19,6 @@ import java.util.concurrent.TimeUnit;
 public class LocalChrome {
 
     protected RemoteWebDriver driver;
-
     protected Eyes eyes;
 
     private static final String BATCH_NAME = params.BATCH_NAME;
@@ -36,7 +35,7 @@ public class LocalChrome {
         long before;
 
         //Force to check against specific baseline branch
-        eyes.setBaselineBranchName("CIBC");
+        //eyes.setBaselineBranchName("CIBC");
         //Force; to check with the forced baselines corresponding environment
         //eyes.setBaselineEnvName("FF1200x900");
         //eyes.setAppName();
@@ -69,7 +68,7 @@ public class LocalChrome {
         long before = System.currentTimeMillis();
 
         eyes = utils.myeyes.getEyes(threadId);
-        eyes.setLogHandler(new FileLogger("log/file.log",true,true));
+        eyes.setLogHandler(new FileLogger("log/Eyes_LC.log",true,true));
         eyes.setServerUrl(params.EYES_URL);
 
         BatchInfo batchInfo = new BatchInfo(BATCH_NAME);

@@ -28,7 +28,7 @@ public class drivers {
         if (chromeDrivers == null || !chromeDrivers.containsKey(threadId)) {
 
             ChromeOptions cOptions = new ChromeOptions();
-           // cOptions.addArguments("--headless");   // toggling this between tests can cause some good examples of font issues
+            cOptions.addArguments("--headless");   // toggling this between tests can cause some good examples of font issues
             cOptions.addArguments("--disable-infobars");
             cOptions.addArguments("--disable-gpu");
             cOptions.addArguments("--disable-popup-blocking");
