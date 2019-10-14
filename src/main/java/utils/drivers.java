@@ -28,7 +28,7 @@ public class drivers {
         if (chromeDrivers == null || !chromeDrivers.containsKey(threadId)) {
 
             ChromeOptions cOptions = new ChromeOptions();
-            cOptions.setBinary("/usr/local/share/chromedriver");
+            System.setProperty("webdriver.chrome.driver", "/usr/local/bin/chromedriver");
 
             cOptions.addArguments("--headless");   // toggling this between tests can cause some good examples of font issues
             cOptions.addArguments("--no-sandbox");
