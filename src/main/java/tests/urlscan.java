@@ -58,14 +58,17 @@ public class urlscan {
                 };
 
 
-                utils.page.suspend(2000);
+                utils.page.suspend(1000);
                 utils.page.arrowDown(driver);
                 utils.page.arrowUp(driver);
                 utils.page.home(driver);
-                utils.page.suspend(2000);
+                utils.page.suspend(1000);
                 utils.page.changePage(driver);
-                utils.page.changePageSingle(driver, "A", "B");
-                eyes.check(arr[i], Target.window());
+                utils.page.changePageSingle(driver, "Choose", "Select");
+                utils.page.skewPage(driver);
+                utils.page.alignTextCenter(driver);
+                utils.page.removeNodes(driver);
+                eyes.check(arr[i], Target.window().fully());
             } catch (Exception e) {
                 System.out.println("FAILED URL " + +i + " in " + (System.currentTimeMillis() - before) + "ms");
                 e.printStackTrace();

@@ -20,7 +20,7 @@ import utils.params;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
-public class BBVA {
+public class CINFIN {
 
     protected RemoteWebDriver driver;
     protected Eyes eyes;
@@ -28,7 +28,7 @@ public class BBVA {
     private EyesRunner visualGridRunner;
     private Configuration renderConfig = new Configuration();
 
-    private static final String BATCH_NAME = "BBVA VG";
+    private static final String BATCH_NAME = "CINFIN VG";
     private static final String BATCH_ID = params.BATCH_ID;
 
     private static  final boolean isVG = false;
@@ -36,16 +36,17 @@ public class BBVA {
 
     @Parameters({"platformName", "platformVersion", "browserName", "browserVersion"})
     @Test(priority = 1, alwaysRun = true, enabled = true)
-    public void BBVA_1(String platformName ,String platformVersion,
+    public void CINFIN_1(String platformName ,String platformVersion,
                          String browserName, String browserVersion) {
 
         try {
-            openEyes(isVG, "BBVA", "BBVA", 1200, 1000);
+            openEyes(isVG, "CINFIN", "CINFIN", 1200, 1000);
 
-            driver.get("https://bbvausa.com");
+            driver.get("https://cinfin.com");
             utils.page.pageDown(driver);
             utils.page.skewPage(driver);
             utils.page.changePageSingle(driver, "O", "0");
+            utils.page.removeNodes(driver);
 
             //eyes.check("Home Page", Target.window().fully().ignoreDisplacements());
 
@@ -57,24 +58,19 @@ public class BBVA {
                             .fully()
                             .strict()
                             .ignoreDisplacements()
-                            .ignore(By.cssSelector("body > section:nth-child(3) > section"))
-                            .layout(By.cssSelector("body > section:nth-child(4)"))
-                            .layout(By.cssSelector("body > section:nth-child(7) > section > div"))
             );
 
-            driver.get("https://www.bbvausa.com/digital-banking-services/apply.html");
-            utils.page.removeNodes(driver);
-            utils.page.skewPage(driver);
-            utils.page.alignTextCenter(driver);
-            eyes.check("Apply Now", Target.window().fully().ignoreDisplacements());
+            driver.findElementByCssSelector("#widecontent_0_aspZipCodeAspot").click();
+            driver.findElementByCssSelector("#widecontent_0_aspZipCodeAspot").sendKeys("10019");
+            driver.findElementByCssSelector("#widecontent_0_btnFindAgency").click();
 
-            driver.findElementByCssSelector("#checking > div:nth-child(4) > a.btn.btn-aqua.btn-sm").click();
-            ArrayList<String> newTab = new ArrayList<String>(driver.getWindowHandles());
-            driver.switchTo().window(newTab.get(1));
-            utils.page.removeNodes(driver);
-            utils.page.skewPage(driver);
-            utils.page.alignTextCenter(driver);
-            eyes.check("Apply Free Checking", Target.window().fully().ignoreDisplacements());
+            utils.page.suspend(2000);
+            eyes.check("Results Page",
+                    Target.window()
+                            .fully()
+                            .strict()
+                            .ignoreDisplacements()
+            );
 
             closeEyes(isVG);
 
@@ -157,10 +153,12 @@ public class BBVA {
                 .addBrowser(1100, 600, BrowserType.CHROME)
                 .addBrowser(1200, 600, BrowserType.CHROME)
 
+
                 .addBrowser(400, 600, BrowserType.CHROME)
                 .addBrowser(500, 600, BrowserType.CHROME)
                 .addBrowser(600, 600, BrowserType.CHROME)
                 .addBrowser(700, 600, BrowserType.CHROME)
+                    /*
                 .addBrowser(800, 600, BrowserType.CHROME)
                 .addBrowser(900, 600, BrowserType.CHROME)
                 .addBrowser(1000, 600, BrowserType.CHROME)
@@ -178,6 +176,7 @@ public class BBVA {
                 .addBrowser(1000, 600, BrowserType.FIREFOX)
                 .addBrowser(1200, 600, BrowserType.FIREFOX)
                 .addBrowser(1600, 600, BrowserType.FIREFOX)
+                */
 
                 .addBrowser(800, 600, BrowserType.EDGE)
                 .addBrowser(1200, 600, BrowserType.EDGE)

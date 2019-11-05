@@ -87,20 +87,15 @@ public class VisualGrid {
 
                 try{
                     utils.page.clickLinkText(driver, "Accept Cookies");
-                    System.out.println("Clear succeeded");
                     utils.page.suspend(2000);
                 } catch (Exception e){
                     System.out.println("Clear failed");
                 };
 
-                //utils.page.suspend(1000);
-                //utils.page.pageDown(driver);
-                //utils.page.arrowDown(driver);
-                //utils.page.arrowUp(driver);
-                //utils.page.home(driver);
-                //utils.page.suspend(2000);
-                utils.page.changePage(driver);
-                utils.page.changePageSingle(driver, "q", "g");
+                utils.page.suspend(2000);
+                utils.page.arrowDown(driver);
+                utils.page.arrowUp(driver);
+                utils.page.suspend(2000);
 
                 eyes.check(arr[i],
                         Target.window().fully());

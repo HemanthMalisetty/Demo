@@ -8,7 +8,10 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import utils.params;
+import utils.ResultsHandler;
+import utils.ResultStatus;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -28,7 +31,7 @@ public class LocalChrome {
     @Parameters({"platformName", "platformVersion", "browserName", "browserVersion"})
     @Test(priority = 1, alwaysRun = true, enabled = true)
     public void CheckURL(String platformName ,String platformVersion,
-                         String browserName, String browserVersion) {
+                         String browserName, String browserVersion) throws Exception {
 
         Integer i=0;
         String testName = params.TEST_NAME;
@@ -54,6 +57,44 @@ public class LocalChrome {
         tests.urlscan.scanlist(driver, eyes, params.URL_FILE);
 
         TestResults testResult = eyes.close(false);
+
+        //===============
+
+        //Link to batch result.
+        System.out.println("This is the link for the Batch Result: "+testResult.getUrl());
+
+        ResultsHandler testResultHandler = new ResultsHandler(testResult, params.EYES_READ_KEY);
+//            ApplitoolsTestResultsHandler testResultHandler = new ApplitoolsTestResultsHandler(testResult, System.getenv("Applitools_ViewKey"),"ProxyServerURL","ProxyServerPort");
+//            ApplitoolsTestResultsHandler testResultHandler = new ApplitoolsTestResultsHandler(testResult, System.getenv("Applitools_ViewKey"),"ProxyServerURL","ProxyServerPort","ProxyServerUserName","ProxyServerPassword");
+
+        List<BufferedImage>  base = testResultHandler.getBaselineBufferedImages();  // get Baseline Images as BufferedImage
+        List<BufferedImage>  curr = testResultHandler.getCurrentBufferedImages();   // get Current Images as BufferedImage
+        List<BufferedImage> diff = testResultHandler.getDiffsBufferedImages();      // get Diff Images as BufferedImage
+
+
+        // Optional Setting this prefix will determine the structure of the repository for the downloaded images.
+        testResultHandler.SetPathPrefixStructure("TestName/AppName/viewport/hostingOS/hostingApp");
+
+        //Link to test/step result
+//            System.out.println("This is the url to the first step " +testResultHandler.getLinkToStep(1));
+
+        testResultHandler.downloadImages("./log/images");                // Download both the Baseline and the Current images to the folder specified in Path.
+//            testResultHandler.downloadBaselineImages(System.getenv("PathToDownloadImages"));      // Download only the Baseline images to the folder specified in Path.
+//            testResultHandler.downloadCurrentImages(System.getenv("PathToDownloadImages"));       // Download only the Current images to the folder specified in Path.
+        testResultHandler.downloadDiffs("./log/diffs");                 // Download Diffs to the folder specified in Path.
+        testResultHandler.downloadAnimateGiff("./log/gif");           // Download Animated GIf to the folder specified in Path.
+
+//            Get Steps Names
+        String[] names = testResultHandler.getStepsNames();
+
+//            Get the status of each step (Pass / Unresolved / New / Missing).
+        ResultStatus[] results = testResultHandler.calculateStepResults();
+        for (i=0 ; i< results.length; i++){
+            System.out.println("The result of step "+(i+1)+" is "+ results[i]);
+        }
+
+        //===============
+
         System.out.println("Applitools Test Results");
         System.out.println(testResult.toString());
     }
@@ -100,4 +141,5 @@ public class LocalChrome {
 
 
     }
+
 }

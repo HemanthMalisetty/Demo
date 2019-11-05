@@ -40,7 +40,6 @@ public class vg2real {
     private Random rand = new Random();
 
     private static final String BATCH_NAME = params.BATCH_NAME;
-    private static final String BATCH_ID = params.BATCH_ID;
     private static final String APP_NAME = params.APP_NAME;
     private static final String TEST_NAME = params.TEST_NAME;
 
@@ -74,8 +73,12 @@ public class vg2real {
         eyes.setLogHandler(new FileLogger("log/vg2realeyes.log",true,true));
         eyes.setMatchLevel(params.MATCH_MODE);
         eyes.setSaveNewTests(true);
-        eyes.setBaselineEnvName("VG1");
+        eyes.setBaselineEnvName("VGC" + eyes.getBatch().getId());
 
+        eyes.open(driver, APP_NAME, TEST_NAME, new RectangleSize(1200, 600));
+        tests.urlscan.scanlist(driver, eyes, params.URL_FILE);
+
+        /*
         System.out.println("===============================================");
 
         before = System.currentTimeMillis();
@@ -95,6 +98,8 @@ public class vg2real {
         }
 
         System.out.println("Completed URL Check in " + ((System.currentTimeMillis() - before)) / 1000 + " seconds");
+        */
+
         System.out.println("Waiting for Visual Grid Rendering ...");
         before = System.currentTimeMillis();
         TestResultsSummary allTestResults = visualGridRunner.getAllTestResults(false);
@@ -114,8 +119,12 @@ public class vg2real {
         eyesReal.setBatch(batchInfo);
         eyesReal.setMatchLevel(params.MATCH_MODE);
         eyesReal.setStitchMode(StitchMode.CSS);
-        eyesReal.setBaselineEnvName("VG1");
+        eyesReal.setBaselineEnvName("VGC" + eyes.getBatch().getId());
 
+        eyesReal.open(driver,APP_NAME, TEST_NAME, new RectangleSize(1200, 600));
+        tests.urlscan.scanlist(driver, eyesReal, params.URL_FILE);
+
+        /*
         System.out.println("===============================================");
 
         for(i=0;i<arr.length;i++){
@@ -132,6 +141,8 @@ public class vg2real {
                 e.printStackTrace();
             }
         }
+        */
+
         TestResults testResult = eyesReal.close(false);
         System.out.println(testResult);
     }
