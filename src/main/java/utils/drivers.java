@@ -30,7 +30,7 @@ public class drivers {
             ChromeOptions cOptions = new ChromeOptions();
             System.setProperty("webdriver.chrome.driver", "/usr/local/bin/chromedriver");
 
-            cOptions.addArguments("--headless");   // toggling this between tests can cause some good examples of font issues
+           // cOptions.addArguments("--headless");   // toggling this between tests can cause some good examples of font issues
             cOptions.addArguments("--no-sandbox");
             cOptions.addArguments("--disable-infobars");
             cOptions.addArguments("--disable-gpu");
