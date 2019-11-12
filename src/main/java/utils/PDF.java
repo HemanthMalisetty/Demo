@@ -6,6 +6,11 @@ import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
 
+import utils.image;
+
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 
 public class PDF {
@@ -14,16 +19,27 @@ public class PDF {
         //Creating PDF document object
         PDDocument document = new PDDocument();
 
+        String inputImageFullName = "log/diffs/url VG Demo/url VG Demo/1200x1040/Mac OS X 10.14/Chrome/00000251829776547219/00000251829776546950/step 1 https~www.timeanddate.com~countdown~newyear-Diff.png";
+        double scaleFactor = .250;
+
         try {
+            // https://pdfbox.apache.org/docs/2.0.8/javadocs/overview-summary.html
+
             //Creating a blank page
             PDPage page = new PDPage();
             PDPageContentStream contentStream = new PDPageContentStream(document, page);
 
-            //Creating PDImageXObject object
-            PDImageXObject pdImage = PDImageXObject.createFromFile("log/diffs/url VG Demo/url VG Demo/1200x1040/Mac OS X 10.14/Chrome/00000251829776547219/00000251829776546950/step 1 https~www.timeanddate.com~countdown~newyear-Diff.png",document);
+            //Figure out where to put the image (upper left)
 
-            //Drawing the image in the PDF document
-            contentStream.drawImage(pdImage, 70, 250);
+            //Drawing the image in the PDF document with a specified size
+            File inputFile = new File(inputImageFullName);
+            BufferedImage inputImage = ImageIO.read(inputFile);
+            int imgWidth = inputImage.getWidth(null);
+            int imgHeight = inputImage.getHeight(null);
+            long scaledWidth = Math.round( (double) imgWidth * scaleFactor);
+            long scaledHeight = Math.round( (double) imgHeight * scaleFactor);
+            PDImageXObject pdImage = PDImageXObject.createFromFile(inputImageFullName,document);
+            contentStream.drawImage(pdImage, 70, 400, scaledWidth, scaledHeight);
 
             //Begin the Content stream
             contentStream.beginText();
@@ -32,7 +48,7 @@ public class PDF {
             contentStream.setFont(PDType1Font.TIMES_ROMAN, 12);
 
             //Setting the position for the line
-            contentStream.newLineAtOffset(25, 800);
+            contentStream.newLineAtOffset(50,50);
 
             String text = "This is the sample document and we are adding content to it.";
 

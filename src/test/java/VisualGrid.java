@@ -43,7 +43,7 @@ public class VisualGrid {
 
     private static final String BATCH_NAME = params.BATCH_NAME;
     private static final String BATCH_ID = params.BATCH_ID;
-    private static final String APP_NAME = params.APP_NAME;
+    private static final String APP_NAME = "Fidelity Header";
 
     @Parameters({"platformName", "platformVersion", "browserName", "browserVersion"})
     @Test(priority = 1, alwaysRun = true, enabled = true)
@@ -55,10 +55,11 @@ public class VisualGrid {
         long before;
 
         eyes.setMatchLevel(params.MATCH_MODE);
+       // eyes.setEnvName("Fidelity Header");
+        eyes.setBranchName("Fidelity Header");
         renderConfig.setSendDom(true);
         renderConfig.setTestName(testName);
 
-        //eyes.setBaselineEnvName("Chrome");   // change in the renderconfig
 
         eyes.setConfiguration(renderConfig);
         eyes.open(driver,APP_NAME, testName, new RectangleSize(1400, 900));
@@ -82,27 +83,32 @@ public class VisualGrid {
             try {
                 driver.get(arr[i]);
 
-
                 //clear cookie warning or floating toolbar or whatever needs cleanup
-
+                /*
                 try{
                     utils.page.clickLinkText(driver, "Accept Cookies");
                     utils.page.suspend(2000);
                 } catch (Exception e){
                     System.out.println("Clear failed");
                 };
+                */
 
-                utils.page.suspend(2000);
                 utils.page.arrowDown(driver);
                 utils.page.arrowUp(driver);
-                utils.page.suspend(2000);
 
+                /*
                 eyes.check(arr[i],
-                        Target.window().fully());
+                        Target.window());
 
-                //.region(By.cssSelector("body > div.content-wrapper > div.main > div:nth-child(10) > div > div > div > div")));   // Check the entire page
-                //eyes.check(arr[i],
-                //        Target.region(By.cssSelector("#mw-content-text > div > table.infobox.hproduct > tbody > tr:nth-child(1) > td > a > img")));
+                int upwards = 1000, downwards = 1000, toTheLeft = 1000, toTheRight = 1000;
+                eyes.check(arr[i],
+                            Target.window()
+                            .floating(By.cssSelector("#pgnb > div.pbn > div.pnld > a"), upwards, downwards, toTheLeft, toTheRight)
+                );
+                */
+
+                eyes.check(arr[1],
+                        Target.region(By.cssSelector("#pgnb > div.pbn > div.pnld > a")));
 
             } catch (Exception e) {
                 System.out.println("FAILED URL " + i + " in " + (System.currentTimeMillis() - before) + "ms");
@@ -111,8 +117,6 @@ public class VisualGrid {
         }
         System.out.println("Completed URL Check in " + ((System.currentTimeMillis() - before)) / 1000 + " seconds");
         System.out.println("Waiting for Visual Grid Rendering ...");
-
-        before = System.currentTimeMillis();
 
         eyes.close(false);
         TestResultsSummary allTestResults = visualGridRunner.getAllTestResults(false);
@@ -145,7 +149,7 @@ public class VisualGrid {
         String sequenceName = "Alpha";
         batchInfo.setSequenceName(sequenceName);
 
-        visualGridRunner = new VisualGridRunner(100);
+        visualGridRunner = new VisualGridRunner(500);
         visualGridRunner.setLogHandler(logHandler);
         visualGridRunner.getLogger().log("Starting Test");
 
@@ -156,60 +160,35 @@ public class VisualGrid {
         renderConfig.setBatch(batchInfo);
         renderConfig.setDefaultMatchSettings(ims);
 
-        //renderConfig.setBaselineEnvName("Chrome");   // Change the baseline !!!!!
+        //renderConfig.setBaselineEnvName("Firefox");   // Change the baseline !!!!!
 
-        renderConfig.addBrowser(1100, 600, BrowserType.CHROME);
-
-        renderConfig.addBrowser(1400, 600, BrowserType.EDGE);
-        renderConfig.addBrowser(1400, 600, BrowserType.FIREFOX);
-        renderConfig.addBrowser(1400, 600, BrowserType.CHROME);
-        renderConfig.addBrowser(1000, 600, BrowserType.CHROME);
-        renderConfig.addBrowser(1100, 600, BrowserType.CHROME);
-        renderConfig.addBrowser(1200, 600, BrowserType.CHROME);
-
-        renderConfig.addBrowser(400, 600, BrowserType.CHROME);
-        renderConfig.addBrowser(500, 600, BrowserType.CHROME);
         renderConfig.addBrowser(600, 600, BrowserType.CHROME);
-        renderConfig.addBrowser(700, 600, BrowserType.CHROME);
-        renderConfig.addBrowser(800, 600, BrowserType.CHROME);
-        renderConfig.addBrowser(900, 600, BrowserType.CHROME);
-        renderConfig.addBrowser(1000, 600, BrowserType.CHROME);
-        renderConfig.addBrowser(1100, 600, BrowserType.CHROME);
-        renderConfig.addBrowser(1200, 600, BrowserType.CHROME);
-        renderConfig.addBrowser(1300, 600, BrowserType.CHROME);
         renderConfig.addBrowser(1400, 600, BrowserType.CHROME);
-        renderConfig.addBrowser(1500, 600, BrowserType.CHROME);
         renderConfig.addBrowser(1600, 600, BrowserType.CHROME);
 
-        renderConfig.addBrowser(1800, 600, BrowserType.CHROME);
-        renderConfig.addBrowser(1900, 600, BrowserType.CHROME);
-        renderConfig.addBrowser(2000, 600, BrowserType.CHROME);
-        renderConfig.addBrowser(2500, 600, BrowserType.CHROME);
-        renderConfig.addBrowser(3000, 600, BrowserType.CHROME);
-
-        renderConfig.addBrowser(600,  500, BrowserType.FIREFOX);
-        renderConfig.addBrowser(700, 600, BrowserType.FIREFOX);
-        renderConfig.addBrowser(800, 600, BrowserType.FIREFOX);
-        renderConfig.addBrowser(900,  600, BrowserType.FIREFOX);
-        renderConfig.addBrowser(1000, 600, BrowserType.FIREFOX);
-        renderConfig.addBrowser(1200, 600, BrowserType.FIREFOX);
+        renderConfig.addBrowser(600, 600, BrowserType.FIREFOX);
+        renderConfig.addBrowser(1400, 600, BrowserType.FIREFOX);
         renderConfig.addBrowser(1600, 600, BrowserType.FIREFOX);
 
-        renderConfig.addBrowser(800,  600, BrowserType.EDGE);
-        renderConfig.addBrowser(1200, 600, BrowserType.EDGE);
-        renderConfig.addBrowser(1600, 500, BrowserType.EDGE);
+        renderConfig.addBrowser(600, 600, BrowserType.EDGE);
+        renderConfig.addBrowser(1400, 600, BrowserType.EDGE);
+        renderConfig.addBrowser(1600, 600, BrowserType.EDGE);
 
+        renderConfig.addBrowser(600, 600, BrowserType.IE_10);
         renderConfig.addBrowser(1400, 600, BrowserType.IE_10);
-        renderConfig.addBrowser(1400, 600, BrowserType.IE_11);
-        renderConfig.addBrowser(800,  600, BrowserType.IE_11);
-        renderConfig.addBrowser(1200,  600, BrowserType.IE_11);
-        renderConfig.addBrowser(1600,  500, BrowserType.IE_11);
+        renderConfig.addBrowser(1600, 600, BrowserType.IE_10);
 
+        renderConfig.addBrowser(600, 600, BrowserType.IE_11);
+        renderConfig.addBrowser(1400, 600, BrowserType.IE_11);
+        renderConfig.addBrowser(1600, 600, BrowserType.IE_11);
+
+        /*
         renderConfig.addDeviceEmulation(DeviceName.iPad_Pro, ScreenOrientation.PORTRAIT);
         renderConfig.addDeviceEmulation(DeviceName.Nexus_10, ScreenOrientation.PORTRAIT);
         renderConfig.addDeviceEmulation(DeviceName.iPhone_X, ScreenOrientation.PORTRAIT);
         renderConfig.addDeviceEmulation(DeviceName.iPad, ScreenOrientation.PORTRAIT);
         renderConfig.addDeviceEmulation(DeviceName.Pixel_2_XL, ScreenOrientation.PORTRAIT);
+*/
 
         eyes.setApiKey(params.EYES_KEY);
         eyes.setIsDisabled(params.DISABLE_EYES);

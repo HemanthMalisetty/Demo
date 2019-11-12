@@ -31,10 +31,10 @@ public class FedEx {
     private EyesRunner visualGridRunner;
     private Configuration renderConfig = new Configuration();
 
-    private static final String BATCH_NAME = "FedEx";
+    private static final String BATCH_NAME = "FedEx Golden";
     private static final String BATCH_ID = params.BATCH_ID;
 
-    private static  final boolean isVG = false;
+    private static  final boolean isVG = true;
 
 
     @Parameters({"platformName", "platformVersion", "browserName", "browserVersion"})
@@ -226,6 +226,7 @@ public class FedEx {
             eyes.setBatch(batchInfo);
             eyes.setStitchMode(StitchMode.CSS);
             eyes.setForceFullPageScreenshot(false);
+
             if (params.FULL_SCREEN) eyes.setForceFullPageScreenshot(true);
             eyes.setSendDom(true);
             //Optional, used to compare browsers against each other
@@ -255,8 +256,8 @@ public class FedEx {
                 .addBrowser(1400, 600, BrowserType.CHROME)
                 .addBrowser(1000, 600, BrowserType.CHROME)
                 .addBrowser(1100, 600, BrowserType.CHROME)
-                .addBrowser(1200, 600, BrowserType.CHROME)
-
+                .addBrowser(1200, 600, BrowserType.CHROME);
+/*
                 .addBrowser(400, 600, BrowserType.CHROME)
                 .addBrowser(500, 600, BrowserType.CHROME)
                 .addBrowser(600, 600, BrowserType.CHROME)
@@ -286,7 +287,7 @@ public class FedEx {
                 .addBrowser(800, 600, BrowserType.IE_11)
                 .addBrowser(1200, 600, BrowserType.IE_11)
                 .addBrowser(1600, 500, BrowserType.IE_11);
-
+*/
 
             visualGridRunner = new VisualGridRunner(100);
             visualGridRunner.setLogHandler(new FileLogger("log/file.log", true, true));

@@ -6,8 +6,10 @@ public class params {
 
     // public static String EYES_KEY = System.getProperty("eyesAPIKey", "DEFAULT_TOKEN");
     // public static String EYES_KEY = "TCX1FEgWioHJpBSVryz2EeI8yU7J5WijAJNNuIEbSKU110";
-    // public static String EYES_KEY = "sK3O8LZgrenpvvNKHMrZx8104HzYvsTDRNB6xfrsPP0fk110"; // FedEx Europe Key
-    // public static String EYES_KEY = "sjmNt4T85wb9hRjwDAhCk4lz61nJEg6dpLsEyRPoVPY110";   // FedEx Tennessee Key
+    // public static String EYES_KEY = "sK3O8LZgrenpvvNKHMrZx8104HzYvsTDRNB6xfrsPP0fk110"; // FedEx POC Europe Key
+    // public static String EYES_KEY = "sjmNt4T85wb9hRjwDAhCk4lz61nJEg6dpLsEyRPoVPY110";   // FedEx POC Separate Tennessee Key
+
+    // public static String EYES_KEY = "sK3O8LZgrenpvvNKHMrZx8104HzYvsTDRNB6xfrsPP0fk110";   // FedEx Tennessee Key
      public static String EYES_KEY = "bq91GrRWoSL26p7qINN2QdgGdWI9evF1abIREFBaSEo110";   // CME Demo
 
     // public static String EYES_KEY = "SfOlH07cYI0R69heErJe102gvu1Z7b110NZnd8qNk14Llng110";   // CME Feature Demo
@@ -29,7 +31,7 @@ public class params {
     public static Boolean changePageSingle = false;
     public static Boolean removeChildNode = false;
     public static Boolean skewPage = false;
-    public static Boolean alignTextCenter = false;
+    public static Boolean alignTextCenter = true;
 
     public static String APP_NAME = name + suffix;
     public static String TEST_NAME = name + suffix;
