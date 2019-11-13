@@ -14,9 +14,8 @@ import utils.ResultStatus;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.text.SimpleDateFormat;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 public class LocalChrome {
@@ -57,6 +56,7 @@ public class LocalChrome {
         tests.urlscan.scanlist(driver, eyes, params.URL_FILE);
 
         TestResults testResult = eyes.close(false);
+        exportImages(testResult);
 
         System.out.println("Applitools Test Results");
         System.out.println(testResult.toString());
@@ -106,9 +106,7 @@ public class LocalChrome {
     }
 
     public void exportImages(TestResults testResult){
-        //===============
 
-        //Link to batch result.
         System.out.println("This is the link for the Batch Result: "+testResult.getUrl());
 
         try {
@@ -119,25 +117,26 @@ public class LocalChrome {
             List<BufferedImage>  base = testResultHandler.getBaselineBufferedImages();  // get Baseline Images as BufferedImage
             List<BufferedImage>  curr = testResultHandler.getCurrentBufferedImages();   // get Current Images as BufferedImage
             List<BufferedImage> diff = testResultHandler.getDiffsBufferedImages();      // get Diff Images as BufferedImage
-
-
-            // Optional Setting this prefix will determine the structure of the repository for the downloaded images.
-            testResultHandler.SetPathPrefixStructure("TestName/AppName/viewport/hostingOS/hostingApp");
-
-            //Link to test/step result
-//            System.out.println("This is the url to the first step " +testResultHandler.getLinkToStep(1));
-
-
-            testResultHandler.downloadImages("./log/images");                // Download both the Baseline and the Current images to the folder specified in Path.
-//            testResultHandler.downloadBaselineImages(System.getenv("PathToDownloadImages"));      // Download only the Baseline images to the folder specified in Path.
-//            testResultHandler.downloadCurrentImages(System.getenv("PathToDownloadImages"));       // Download only the Current images to the folder specified in Path.
-            testResultHandler.downloadDiffs("./log/diffs");                 // Download Diffs to the folder specified in Path.
-            testResultHandler.downloadAnimateGiff("./log/gif");           // Download Animated GIf to the folder specified in Path.
-
-
-    //            Get Steps Names
             String[] names = testResultHandler.getStepsNames();
 
+            String PDFName = "./log/" + testResultHandler.getTestName() + ".pdf";
+
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy MMM dd HH:mm:ss");
+            Calendar timeStamp = testResult.getStartedAt();
+            String ts = sdf.format(timeStamp.getTime());
+
+            utils.PDF.makePDF(base,diff,names, testResult.getBatchName(), testResultHandler.getTestName(), PDFName, ts);
+
+            System.out.println("PDF created: " + PDFName);
+/*
+            // Optional Setting this prefix will determine the structure of the repository for the downloaded images.
+            testResultHandler.SetPathPrefixStructure("TestName/AppName/viewport/hostingOS/hostingApp");
+            //Link to test/step result
+//            System.out.println("This is the url to the first step " +testResultHandler.getLinkToStep(1));
+            testResultHandler.downloadImages("./log/images");                // Download both the Baseline and the Current images to the folder specified in Path.
+            testResultHandler.downloadDiffs("./log/diffs");                 // Download Diffs to the folder specified in Path.
+            testResultHandler.downloadAnimateGiff("./log/gif");           // Download Animated GIf to the folder specified in Path.
+*/
     //            Get the status of each step (Pass / Unresolved / New / Missing).
             ResultStatus[] results = testResultHandler.calculateStepResults();
             for (int i=0 ; i< results.length; i++){

@@ -50,9 +50,8 @@ public class urlscan {
                     //        "x[0].style.display = 'none';";
                     //driver.executeScript(jscript);
 
-                    utils.page.clickLinkText(driver, "Accept Cookies");
-                    System.out.println("Clear succeeded");
-                    utils.page.suspend(1000);
+                  //  utils.page.clickLinkText(driver, "Accept Cookies");
+                  //  System.out.println("Clear succeeded");
                 } catch (Exception e){
                     System.out.println("Clear skipped");
                 };
@@ -61,7 +60,6 @@ public class urlscan {
                 utils.page.suspend(1000);
                 utils.page.arrowDown(driver);
                 utils.page.arrowUp(driver);
-                utils.page.home(driver);
                 utils.page.suspend(1000);
                 utils.page.changePage(driver);
                 utils.page.changePageSingle(driver, "Choose", "Select");
