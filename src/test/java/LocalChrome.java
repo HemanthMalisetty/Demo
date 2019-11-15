@@ -51,7 +51,7 @@ public class LocalChrome {
         eyes.setForceFullPageScreenshot(false);
         if(params.FULL_SCREEN) eyes.setForceFullPageScreenshot(true);
         eyes.setSendDom(true);
-        eyes.open(driver,APP_NAME, testName, new RectangleSize(1200, 1040));
+        eyes.open(driver,APP_NAME, testName, new RectangleSize(600, 800));
 
         tests.urlscan.scanlist(driver, eyes, params.URL_FILE);
 
@@ -99,7 +99,6 @@ public class LocalChrome {
             //eyes.abortIfNotClosed(); // deprecated
             if(!eyes.getIsOpen()) eyes.abort();
             driver.quit();
-            System.out.println("Driver quit took " + (System.currentTimeMillis() - before) + "ms");
         }
 
 
@@ -127,6 +126,11 @@ public class LocalChrome {
 
             utils.PDF.makePDF(base,diff,names, testResult.getBatchName(), testResultHandler.getTestName(), PDFName, ts);
 
+            ResultStatus[] results = testResultHandler.calculateStepResults();
+            for (int i=0 ; i< results.length; i++){
+                System.out.println("The result of step "+(i+1)+" is "+ results[i]);
+            }
+
             System.out.println("PDF created: " + PDFName);
 /*
             // Optional Setting this prefix will determine the structure of the repository for the downloaded images.
@@ -138,14 +142,10 @@ public class LocalChrome {
             testResultHandler.downloadAnimateGiff("./log/gif");           // Download Animated GIf to the folder specified in Path.
 */
     //            Get the status of each step (Pass / Unresolved / New / Missing).
-            ResultStatus[] results = testResultHandler.calculateStepResults();
-            for (int i=0 ; i< results.length; i++){
-                System.out.println("The result of step "+(i+1)+" is "+ results[i]);
-            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
-        //===============
     }
 
 }

@@ -5,6 +5,7 @@ import com.applitools.eyes.MatchLevel;
 public class params {
 
      public static String EYES_KEY = System.getProperty("eyesAPIKey", "DEFAULT_TOKEN");
+
     // public static String EYES_KEY = "TCX1FEgWioHJpBSVryz2EeI8yU7J5WijAJNNuIEbSKU110";
     // public static String EYES_KEY = "sK3O8LZgrenpvvNKHMrZx8104HzYvsTDRNB6xfrsPP0fk110"; // FedEx POC Europe Key
     // public static String EYES_KEY = "sjmNt4T85wb9hRjwDAhCk4lz61nJEg6dpLsEyRPoVPY110";   // FedEx POC Separate Tennessee Key

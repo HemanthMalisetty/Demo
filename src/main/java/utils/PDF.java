@@ -23,7 +23,8 @@ public class PDF {
 
 
     public static void makePDF(List<BufferedImage> leftimages, List<BufferedImage> rightimages,
-                               String stepNames[], String batchName, String testName, String PDFName, String timeStamp) throws IOException {
+                               String stepNames[], String batchName, String testName,
+                               String PDFName, String timeStamp) throws IOException {
 
         try {
             // https://pdfbox.apache.org/docs/2.0.8/javadocs/overview-summary.html
